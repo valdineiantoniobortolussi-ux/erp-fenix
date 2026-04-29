@@ -1,0 +1,882 @@
+-- ================================================================
+-- Fênix ERP — DML PRIORIDADE 1
+-- Tabelas Auxiliares Fiscais + Tributação
+-- Crítico: base para apuração correta de todos os tributos
+-- Sessão: 2026-04-26 | Cobertura: +74 tabelas → ~326/478 (68%)
+-- ================================================================
+
+SET FOREIGN_KEY_CHECKS = 0;
+SET SQL_MODE = '';
+
+-- ================================================================
+-- BLOCO 1 — UF (Unidades Federativas)
+-- ================================================================
+
+INSERT INTO `UF` (`SIGLA`,`NOME`,`CODIGO_IBGE`) VALUES
+('AC','Acre','12'),
+('AL','Alagoas','27'),
+('AM','Amazonas','13'),
+('AP','Amapá','16'),
+('BA','Bahia','29'),
+('CE','Ceará','23'),
+('DF','Distrito Federal','53'),
+('ES','Espírito Santo','32'),
+('GO','Goiás','52'),
+('MA','Maranhão','21'),
+('MG','Minas Gerais','31'),
+('MS','Mato Grosso do Sul','50'),
+('MT','Mato Grosso','51'),
+('PA','Pará','15'),
+('PB','Paraíba','25'),
+('PE','Pernambuco','26'),
+('PI','Piauí','22'),
+('PR','Paraná','41'),
+('RJ','Rio de Janeiro','33'),
+('RN','Rio Grande do Norte','24'),
+('RO','Rondônia','11'),
+('RR','Roraima','14'),
+('RS','Rio Grande do Sul','43'),
+('SC','Santa Catarina','42'),
+('SE','Sergipe','28'),
+('SP','São Paulo','35'),
+('TO','Tocantins','17');
+
+-- ================================================================
+-- BLOCO 2 — PAIS (Países — padrão BACEN/SEFAZ)
+-- ================================================================
+
+INSERT INTO `PAIS` (`codigo`,`nome`,`sigla`) VALUES
+('1058','Brasil','BRA'),
+('0249','Alemanha','DEU'),
+('0175','Argentina','ARG'),
+('0232','Austrália','AUS'),
+('0535','Bolívia','BOL'),
+('0289','Canadá','CAN'),
+('0191','Chile','CHL'),
+('0210','China','CHN'),
+('0195','Colômbia','COL'),
+('0531','Cuba','CUB'),
+('0245','Espanha','ESP'),
+('0229','Estados Unidos','USA'),
+('0230','França','FRA'),
+('0334','Índia','IND'),
+('0376','Israel','ISR'),
+('0232','Itália','ITA'),
+('0400','Japão','JPN'),
+('0468','México','MEX'),
+('0562','Paraguai','PRY'),
+('0566','Peru','PER'),
+('0617','Portugal','PRT'),
+('0655','Reino Unido','GBR'),
+('0695','Rússia','RUS'),
+('0764','Suíça','CHE'),
+('0800','Uruguai','URY'),
+('0845','Venezuela','VEN');
+
+-- ================================================================
+-- BLOCO 3 — MUNICÍPIOS (principais capitais + cidades relevantes)
+-- ================================================================
+
+INSERT INTO `MUNICIPIO` (`codigo_ibge`,`nome`,`uf`,`codigo_siafi`) VALUES
+-- Capitais
+('1200401','Rio Branco','AC','0107'),
+('2704302','Maceió','AL','2601'),
+('1302603','Manaus','AM','0402'),
+('1600303','Macapá','AP','0508'),
+('2927408','Salvador','BA','3803'),
+('2304400','Fortaleza','CE','1302'),
+('5300108','Brasília','DF','9701'),
+('3205309','Vitória','ES','5703'),
+('5208707','Goiânia','GO','9207'),
+('2111300','São Luís','MA','1602'),
+('3106200','Belo Horizonte','MG','4123'),
+('5002704','Campo Grande','MS','9951'),
+('5103403','Cuiabá','MT','9917'),
+('1501402','Belém','PA','0401'),
+('2507507','João Pessoa','PB','2001'),
+('2611606','Recife','PE','2401'),
+('2211001','Teresina','PI','1801'),
+('4106902','Curitiba','PR','7535'),
+('3304557','Rio de Janeiro','RJ','6001'),
+('2408102','Natal','RN','2201'),
+('1100205','Porto Velho','RO','0507'),
+('1400100','Boa Vista','RR','0602'),
+('4314902','Porto Alegre','RS','8801'),
+('4205407','Florianópolis','SC','8203'),
+('2800308','Aracaju','SE','3101'),
+('3550308','São Paulo','SP','7107'),
+('1721000','Palmas','TO','1009'),
+-- Cidades relevantes SP
+('3548500','São José dos Campos','SP','7105'),
+('3509502','Campinas','SP','7113'),
+('3543402','Ribeirão Preto','SP','7193'),
+('3534401','Osasco','SP','7151'),
+('3522206','Guarulhos','SP','7109'),
+('3518800','Franca','SP','7169'),
+('3505708','Bauru','SP','7127'),
+('3513801','Diadema','SP','7131'),
+('3530607','Mauá','SP','7163'),
+('3547809','Santo André','SP','7199'),
+('3548708','São Bernardo do Campo','SP','7201'),
+-- Cidades relevantes RJ
+('3301009','Campos dos Goytacazes','RJ','6011'),
+('3303302','Niterói','RJ','6031'),
+('3304003','Nova Iguaçu','RJ','6037'),
+('3301702','Duque de Caxias','RJ','6019'),
+-- Cidades relevantes MG
+('3170206','Uberlândia','MG','4205'),
+('3118601','Contagem','MG','4127'),
+('3143302','Juiz de Fora','MG','4139');
+
+-- ================================================================
+-- BLOCO 4 — CST ICMS
+-- ================================================================
+
+INSERT INTO `CST_ICMS` (`codigo`,`descricao`,`origem`) VALUES
+-- Tributado integralmente
+('00','Tributada integralmente','0'),
+-- Com cobrança por ST
+('10','Tributada e com cobrança do ICMS por substituição tributária','0'),
+('20','Com redução de base de cálculo','0'),
+('30','Isenta ou não tributada e com cobrança do ICMS por ST','0'),
+('40','Isenta','0'),
+('41','Não tributada','0'),
+('50','Suspensão','0'),
+('51','Diferimento','0'),
+('60','ICMS cobrado anteriormente por substituição tributária','0'),
+('70','Com redução de base de cálculo e cobrança do ICMS por ST','0'),
+('90','Outras','0'),
+-- Simples Nacional
+('101','Tributada pelo Simples Nacional com permissão de crédito','1'),
+('102','Tributada pelo Simples Nacional sem permissão de crédito','1'),
+('103','Isenção do ICMS no Simples Nacional para faixa de receita bruta','1'),
+('201','Tributada pelo Simples Nacional com permissão de crédito e com cobrança do ICMS por ST','1'),
+('202','Tributada pelo Simples Nacional sem permissão de crédito e com cobrança do ICMS por ST','1'),
+('203','Isenção do ICMS no Simples Nacional para faixa de receita bruta e com cobrança do ICMS por ST','1'),
+('300','Imune','1'),
+('400','Não tributada pelo Simples Nacional','1'),
+('500','ICMS cobrado anteriormente por ST ou por antecipação','1'),
+('900','Outros','1');
+
+-- ================================================================
+-- BLOCO 5 — CSOSN (Código de Situação da Operação no Simples Nacional)
+-- ================================================================
+
+INSERT INTO `CSOSN` (`codigo`,`descricao`) VALUES
+('101','Tributada pelo Simples Nacional com permissão de crédito'),
+('102','Tributada pelo Simples Nacional sem permissão de crédito'),
+('103','Isenção do ICMS no Simples Nacional para faixa de receita bruta'),
+('201','Tributada pelo Simples Nacional com permissão de crédito e com cobrança do ICMS por ST'),
+('202','Tributada pelo Simples Nacional sem permissão de crédito e com cobrança do ICMS por ST'),
+('203','Isenção do ICMS no Simples Nacional e com cobrança do ICMS por ST'),
+('300','Imune'),
+('400','Não tributada pelo Simples Nacional'),
+('500','ICMS cobrado anteriormente por ST ou por antecipação'),
+('900','Outros');
+
+-- ================================================================
+-- BLOCO 6 — CST IPI
+-- ================================================================
+
+INSERT INTO `CST_IPI` (`codigo`,`descricao`,`tipo`) VALUES
+-- Entradas
+('00','Entrada com recuperação de crédito','E'),
+('01','Entrada tributada com alíquota zero','E'),
+('02','Entrada isenta','E'),
+('03','Entrada não-tributada','E'),
+('04','Entrada imune','E'),
+('05','Entrada com suspensão','E'),
+('49','Outras entradas','E'),
+-- Saídas
+('50','Saída tributada','S'),
+('51','Saída tributável com alíquota zero','S'),
+('52','Saída isenta','S'),
+('53','Saída não-tributada','S'),
+('54','Saída imune','S'),
+('55','Saída com suspensão','S'),
+('99','Outras saídas','S');
+
+-- ================================================================
+-- BLOCO 7 — CST PIS
+-- ================================================================
+
+INSERT INTO `CST_PIS` (`codigo`,`descricao`,`regime`) VALUES
+('01','Operação Tributável - Base de Cálculo = Valor da Operação Alíquota Normal (Cumulativo/Não Cumulativo)','A'),
+('02','Operação Tributável - Base de Cálculo = Valor da Operação (Alíquota Diferenciada)','A'),
+('03','Operação Tributável - Base de Cálculo = Quantidade Vendida × Alíquota por Unidade de Medida de Produto','A'),
+('04','Operação Tributável - Tributação Monofásica (Alíquota Zero)','A'),
+('05','Operação Tributável por Substituição Tributária','A'),
+('06','Operação Tributável - Alíquota Zero','A'),
+('07','Operação Isenta da Contribuição','A'),
+('08','Operação sem Incidência da Contribuição','A'),
+('09','Operação com Suspensão da Contribuição','A'),
+('49','Outras Operações de Saída','A'),
+('50','Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno','B'),
+('51','Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno','B'),
+('52','Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação','B'),
+('53','Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno','B'),
+('54','Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação','B'),
+('55','Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação','B'),
+('56','Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação','B'),
+('60','Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno','B'),
+('61','Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não-Tributada no Mercado Interno','B'),
+('62','Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação','B'),
+('63','Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno','B'),
+('64','Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação','B'),
+('65','Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação','B'),
+('66','Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno e de Exportação','B'),
+('67','Crédito Presumido - Outras Operações','B'),
+('70','Operação de Aquisição sem Direito a Crédito','B'),
+('71','Operação de Aquisição com Isenção','B'),
+('72','Operação de Aquisição com Suspensão','B'),
+('73','Operação de Aquisição a Alíquota Zero','B'),
+('74','Operação de Aquisição sem Incidência da Contribuição','B'),
+('75','Operação de Aquisição por Substituição Tributária','B'),
+('98','Outras Operações de Entrada','B'),
+('99','Outras Operações','A');
+
+-- ================================================================
+-- BLOCO 8 — CST COFINS (espelha o CST PIS)
+-- ================================================================
+
+INSERT INTO `CST_COFINS` (`codigo`,`descricao`,`regime`) VALUES
+('01','Operação Tributável - Base de Cálculo = Valor da Operação Alíquota Normal','A'),
+('02','Operação Tributável - Base de Cálculo = Valor da Operação (Alíquota Diferenciada)','A'),
+('03','Operação Tributável - Base de Cálculo = Quantidade Vendida × Alíquota por Unidade','A'),
+('04','Operação Tributável - Tributação Monofásica (Alíquota Zero)','A'),
+('05','Operação Tributável por Substituição Tributária','A'),
+('06','Operação Tributável - Alíquota Zero','A'),
+('07','Operação Isenta da Contribuição','A'),
+('08','Operação sem Incidência da Contribuição','A'),
+('09','Operação com Suspensão da Contribuição','A'),
+('49','Outras Operações de Saída','A'),
+('50','Operação com Direito a Crédito - Vinculada a Receita Tributada Mercado Interno','B'),
+('51','Operação com Direito a Crédito - Vinculada a Receita Não-Tributada Mercado Interno','B'),
+('52','Operação com Direito a Crédito - Vinculada a Receita de Exportação','B'),
+('53','Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas','B'),
+('54','Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Exportação','B'),
+('55','Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas e Exportação','B'),
+('56','Operação com Direito a Crédito - Vinculada a Receitas Tributadas, Não-Tributadas e Exportação','B'),
+('60','Crédito Presumido - Vinculada Exclusivamente a Receita Tributada Mercado Interno','B'),
+('70','Operação de Aquisição sem Direito a Crédito','B'),
+('71','Operação de Aquisição com Isenção','B'),
+('72','Operação de Aquisição com Suspensão','B'),
+('73','Operação de Aquisição a Alíquota Zero','B'),
+('74','Operação de Aquisição sem Incidência','B'),
+('75','Operação de Aquisição por Substituição Tributária','B'),
+('98','Outras Operações de Entrada','B'),
+('99','Outras Operações','A');
+
+-- ================================================================
+-- BLOCO 9 — NOTA_FISCAL_MODELO
+-- ================================================================
+
+INSERT INTO `NOTA_FISCAL_MODELO` (`codigo`,`descricao`) VALUES
+('01','NF — Nota Fiscal (papel)'),
+('04','NF-P — Nota Fiscal de Produtor'),
+('55','NF-e — Nota Fiscal Eletrônica'),
+('57','CT-e — Conhecimento de Transporte Eletrônico'),
+('58','MDF-e — Manifesto Eletrônico de Documentos Fiscais'),
+('59','CF-e-SAT — Cupom Fiscal Eletrônico SAT'),
+('63','BPe — Bilhete de Passagem Eletrônico'),
+('65','NFC-e — Nota Fiscal de Consumidor Eletrônica'),
+('67','CT-e OS — CT-e para Outros Serviços');
+
+-- ================================================================
+-- BLOCO 10 — NOTA_FISCAL_TIPO
+-- ================================================================
+
+INSERT INTO `NOTA_FISCAL_TIPO` (`codigo`,`descricao`) VALUES
+('0','Entrada'),
+('1','Saída');
+
+-- ================================================================
+-- BLOCO 11 — TRIBUTAÇÃO — GRUPO TRIBUTÁRIO
+-- ================================================================
+
+INSERT INTO `TRIBUT_GRUPO_TRIBUTARIO` (`id`,`codigo`,`descricao`,`tipo_tributacao`) VALUES
+(1,'TG001','Mercadorias — Tributadas Integralmente','T'),
+(2,'TG002','Mercadorias — Substituição Tributária','S'),
+(3,'TG003','Mercadorias — Isentas','I'),
+(4,'TG004','Mercadorias — Não Tributadas','N'),
+(5,'TG005','Serviços — Tributados ISS','S'),
+(6,'TG006','Serviços — Isentos ISS','I'),
+(7,'TG007','Produtos Monofásicos — Alíquota Zero','M'),
+(8,'TG008','Importação','X'),
+(9,'TG009','Exportação','E'),
+(10,'TG010','Simples Nacional — Com Crédito','SC'),
+(11,'TG011','Simples Nacional — Sem Crédito','SN'),
+(12,'TG012','Ativo Imobilizado','A');
+
+-- ================================================================
+-- BLOCO 12 — TRIBUTAÇÃO — OPERAÇÃO FISCAL
+-- ================================================================
+
+INSERT INTO `TRIBUT_OPERACAO_FISCAL`
+  (`id`,`codigo`,`descricao`,`tipo_movimento`,`natureza_operacao`,`finalidade`,
+   `cst_icms_padrao`,`csosn_padrao`,`cfop_dentro_estado`,`cfop_fora_estado`,`ativo`) VALUES
+(1,'OF001','Venda de Mercadorias','S','VENDA','NF','00','102',5102,6102,'S'),
+(2,'OF002','Venda para Consumidor Final','S','VENDA','NF','00','102',5102,6102,'S'),
+(3,'OF003','Venda com Substituição Tributária','S','VENDA','NF','10','201',5401,6401,'S'),
+(4,'OF004','Devolução de Compras','S','DEVOLUCAO','NF','00','102',5201,6201,'S'),
+(5,'OF005','Transferência entre Filiais','S','TRANSFERENCIA','NF','00','102',5152,6152,'S'),
+(6,'OF006','Compra para Comercialização','E','COMPRA','NF','00','102',1102,2102,'S'),
+(7,'OF007','Compra para Uso e Consumo','E','COMPRA','NF','00','102',1556,2556,'S'),
+(8,'OF008','Compra para Ativo Imobilizado','E','COMPRA','NF','00','102',1551,2551,'S'),
+(9,'OF009','Devolução de Vendas','E','DEVOLUCAO','NF','00','102',1201,2201,'S'),
+(10,'OF010','Remessa para Industrialização','S','REMESSA','NF','00','102',5901,6901,'S'),
+(11,'OF011','Retorno de Industrialização','E','RETORNO','NF','00','102',1901,2901,'S'),
+(12,'OF012','Venda de Serviços (NFS-e)','S','SERVICO','NFS','00',NULL,NULL,NULL,'S'),
+(13,'OF013','Exportação de Mercadorias','S','EXPORTACAO','NF','40',NULL,7101,7101,'S'),
+(14,'OF014','Remessa para Conserto/Reparo','S','REMESSA','NF','00','102',5915,6915,'S'),
+(15,'OF015','Retorno de Conserto/Reparo','E','RETORNO','NF','00','102',1915,2915,'S');
+
+-- ================================================================
+-- BLOCO 13 — TRIBUTAÇÃO — ICMS POR UF (alíquotas internas e interestaduais)
+-- ================================================================
+
+INSERT INTO `TRIBUT_ICMS_UF`
+  (`id`,`uf_origem`,`uf_destino`,`aliquota`,`reducao_base`,`vigencia_inicio`,`vigencia_fim`) VALUES
+-- Alíquotas internas (cada UF consigo mesma)
+(1,'SP','SP',18.000000,0.000000,'2023-01-01',NULL),
+(2,'RJ','RJ',20.000000,0.000000,'2023-01-01',NULL),
+(3,'MG','MG',18.000000,0.000000,'2023-01-01',NULL),
+(4,'RS','RS',17.000000,0.000000,'2023-01-01',NULL),
+(5,'PR','PR',19.000000,0.000000,'2023-01-01',NULL),
+(6,'SC','SC',17.000000,0.000000,'2023-01-01',NULL),
+(7,'BA','BA',20.500000,0.000000,'2023-01-01',NULL),
+(8,'PE','PE',20.500000,0.000000,'2023-01-01',NULL),
+(9,'CE','CE',20.000000,0.000000,'2023-01-01',NULL),
+(10,'GO','GO',17.000000,0.000000,'2023-01-01',NULL),
+(11,'MS','MS',17.000000,0.000000,'2023-01-01',NULL),
+(12,'MT','MT',17.000000,0.000000,'2023-01-01',NULL),
+(13,'DF','DF',18.000000,0.000000,'2023-01-01',NULL),
+(14,'ES','ES',17.000000,0.000000,'2023-01-01',NULL),
+(15,'PA','PA',17.000000,0.000000,'2023-01-01',NULL),
+(16,'MA','MA',22.000000,0.000000,'2023-01-01',NULL),
+(17,'PI','PI',21.000000,0.000000,'2023-01-01',NULL),
+(18,'AL','AL',19.000000,0.000000,'2023-01-01',NULL),
+(19,'SE','SE',19.000000,0.000000,'2023-01-01',NULL),
+(20,'RN','RN',18.000000,0.000000,'2023-01-01',NULL),
+(21,'PB','PB',20.000000,0.000000,'2023-01-01',NULL),
+(22,'AM','AM',20.000000,0.000000,'2023-01-01',NULL),
+(23,'AC','AC',19.000000,0.000000,'2023-01-01',NULL),
+(24,'RO','RO',17.500000,0.000000,'2023-01-01',NULL),
+(25,'RR','RR',20.000000,0.000000,'2023-01-01',NULL),
+(26,'AP','AP',18.000000,0.000000,'2023-01-01',NULL),
+(27,'TO','TO',20.000000,0.000000,'2023-01-01',NULL),
+-- Alíquotas interestaduais — SP como origem (destino Sul/Sudeste = 12%, Norte/NE/CO = 7%)
+(28,'SP','MG',12.000000,0.000000,'2023-01-01',NULL),
+(29,'SP','RJ',12.000000,0.000000,'2023-01-01',NULL),
+(30,'SP','PR',12.000000,0.000000,'2023-01-01',NULL),
+(31,'SP','RS',12.000000,0.000000,'2023-01-01',NULL),
+(32,'SP','SC',12.000000,0.000000,'2023-01-01',NULL),
+(33,'SP','ES',12.000000,0.000000,'2023-01-01',NULL),
+(34,'SP','BA',7.000000,0.000000,'2023-01-01',NULL),
+(35,'SP','PE',7.000000,0.000000,'2023-01-01',NULL),
+(36,'SP','CE',7.000000,0.000000,'2023-01-01',NULL),
+(37,'SP','GO',7.000000,0.000000,'2023-01-01',NULL),
+(38,'SP','MT',7.000000,0.000000,'2023-01-01',NULL),
+(39,'SP','MS',7.000000,0.000000,'2023-01-01',NULL),
+(40,'SP','DF',7.000000,0.000000,'2023-01-01',NULL),
+(41,'SP','AM',7.000000,0.000000,'2023-01-01',NULL),
+(42,'SP','PA',7.000000,0.000000,'2023-01-01',NULL),
+(43,'SP','MA',7.000000,0.000000,'2023-01-01',NULL),
+(44,'SP','PI',7.000000,0.000000,'2023-01-01',NULL),
+(45,'SP','AL',7.000000,0.000000,'2023-01-01',NULL),
+(46,'SP','SE',7.000000,0.000000,'2023-01-01',NULL),
+(47,'SP','RN',7.000000,0.000000,'2023-01-01',NULL),
+(48,'SP','PB',7.000000,0.000000,'2023-01-01',NULL),
+(49,'SP','AC',7.000000,0.000000,'2023-01-01',NULL),
+(50,'SP','RO',7.000000,0.000000,'2023-01-01',NULL),
+(51,'SP','RR',7.000000,0.000000,'2023-01-01',NULL),
+(52,'SP','AP',7.000000,0.000000,'2023-01-01',NULL),
+(53,'SP','TO',7.000000,0.000000,'2023-01-01',NULL),
+-- MG como origem
+(54,'MG','SP',12.000000,0.000000,'2023-01-01',NULL),
+(55,'MG','RJ',12.000000,0.000000,'2023-01-01',NULL),
+(56,'MG','PR',12.000000,0.000000,'2023-01-01',NULL),
+(57,'MG','RS',12.000000,0.000000,'2023-01-01',NULL),
+(58,'MG','BA',7.000000,0.000000,'2023-01-01',NULL),
+-- RJ como origem
+(59,'RJ','SP',12.000000,0.000000,'2023-01-01',NULL),
+(60,'RJ','MG',12.000000,0.000000,'2023-01-01',NULL),
+(61,'RJ','BA',7.000000,0.000000,'2023-01-01',NULL),
+-- PR como origem
+(62,'PR','SP',12.000000,0.000000,'2023-01-01',NULL),
+(63,'PR','RS',12.000000,0.000000,'2023-01-01',NULL),
+(64,'PR','BA',7.000000,0.000000,'2023-01-01',NULL),
+-- RS como origem
+(65,'RS','SP',12.000000,0.000000,'2023-01-01',NULL),
+(66,'RS','PR',12.000000,0.000000,'2023-01-01',NULL),
+(67,'RS','SC',12.000000,0.000000,'2023-01-01',NULL);
+
+-- ================================================================
+-- BLOCO 14 — TRIBUTAÇÃO — REGRAS IPI POR NCM
+-- ================================================================
+
+INSERT INTO `TRIBUT_IPI` (`id`,`ncm`,`cst_ipi`,`aliquota`,`unidade_tributavel`,`vigencia_inicio`,`vigencia_fim`,`descricao`) VALUES
+(1,'84713000','50',0.000000,'UN','2023-01-01',NULL,'Computadores — Alíquota Zero'),
+(2,'84716060','50',0.000000,'UN','2023-01-01',NULL,'Periféricos — Alíquota Zero'),
+(3,'84433121','50',0.000000,'UN','2023-01-01',NULL,'Impressoras — Alíquota Zero'),
+(4,'39261000','50',5.000000,'KG','2023-01-01',NULL,'Artigos de Plástico'),
+(5,'37031000','50',10.000000,'M2','2023-01-01',NULL,'Papéis fotográficos'),
+(6,'48025690','50',0.000000,'KG','2023-01-01',NULL,'Papel A4 — Alíquota Zero'),
+(7,'22021000','50',15.000000,'L','2023-01-01',NULL,'Água mineral com gás'),
+(8,'22030000','50',30.000000,'L','2023-01-01',NULL,'Cervejas de malte'),
+(9,'24022000','50',300.000000,'UN','2023-01-01',NULL,'Cigarros'),
+(10,'87032110','50',13.000000,'UN','2023-01-01',NULL,'Automóveis 1.0 flex'),
+(11,'87032190','50',25.000000,'UN','2023-01-01',NULL,'Automóveis acima 1.0 gasolina'),
+(12,'87032290','50',16.000000,'UN','2023-01-01',NULL,'Automóveis flex acima 1.0');
+
+-- ================================================================
+-- BLOCO 15 — TRIBUTAÇÃO — PIS
+-- ================================================================
+
+INSERT INTO `TRIBUT_PIS`
+  (`id`,`id_tribut_grupo_tributario`,`cst_pis_entrada`,`cst_pis_saida`,
+   `aliquota_percentual`,`aliquota_valor`,`natureza_bc_credito`,`vigencia_inicio`,`vigencia_fim`) VALUES
+(1,1,'50','01',1.650000,0.000000,'01','2023-01-01',NULL),
+(2,2,'50','05',1.650000,0.000000,'01','2023-01-01',NULL),
+(3,3,'70','07',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(4,4,'70','08',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(5,7,'73','04',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(6,8,'50','01',2.100000,0.000000,'01','2023-01-01',NULL),
+(7,9,'50','99',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(8,10,'50','99',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(9,11,'70','99',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(10,12,'50','50',1.650000,0.000000,'02','2023-01-01',NULL);
+
+-- ================================================================
+-- BLOCO 16 — TRIBUTAÇÃO — COFINS
+-- ================================================================
+
+INSERT INTO `TRIBUT_COFINS`
+  (`id`,`id_tribut_grupo_tributario`,`cst_cofins_entrada`,`cst_cofins_saida`,
+   `aliquota_percentual`,`aliquota_valor`,`natureza_bc_credito`,`vigencia_inicio`,`vigencia_fim`) VALUES
+(1,1,'50','01',7.600000,0.000000,'01','2023-01-01',NULL),
+(2,2,'50','05',7.600000,0.000000,'01','2023-01-01',NULL),
+(3,3,'70','07',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(4,4,'70','08',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(5,7,'73','04',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(6,8,'50','01',9.750000,0.000000,'01','2023-01-01',NULL),
+(7,9,'50','99',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(8,10,'50','99',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(9,11,'70','99',0.000000,0.000000,NULL,'2023-01-01',NULL),
+(10,12,'50','50',7.600000,0.000000,'02','2023-01-01',NULL);
+
+-- ================================================================
+-- BLOCO 17 — TRIBUTAÇÃO — ISS POR MUNICÍPIO / SERVIÇO
+-- ================================================================
+
+INSERT INTO `TRIBUT_ISS`
+  (`id`,`codigo_municipio`,`codigo_servico_lc116`,`descricao_servico`,
+   `aliquota`,`valor_fixo`,`vigencia_inicio`,`vigencia_fim`) VALUES
+-- São Paulo (3550308)
+(1,3550308,'1.01','Análise e desenvolvimento de sistemas',2.000000,0.000000,'2023-01-01',NULL),
+(2,3550308,'1.05','Licenciamento ou cessão de software',2.000000,0.000000,'2023-01-01',NULL),
+(3,3550308,'7.01','Engenharia e arquitetura',2.000000,0.000000,'2023-01-01',NULL),
+(4,3550308,'7.02','Execução por administração, empreitada ou subempreitada',5.000000,0.000000,'2023-01-01',NULL),
+(5,3550308,'7.05','Reparação, conservação e reforma de edificações',5.000000,0.000000,'2023-01-01',NULL),
+(6,3550308,'14.01','Lubrificação, limpeza, instalação, manutenção e conservação',2.000000,0.000000,'2023-01-01',NULL),
+(7,3550308,'17.01','Assessoria ou consultoria de qualquer natureza',2.000000,0.000000,'2023-01-01',NULL),
+(8,3550308,'17.03','Planejamento, organização e administração de feiras',2.000000,0.000000,'2023-01-01',NULL),
+(9,3550308,'17.04','Recrutamento, agenciamento, seleção e colocação',2.000000,0.000000,'2023-01-01',NULL),
+-- Rio de Janeiro (3304557)
+(10,3304557,'1.01','Análise e desenvolvimento de sistemas',2.000000,0.000000,'2023-01-01',NULL),
+(11,3304557,'7.02','Execução por administração, empreitada ou subempreitada',5.000000,0.000000,'2023-01-01',NULL),
+(12,3304557,'17.01','Assessoria ou consultoria de qualquer natureza',2.000000,0.000000,'2023-01-01',NULL),
+-- Belo Horizonte (3106200)
+(13,3106200,'1.01','Análise e desenvolvimento de sistemas',2.000000,0.000000,'2023-01-01',NULL),
+(14,3106200,'7.02','Execução por administração, empreitada',3.000000,0.000000,'2023-01-01',NULL),
+(15,3106200,'17.01','Consultoria de qualquer natureza',3.000000,0.000000,'2023-01-01',NULL),
+-- Curitiba (4106902)
+(16,4106902,'1.01','Análise e desenvolvimento de sistemas',2.500000,0.000000,'2023-01-01',NULL),
+(17,4106902,'7.02','Execução por administração, empreitada',5.000000,0.000000,'2023-01-01',NULL),
+(18,4106902,'17.01','Consultoria de qualquer natureza',2.500000,0.000000,'2023-01-01',NULL),
+-- Porto Alegre (4314902)
+(19,4314902,'1.01','Análise e desenvolvimento de sistemas',2.000000,0.000000,'2023-01-01',NULL),
+(20,4314902,'17.01','Consultoria de qualquer natureza',3.000000,0.000000,'2023-01-01',NULL);
+
+-- ================================================================
+-- BLOCO 18 — TRIBUTAÇÃO — CONFIGURA OPERAÇÃO FISCAL × GRUPO TRIBUTÁRIO
+-- ================================================================
+
+INSERT INTO `TRIBUT_CONFIGURA_OF_GT`
+  (`id`,`id_tribut_operacao_fiscal`,`id_tribut_grupo_tributario`,
+   `cst_icms`,`csosn`,`modalidade_bc_icms`,`reducao_base_icms`,`motivo_desoneracao`,
+   `cst_ipi_saida`,`cst_ipi_entrada`,`cst_pis_saida`,`cst_cofins_saida`,`ativo`) VALUES
+-- Venda SP tributada integralmente
+(1,1,1,'00','102','3',0.000000,NULL,'50','00','01','01','S'),
+-- Venda SP com ST
+(2,3,2,'10','201','4',0.000000,NULL,'50','00','01','01','S'),
+-- Venda SP isenta
+(3,1,3,'40','400','3',0.000000,'6',NULL,NULL,'07','07','S'),
+-- Venda SP não tributada
+(4,1,4,'41','400','3',0.000000,NULL,NULL,NULL,'08','08','S'),
+-- Venda para consumidor final SP
+(5,2,1,'00','102','3',0.000000,NULL,'50','00','01','01','S'),
+-- Venda para consumidor final simples
+(6,2,11,'00','400','3',0.000000,NULL,'50','00','99','99','S'),
+-- Compra para comercialização
+(7,6,1,'00','102','3',0.000000,NULL,'00','50','50','50','S'),
+-- Compra com ST
+(8,6,2,'60','500','3',0.000000,NULL,'00','50','50','50','S'),
+-- Exportação
+(9,13,9,'40',NULL,'3',0.000000,NULL,'52',NULL,'99','99','S'),
+-- Serviço ISS
+(10,12,5,NULL,NULL,NULL,0.000000,NULL,NULL,NULL,'01','01','S'),
+-- Serviço ISS isento
+(11,12,6,NULL,NULL,NULL,0.000000,NULL,NULL,NULL,'07','07','S'),
+-- Produto monofásico alíquota zero
+(12,1,7,'00','102','3',0.000000,NULL,'51','01','04','04','S'),
+-- Ativo imobilizado
+(13,8,12,'00','102','3',0.000000,NULL,'00','00','72','72','S'),
+-- Devolução de venda
+(14,4,1,'00','102','3',0.000000,NULL,'00','00','50','50','S'),
+-- Devolução de compra
+(15,9,1,'00','102','3',0.000000,NULL,'00','50','01','01','S');
+
+-- ================================================================
+-- BLOCO 19 — IBPT (Imposto de Bordo — % tributos incidentes por NCM)
+-- ================================================================
+
+INSERT INTO `IBPT` (`ncm`,`ex`,`tipo`,`descricao`,`nacional_federal`,`importados_federal`,`estadual`,`municipal`,`vigencia_inicio`,`vigencia_fim`,`chave`,`versao`) VALUES
+('84713000','','0','Computadores pessoais',13.450000,37.680000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV001','23.1.A'),
+('84716060','','0','Periféricos de informática',13.450000,37.680000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV002','23.1.A'),
+('84433121','','0','Impressoras','17.770000',38.200000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV003','23.1.A'),
+('39261000','','0','Artigos de plástico',23.500000,42.000000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV004','23.1.A'),
+('48025690','','0','Papel A4',18.200000,37.000000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV005','23.1.A'),
+('22021000','','0','Água mineral',33.540000,44.500000,18.000000,0.000000,'2023-01-01','2023-12-31','CHV006','23.1.A'),
+('22030000','','0','Cervejas',54.800000,62.100000,20.000000,0.000000,'2023-01-01','2023-12-31','CHV007','23.1.A'),
+('61051000','','0','Camisas de malha',37.200000,53.100000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV008','23.1.A'),
+('87032110','','0','Automóveis 1.0 flex',32.300000,45.200000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV009','23.1.A'),
+('94036000','','0','Móveis de madeira',28.600000,43.800000,12.000000,0.000000,'2023-01-01','2023-12-31','CHV010','23.1.A');
+
+-- ================================================================
+-- BLOCO 20 — FERIADOS NACIONAIS E ESTADUAIS SP
+-- ================================================================
+
+INSERT INTO `FERIADOS` (`data`,`descricao`,`tipo`,`uf`,`codigo_municipio`) VALUES
+-- Nacionais 2023
+('2023-01-01','Confraternização Universal','N',NULL,NULL),
+('2023-02-20','Carnaval','N',NULL,NULL),
+('2023-02-21','Carnaval','N',NULL,NULL),
+('2023-02-22','Quarta-feira de Cinzas (meio dia)','N',NULL,NULL),
+('2023-04-07','Sexta-feira da Paixão','N',NULL,NULL),
+('2023-04-09','Páscoa','N',NULL,NULL),
+('2023-04-21','Tiradentes','N',NULL,NULL),
+('2023-05-01','Dia do Trabalho','N',NULL,NULL),
+('2023-06-08','Corpus Christi','N',NULL,NULL),
+('2023-09-07','Independência do Brasil','N',NULL,NULL),
+('2023-10-12','Nossa Senhora Aparecida','N',NULL,NULL),
+('2023-11-02','Finados','N',NULL,NULL),
+('2023-11-15','Proclamação da República','N',NULL,NULL),
+('2023-12-25','Natal','N',NULL,NULL),
+-- Nacionais 2024
+('2024-01-01','Confraternização Universal','N',NULL,NULL),
+('2024-02-12','Carnaval','N',NULL,NULL),
+('2024-02-13','Carnaval','N',NULL,NULL),
+('2024-03-29','Sexta-feira da Paixão','N',NULL,NULL),
+('2024-03-31','Páscoa','N',NULL,NULL),
+('2024-04-21','Tiradentes','N',NULL,NULL),
+('2024-05-01','Dia do Trabalho','N',NULL,NULL),
+('2024-05-30','Corpus Christi','N',NULL,NULL),
+('2024-09-07','Independência do Brasil','N',NULL,NULL),
+('2024-10-12','Nossa Senhora Aparecida','N',NULL,NULL),
+('2024-11-02','Finados','N',NULL,NULL),
+('2024-11-15','Proclamação da República','N',NULL,NULL),
+('2024-11-20','Consciência Negra','N',NULL,NULL),
+('2024-12-25','Natal','N',NULL,NULL),
+-- Estaduais SP
+('2023-07-09','Revolução Constitucionalista de 1932','E','SP',NULL),
+('2024-07-09','Revolução Constitucionalista de 1932','E','SP',NULL),
+-- Municipais São Paulo
+('2023-01-25','Aniversário de São Paulo','M','SP',3550308),
+('2024-01-25','Aniversário de São Paulo','M','SP',3550308),
+('2023-11-20','Consciência Negra — SP','M','SP',3550308);
+
+-- ================================================================
+-- BLOCO 21 — SALÁRIO MÍNIMO
+-- ================================================================
+
+INSERT INTO `SALARIO_MINIMO` (`valor`,`vigencia_inicio`,`vigencia_fim`,`portaria`) VALUES
+(1320.000000,'2023-05-01','2024-01-31','Portaria MTE 1.387/2023'),
+(1412.000000,'2024-01-01',NULL,'MP 1.247/2024');
+
+-- ================================================================
+-- BLOCO 22 — SALÁRIO FAMÍLIA
+-- ================================================================
+
+INSERT INTO `SALARIO_FAMILIA` (`remuneracao_ate`,`valor_por_filho`,`vigencia_inicio`,`vigencia_fim`) VALUES
+(1754.18,59.82,'2023-01-01','2023-12-31'),
+(1819.26,62.04,'2024-01-01',NULL);
+
+-- ================================================================
+-- BLOCO 23 — SIMPLES NACIONAL
+-- ================================================================
+
+INSERT INTO `SIMPLES_NACIONAL_CABECALHO` (`id`,`competencia`,`receita_bruta_acumulada`,`aliquota_efetiva`,`fator_r`) VALUES
+(1,'2023-01',350000.000000,6.540000,NULL),
+(2,'2023-02',355000.000000,6.540000,NULL),
+(3,'2023-03',362000.000000,6.540000,NULL),
+(4,'2023-04',368000.000000,6.540000,NULL),
+(5,'2023-05',375000.000000,6.540000,NULL),
+(6,'2023-06',382000.000000,6.540000,NULL),
+(7,'2023-07',390000.000000,6.540000,NULL),
+(8,'2023-08',398000.000000,6.540000,NULL),
+(9,'2023-09',407000.000000,6.540000,NULL),
+(10,'2023-10',416000.000000,6.540000,NULL),
+(11,'2023-11',426000.000000,6.540000,NULL),
+(12,'2023-12',436000.000000,6.540000,NULL);
+
+INSERT INTO `SIMPLES_NACIONAL_DETALHE`
+  (`id_simples_nacional_cabecalho`,`receita_bruta_mes`,`aliquota_cpf`,
+   `valor_irpj`,`valor_csll`,`valor_cofins`,`valor_pis`,
+   `valor_cpp`,`valor_icms`,`valor_iss`,`valor_ipi`,`valor_total`) VALUES
+(1,85000.000000,6.540000,807.00,807.00,807.00,173.65,1173.65,1173.65,0.00,0.00,5559.00),
+(2,87000.000000,6.540000,826.00,826.00,826.00,177.72,1202.72,1202.72,0.00,0.00,5689.98),
+(3,89000.000000,6.540000,845.00,845.00,845.00,181.80,1227.80,1227.80,0.00,0.00,5820.06);
+
+-- ================================================================
+-- BLOCO 24 — eSocial — TABELAS AUXILIARES
+-- ================================================================
+
+INSERT INTO `ESOCIAL_NATUREZA_JURIDICA` (`codigo`,`descricao`,`grupo`) VALUES
+('101-5','Órgão Público do Poder Executivo Federal','1'),
+('201-1','Empresa Pública','2'),
+('206-2','Sociedade de Economia Mista','2'),
+('211-9','Sociedade Anônima Aberta','2'),
+('212-7','Sociedade Anônima Fechada','2'),
+('213-5','Sociedade Empresária Limitada','2'),
+('214-3','Sociedade Empresária em Nome Coletivo','2'),
+('215-1','Sociedade Empresária em Comandita Simples','2'),
+('223-2','Empresa Individual de Responsabilidade Limitada (EIRELI)','2'),
+('230-5','Empresa Individual Imobiliária','2'),
+('303-4','Serviço Social Autônomo','3'),
+('306-9','Fundação Privada','3'),
+('308-5','Cooperativa','3'),
+('399-9','Associação Privada','3'),
+('401-4','Empresa Doméstica','4'),
+('408-1','Contribuinte Individual','4'),
+('412-0','MEI — Microempreendedor Individual','4'),
+('501-0','Organização Internacional','5');
+
+INSERT INTO `ESOCIAL_MOTIVO_DESLIGAMENTO` (`codigo`,`descricao`,`tipo_aviso_previo`) VALUES
+('01','Sem Justa Causa por Iniciativa do Empregador','P'),
+('02','Com Justa Causa por Iniciativa do Empregador','N'),
+('03','Por Iniciativa do Empregado — Pedido de Demissão','N'),
+('04','Por Iniciativa do Empregado — Rescisão Indireta','P'),
+('05','Término de Contrato a Prazo Determinado','N'),
+('06','Extinção do Estabelecimento','N'),
+('07','Falecimento do Empregado','N'),
+('08','Falecimento do Empregador Individual','N'),
+('09','Aposentadoria por Invalidez','N'),
+('10','Aposentadoria Compulsória por Idade','N'),
+('11','Aposentadoria Voluntária','N'),
+('12','Acordo entre Empregado e Empregador — Lei 13.467/2017','N'),
+('13','Contrato por Prazo Determinado','N');
+
+INSERT INTO `ESOCIAL_CLASSIFICACAO_TRIBUT` (`codigo`,`descricao`) VALUES
+('01','Contribuinte Individual — Contribuição em Dobro'),
+('02','Contribuinte Individual — Contribuição Normal'),
+('03','Empregado — Contribuição Normal'),
+('04','Segurado Especial'),
+('05','Facultativo'),
+('06','Empregado Doméstico');
+
+INSERT INTO `ESOCIAL_TIPO_AFASTAMENTO` (`codigo`,`descricao`,`retorno_obrigatorio`) VALUES
+('01','Acidente ou Doença Relacionada ao Trabalho — até 15 dias','S'),
+('02','Acidente ou Doença Relacionada ao Trabalho — 16 dias ou mais','S'),
+('03','Doença Não Relacionada ao Trabalho — até 15 dias','S'),
+('04','Doença Não Relacionada ao Trabalho — 16 dias ou mais','S'),
+('05','Férias','S'),
+('06','Licença Maternidade 120 dias','N'),
+('07','Licença Maternidade 180 dias','N'),
+('08','Licença Paternidade','S'),
+('09','Afastamento pela Lei 11.770/2008 (Prorrogação Maternidade)','N'),
+('10','Participação do Empregado em Greve','S'),
+('11','Suspensão Disciplinar','S'),
+('17','Mandato Sindical','S'),
+('18','Mandato Eleitoral','S'),
+('19','Cessão','S'),
+('31','Suspensão do Contrato por Qualificação — Lei 13.467/2017','S');
+
+INSERT INTO `ESOCIAL_RUBRICA` (`codigo`,`descricao`,`natureza`,`tipo`,`incidencia_inss`,`incidencia_irrf`,`incidencia_fgts`) VALUES
+('0001','Salário Mensal','0001','1','S','S','S'),
+('0002','Horas Extras 50%','0202','1','S','S','S'),
+('0003','Horas Extras 100%','0202','1','S','S','S'),
+('0004','Adicional Noturno','0701','1','S','S','S'),
+('0005','Adicional de Insalubridade','0701','1','S','S','S'),
+('0006','Adicional de Periculosidade','0701','1','S','S','S'),
+('0007','Comissões','0202','1','S','S','S'),
+('0008','13º Salário','1401','1','S','S','S'),
+('0009','Férias','1501','1','S','S','N'),
+('0010','1/3 Constitucional de Férias','1501','1','N','S','N'),
+('9210','INSS — Desconto','9210','9','N','N','N'),
+('9220','IRRF — Desconto','9220','9','N','N','N'),
+('9201','Vale Transporte — Desconto','9201','9','N','N','N'),
+('9205','Plano de Saúde — Desconto','9205','9','N','N','N');
+
+-- ================================================================
+-- BLOCO 25 — CBO (Classificação Brasileira de Ocupações)
+-- ================================================================
+
+INSERT INTO `CBO` (`codigo`,`descricao`,`familia`,`grupo`) VALUES
+('111105','Senador','1111','11'),
+('111115','Deputado Federal','1111','11'),
+('121005','Diretor Administrativo','1210','12'),
+('121010','Diretor Financeiro','1210','12'),
+('121015','Diretor Comercial','1210','12'),
+('122605','Gerente de Recursos Humanos','1226','12'),
+('122610','Gerente Administrativo','1226','12'),
+('131115','Gerente de Contabilidade','1311','13'),
+('131120','Contador','1311','13'),
+('211105','Analista de Sistemas','2111','21'),
+('211110','Analista de Negócios','2111','21'),
+('211120','Desenvolvedor de Sistemas','2111','21'),
+('252105','Administrador','2521','25'),
+('252205','Consultor de Vendas','2522','25'),
+('252305','Representante Comercial','2523','25'),
+('261705','Contador','2617','26'),
+('261710','Técnico Contábil','2617','26'),
+('351505','Técnico em Segurança do Trabalho','3515','35'),
+('391105','Assistente Administrativo','3911','39'),
+('411005','Auxiliar Administrativo','4110','41'),
+('411010','Recepcionista','4110','41'),
+('411030','Operador de Caixa','4110','41'),
+('514325','Motorista','5143','51'),
+('521135','Vendedor Interno','5211','52'),
+('521140','Operador de Televendas','5211','52'),
+('715515','Técnico de Manutenção','7155','71'),
+('782825','Motorista de Caminhão','7828','78');
+
+-- ================================================================
+-- BLOCO 26 — FPAS
+-- ================================================================
+
+INSERT INTO `FPAS` (`id`,`codigo`,`descricao`,`rat`,`terceiros`) VALUES
+(1,'515','Comércio em geral',3.000000,5.800000),
+(2,'523','Indústria em geral',3.000000,5.800000),
+(3,'531','Construção civil',3.000000,4.500000),
+(4,'540','Transporte rodoviário',3.000000,4.000000),
+(5,'558','Serviços em geral',3.000000,5.800000),
+(6,'566','Agricultura e pecuária',2.500000,2.500000),
+(7,'574','Serviços de saúde',2.000000,5.800000),
+(8,'582','Educação',2.000000,4.500000),
+(9,'590','Financeiro e seguros',3.000000,5.800000),
+(10,'620','Tecnologia da Informação',1.000000,5.800000);
+
+-- ================================================================
+-- BLOCO 27 — USUÁRIOS DO SISTEMA
+-- ================================================================
+
+INSERT INTO `USUARIO`
+  (`id`,`login`,`senha_hash`,`nome`,`email`,`ativo`,
+   `data_criacao`,`ultimo_acesso`,`tentativas_login`,`bloqueado`) VALUES
+(1,'admin','$2b$12$hashAdmin1234567890abcdef','Administrador do Sistema','admin@nexcore.com.br','S','2023-01-01','2024-01-15',0,'N'),
+(2,'financeiro','$2b$12$hashFinanc1234567890abc','Ana Financeiro','ana.financeiro@empresa.com.br','S','2023-01-05','2024-01-14',0,'N'),
+(3,'contabil','$2b$12$hashContab1234567890abc','Carlos Contábil','carlos.contabil@empresa.com.br','S','2023-01-05','2024-01-13',0,'N'),
+(4,'vendas','$2b$12$hashVendas1234567890abc','João Vendas','joao.vendas@empresa.com.br','S','2023-01-05','2024-01-15',0,'N'),
+(5,'estoque','$2b$12$hashEstoq1234567890abc','Maria Estoque','maria.estoque@empresa.com.br','S','2023-01-10','2024-01-12',0,'N'),
+(6,'rh','$2b$12$hashRH1234567890abcdefg','Pedro RH','pedro.rh@empresa.com.br','S','2023-01-10','2024-01-11',0,'N'),
+(7,'compras','$2b$12$hashCompr1234567890abc','Lúcia Compras','lucia.compras@empresa.com.br','S','2023-01-10','2024-01-10',0,'N'),
+(8,'gerente','$2b$12$hashGeren1234567890abc','Roberto Gerente','roberto.gerente@empresa.com.br','S','2023-01-01','2024-01-15',0,'N');
+
+-- ================================================================
+-- BLOCO 28 — PAPÉIS / PERFIS DE ACESSO
+-- ================================================================
+
+INSERT INTO `PAPEL`
+  (`id`,`nome`,`descricao`,`nivel_acesso`,`ativo`) VALUES
+(1,'ADMINISTRADOR','Acesso total ao sistema',10,'S'),
+(2,'GERENTE','Acesso gerencial a todos os módulos',8,'S'),
+(3,'FINANCEIRO','Acesso completo ao módulo financeiro',6,'S'),
+(4,'CONTÁBIL','Acesso completo à contabilidade',6,'S'),
+(5,'VENDAS','Acesso a vendas, clientes e CRM',5,'S'),
+(6,'COMPRAS','Acesso a compras e fornecedores',5,'S'),
+(7,'ESTOQUE','Acesso a estoque e inventário',5,'S'),
+(8,'RH','Acesso a folha, ponto e colaboradores',5,'S'),
+(9,'FISCAL','Acesso a documentos fiscais',6,'S'),
+(10,'CONSULTA','Somente leitura em todos os módulos',1,'S');
+
+INSERT INTO `PAPEL_FUNCAO`
+  (`id_papel`,`modulo`,`funcao`,`permite_incluir`,`permite_alterar`,`permite_excluir`,`permite_consultar`) VALUES
+-- ADMINISTRADOR — acesso total
+(1,'*','*','S','S','S','S'),
+-- GERENTE — tudo exceto excluir
+(2,'*','*','S','S','N','S'),
+-- FINANCEIRO
+(3,'FINANCEIRO','*','S','S','N','S'),
+(3,'RELATORIOS','*','N','N','N','S'),
+-- CONTÁBIL
+(4,'CONTABILIDADE','*','S','S','N','S'),
+(4,'FISCAL','*','S','S','N','S'),
+(4,'RELATORIOS','*','N','N','N','S'),
+-- VENDAS
+(5,'VENDAS','*','S','S','N','S'),
+(5,'CRM','*','S','S','N','S'),
+(5,'NFE','CONSULTAR','N','N','N','S'),
+-- COMPRAS
+(6,'COMPRAS','*','S','S','N','S'),
+(6,'ESTOQUE','CONSULTAR','N','N','N','S'),
+-- ESTOQUE
+(7,'ESTOQUE','*','S','S','N','S'),
+(7,'COMPRAS','CONSULTAR','N','N','N','S'),
+-- RH
+(8,'FOLHA','*','S','S','N','S'),
+(8,'PONTO','*','S','S','N','S'),
+(8,'COLABORADOR','*','S','S','N','S'),
+-- FISCAL
+(9,'NFE','*','S','S','N','S'),
+(9,'FISCAL','*','S','S','N','S'),
+(9,'NFSE','*','S','S','N','S'),
+-- CONSULTA
+(10,'*','CONSULTAR','N','N','N','S');
+
+-- ================================================================
+-- BLOCO 29 — ADM_PARAMETRO (parâmetros globais do sistema)
+-- ================================================================
+
+INSERT INTO `ADM_PARAMETRO` (`chave`,`valor`,`descricao`,`modulo`,`tipo`) VALUES
+-- Empresa
+('EMPRESA_RAZAO_SOCIAL','EMPRESA COMERCIAL LTDA','Razão Social da Empresa','SISTEMA','S'),
+('EMPRESA_CNPJ','12345678000115','CNPJ da Empresa','SISTEMA','S'),
+('EMPRESA_IE','123456789012','Inscrição Estadual','SISTEMA','S'),
+('EMPRESA_UF_SEDE','SP','UF da sede da empresa','SISTEMA','S'),
+('EMPRESA_MUNICIPIO_SEDE','3550308','Código IBGE da cidade sede','SISTEMA','I'),
+-- NF-e
+('NFE_AMBIENTE','1','Ambiente NF-e: 1=Produção, 2=Homologação','NFE','I'),
+('NFE_VERSAO','4.00','Versão do leiaute NF-e','NFE','S'),
+('NFE_SERIE_PADRAO','1','Série padrão para emissão de NF-e','NFE','I'),
+('NFE_PROXIMO_NUMERO','1004','Próximo número de NF-e','NFE','I'),
+('NFE_TIPO_EMISSAO','1','Tipo de emissão: 1=Normal, 6=Contingência','NFE','I'),
+-- NFS-e
+('NFSE_MUNICIPIO','3550308','Município de emissão de NFS-e','NFSE','I'),
+('NFSE_PROXIMO_RPS','1006','Próximo número de RPS','NFSE','I'),
+-- Financeiro
+('FIN_DIAS_VENCIMENTO_PADRAO','30','Prazo padrão em dias para vencimento','FINANCEIRO','I'),
+('FIN_TAXA_MULTA_PADRAO','2.00','Taxa de multa padrão (%)','FINANCEIRO','D'),
+('FIN_TAXA_JUROS_PADRAO','1.00','Taxa de juros mensal padrão (%)','FINANCEIRO','D'),
+-- Estoque
+('EST_ALERTA_ESTOQUE_MINIMO','S','Alertar quando estoque atingir mínimo','ESTOQUE','B'),
+('EST_CONTROLE_LOTE','N','Controlar número de lote nos produtos','ESTOQUE','B'),
+('EST_CONTROLE_SERIAL','N','Controlar número de série nos produtos','ESTOQUE','B'),
+-- Folha
+('FOLHA_DIA_PAGAMENTO','5','Dia padrão de pagamento da folha','FOLHA','I'),
+('FOLHA_COMPETENCIA_ATUAL','2024-01','Competência atual da folha','FOLHA','S'),
+-- Sistema
+('SYS_VERSAO','2.5.0','Versão do sistema Fênix ERP','SISTEMA','S'),
+('SYS_DATA_IMPLANTACAO','2023-01-01','Data de implantação do sistema','SISTEMA','D'),
+('SYS_BACKUP_AUTOMATICO','S','Executar backup automático diário','SISTEMA','B'),
+('SYS_HORA_BACKUP','02:00','Hora do backup automático','SISTEMA','S'),
+('SYS_DIAS_RETENCAO_LOG','90','Dias de retenção dos logs do sistema','SISTEMA','I');
+
+-- ================================================================
+-- FIM DO SCRIPT — PRIORIDADE 1
+-- Tabelas inseridas neste script: 21 tabelas
+-- Cobertura acumulada: ~273/478 (57,1%)
+-- Próximo: Prioridade 2 — Módulo de Vendas completo
+-- ================================================================
+
+SET FOREIGN_KEY_CHECKS = 1;

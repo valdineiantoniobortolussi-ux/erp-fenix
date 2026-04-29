@@ -1,0 +1,9 @@
+export 'login_bindings.dart';
+export 'wms_recebimento_cabecalho_bindings.dart';
+export 'wms_caixa_bindings.dart';
+export 'wms_ordem_separacao_cab_bindings.dart';
+export 'wms_agendamento_bindings.dart';
+export 'wms_parametro_bindings.dart';
+export 'wms_rua_bindings.dart';
+export 'wms_estante_bindings.dart';
+export 'wms_expedicao_bindings.dart';

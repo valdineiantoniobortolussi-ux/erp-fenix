@@ -1,0 +1,21 @@
+from src.controller.login_controller import login_bp
+from src.controller.ged_documento_cabecalho_controller import ged_documento_cabecalho_bp
+from src.controller.ged_tipo_documento_controller import ged_tipo_documento_bp
+from src.controller.ged_versao_documento_controller import ged_versao_documento_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.view_pessoa_colaborador_controller import view_pessoa_colaborador_bp
+from src.controller.view_pessoa_vendedor_controller import view_pessoa_vendedor_bp
+from src.controller.view_pessoa_transportadora_controller import view_pessoa_transportadora_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(ged_documento_cabecalho_bp)
+		app.register_blueprint(ged_tipo_documento_bp)
+		app.register_blueprint(ged_versao_documento_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(view_pessoa_colaborador_bp)
+		app.register_blueprint(view_pessoa_vendedor_bp)
+		app.register_blueprint(view_pessoa_transportadora_bp)
+		app.register_blueprint(login_bp)

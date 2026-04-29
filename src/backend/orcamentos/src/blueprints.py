@@ -1,0 +1,21 @@
+from src.controller.login_controller import login_bp
+from src.controller.orcamento_fluxo_caixa_controller import orcamento_fluxo_caixa_bp
+from src.controller.orcamento_empresarial_controller import orcamento_empresarial_bp
+from src.controller.banco_conta_caixa_controller import banco_conta_caixa_bp
+from src.controller.fin_natureza_financeira_controller import fin_natureza_financeira_bp
+from src.controller.orcamento_fluxo_caixa_periodo_controller import orcamento_fluxo_caixa_periodo_bp
+from src.controller.orcamento_periodo_controller import orcamento_periodo_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(orcamento_fluxo_caixa_bp)
+		app.register_blueprint(orcamento_empresarial_bp)
+		app.register_blueprint(banco_conta_caixa_bp)
+		app.register_blueprint(fin_natureza_financeira_bp)
+		app.register_blueprint(orcamento_fluxo_caixa_periodo_bp)
+		app.register_blueprint(orcamento_periodo_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(login_bp)

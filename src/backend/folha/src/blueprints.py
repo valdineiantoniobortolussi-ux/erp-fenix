@@ -1,0 +1,69 @@
+from src.controller.empresa_transporte_itinerario_controller import empresa_transporte_itinerario_bp
+from src.controller.empresa_transporte_controller import empresa_transporte_bp
+from src.controller.folha_lancamento_cabecalho_controller import folha_lancamento_cabecalho_bp
+from src.controller.folha_inss_controller import folha_inss_bp
+from src.controller.folha_ppp_controller import folha_ppp_bp
+from src.controller.irrf_controller import irrf_bp
+from src.controller.inss_controller import inss_bp
+from src.controller.operadora_plano_saude_controller import operadora_plano_saude_bp
+from src.controller.folha_lancamento_comissao_controller import folha_lancamento_comissao_bp
+from src.controller.folha_parametro_controller import folha_parametro_bp
+from src.controller.guias_acumuladas_controller import guias_acumuladas_bp
+from src.controller.folha_fechamento_controller import folha_fechamento_bp
+from src.controller.ferias_periodo_aquisitivo_controller import ferias_periodo_aquisitivo_bp
+from src.controller.folha_tipo_afastamento_controller import folha_tipo_afastamento_bp
+from src.controller.folha_afastamento_controller import folha_afastamento_bp
+from src.controller.folha_plano_saude_controller import folha_plano_saude_bp
+from src.controller.folha_evento_controller import folha_evento_bp
+from src.controller.folha_rescisao_controller import folha_rescisao_bp
+from src.controller.folha_ferias_coletivas_controller import folha_ferias_coletivas_bp
+from src.controller.folha_vale_transporte_controller import folha_vale_transporte_bp
+from src.controller.folha_inss_servico_controller import folha_inss_servico_bp
+from src.controller.folha_historico_salarial_controller import folha_historico_salarial_bp
+from src.controller.feriados_controller import feriados_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.view_pessoa_colaborador_controller import view_pessoa_colaborador_bp
+from src.controller.cbo_controller import cbo_bp
+from src.controller.codigo_gps_controller import codigo_gps_bp
+from src.controller.fpas_controller import fpas_bp
+from src.controller.salario_minimo_controller import salario_minimo_bp
+from src.controller.sefip_codigo_movimentacao_controller import sefip_codigo_movimentacao_bp
+from src.controller.sefip_categoria_trabalho_controller import sefip_categoria_trabalho_bp
+from src.controller.sefip_codigo_recolhimento_controller import sefip_codigo_recolhimento_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(empresa_transporte_itinerario_bp)
+		app.register_blueprint(empresa_transporte_bp)
+		app.register_blueprint(folha_lancamento_cabecalho_bp)
+		app.register_blueprint(folha_inss_bp)
+		app.register_blueprint(folha_ppp_bp)
+		app.register_blueprint(irrf_bp)
+		app.register_blueprint(inss_bp)
+		app.register_blueprint(operadora_plano_saude_bp)
+		app.register_blueprint(folha_lancamento_comissao_bp)
+		app.register_blueprint(folha_parametro_bp)
+		app.register_blueprint(guias_acumuladas_bp)
+		app.register_blueprint(folha_fechamento_bp)
+		app.register_blueprint(ferias_periodo_aquisitivo_bp)
+		app.register_blueprint(folha_tipo_afastamento_bp)
+		app.register_blueprint(folha_afastamento_bp)
+		app.register_blueprint(folha_plano_saude_bp)
+		app.register_blueprint(folha_evento_bp)
+		app.register_blueprint(folha_rescisao_bp)
+		app.register_blueprint(folha_ferias_coletivas_bp)
+		app.register_blueprint(folha_vale_transporte_bp)
+		app.register_blueprint(folha_inss_servico_bp)
+		app.register_blueprint(folha_historico_salarial_bp)
+		app.register_blueprint(feriados_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(view_pessoa_colaborador_bp)
+		app.register_blueprint(cbo_bp)
+		app.register_blueprint(codigo_gps_bp)
+		app.register_blueprint(fpas_bp)
+		app.register_blueprint(salario_minimo_bp)
+		app.register_blueprint(sefip_codigo_movimentacao_bp)
+		app.register_blueprint(sefip_categoria_trabalho_bp)
+		app.register_blueprint(sefip_codigo_recolhimento_bp)

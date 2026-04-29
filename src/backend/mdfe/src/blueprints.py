@@ -1,0 +1,23 @@
+from src.controller.login_controller import login_bp
+from src.controller.mdfe_cabecalho_controller import mdfe_cabecalho_bp
+from src.controller.mdfe_informacao_cte_controller import mdfe_informacao_cte_bp
+from src.controller.mdfe_informacao_nfe_controller import mdfe_informacao_nfe_bp
+from src.controller.mdfe_rodoviario_motorista_controller import mdfe_rodoviario_motorista_bp
+from src.controller.mdfe_rodoviario_veiculo_controller import mdfe_rodoviario_veiculo_bp
+from src.controller.mdfe_rodoviario_pedagio_controller import mdfe_rodoviario_pedagio_bp
+from src.controller.mdfe_rodoviario_ciot_controller import mdfe_rodoviario_ciot_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(mdfe_cabecalho_bp)
+		app.register_blueprint(mdfe_informacao_cte_bp)
+		app.register_blueprint(mdfe_informacao_nfe_bp)
+		app.register_blueprint(mdfe_rodoviario_motorista_bp)
+		app.register_blueprint(mdfe_rodoviario_veiculo_bp)
+		app.register_blueprint(mdfe_rodoviario_pedagio_bp)
+		app.register_blueprint(mdfe_rodoviario_ciot_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(login_bp)

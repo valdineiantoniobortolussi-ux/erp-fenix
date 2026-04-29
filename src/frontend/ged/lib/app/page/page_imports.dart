@@ -1,0 +1,11 @@
+export 'home_page.dart';
+export 'modules/ged_documento_cabecalho/ged_documento_detalhe_list_page.dart';
+export 'modules/ged_documento_cabecalho/ged_documento_detalhe_edit_page.dart';
+export 'modules/ged_documento_cabecalho/ged_documento_cabecalho_list_page.dart';
+export 'modules/ged_documento_cabecalho/ged_documento_cabecalho_tab_page.dart';
+export 'modules/ged_documento_cabecalho/ged_documento_cabecalho_edit_page.dart';
+export 'modules/ged_tipo_documento/ged_tipo_documento_list_page.dart';
+export 'modules/ged_tipo_documento/ged_tipo_documento_edit_page.dart';
+export 'modules/ged_versao_documento/ged_versao_documento_list_page.dart';
+export 'modules/ged_versao_documento/ged_versao_documento_edit_page.dart';
+export 'payment/payment_page.dart';

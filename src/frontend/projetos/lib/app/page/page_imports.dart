@@ -1,0 +1,13 @@
+export 'home_page.dart';
+export 'modules/projeto_principal/projeto_cronograma_list_page.dart';
+export 'modules/projeto_principal/projeto_cronograma_edit_page.dart';
+export 'modules/projeto_principal/projeto_stakeholders_list_page.dart';
+export 'modules/projeto_principal/projeto_stakeholders_edit_page.dart';
+export 'modules/projeto_principal/projeto_risco_list_page.dart';
+export 'modules/projeto_principal/projeto_risco_edit_page.dart';
+export 'modules/projeto_principal/projeto_custo_list_page.dart';
+export 'modules/projeto_principal/projeto_custo_edit_page.dart';
+export 'modules/projeto_principal/projeto_principal_list_page.dart';
+export 'modules/projeto_principal/projeto_principal_tab_page.dart';
+export 'modules/projeto_principal/projeto_principal_edit_page.dart';
+export 'payment/payment_page.dart';

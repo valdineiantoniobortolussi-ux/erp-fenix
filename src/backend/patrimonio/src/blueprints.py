@@ -1,0 +1,33 @@
+from src.controller.login_controller import login_bp
+from src.controller.patrim_bem_controller import patrim_bem_bp
+from src.controller.setor_controller import setor_bp
+from src.controller.centro_resultado_controller import centro_resultado_bp
+from src.controller.patrim_indice_atualizacao_controller import patrim_indice_atualizacao_bp
+from src.controller.patrim_taxa_depreciacao_controller import patrim_taxa_depreciacao_bp
+from src.controller.patrim_grupo_bem_controller import patrim_grupo_bem_bp
+from src.controller.patrim_tipo_aquisicao_bem_controller import patrim_tipo_aquisicao_bem_bp
+from src.controller.patrim_estado_conservacao_controller import patrim_estado_conservacao_bp
+from src.controller.seguradora_controller import seguradora_bp
+from src.controller.patrim_tipo_movimentacao_controller import patrim_tipo_movimentacao_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.view_pessoa_fornecedor_controller import view_pessoa_fornecedor_bp
+from src.controller.view_pessoa_colaborador_controller import view_pessoa_colaborador_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(patrim_bem_bp)
+		app.register_blueprint(setor_bp)
+		app.register_blueprint(centro_resultado_bp)
+		app.register_blueprint(patrim_indice_atualizacao_bp)
+		app.register_blueprint(patrim_taxa_depreciacao_bp)
+		app.register_blueprint(patrim_grupo_bem_bp)
+		app.register_blueprint(patrim_tipo_aquisicao_bem_bp)
+		app.register_blueprint(patrim_estado_conservacao_bp)
+		app.register_blueprint(seguradora_bp)
+		app.register_blueprint(patrim_tipo_movimentacao_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(view_pessoa_fornecedor_bp)
+		app.register_blueprint(view_pessoa_colaborador_bp)
+		app.register_blueprint(login_bp)

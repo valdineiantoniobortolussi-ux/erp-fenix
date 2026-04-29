@@ -1,0 +1,26 @@
+import 'package:drift/drift.dart';
+import 'package:cadastros/app/data/provider/drift/database/database.dart';
+
+@DataClassName("TipoAdmissao")
+class TipoAdmissaos extends Table {
+	@override
+	String get tableName => 'tipo_admissao';
+
+	IntColumn get id => integer().named('id').nullable()();
+	TextColumn get codigo => text().named('codigo').withLength(min: 0, max: 3).nullable()();
+	TextColumn get nome => text().named('nome').withLength(min: 0, max: 100).nullable()();
+	TextColumn get descricao => text().named('descricao').nullable()();
+
+	@override
+	Set<Column> get primaryKey => { id };	
+	
+}
+
+class TipoAdmissaoGrouped {
+	TipoAdmissao? tipoAdmissao; 
+
+  TipoAdmissaoGrouped({
+		this.tipoAdmissao, 
+
+  });
+}

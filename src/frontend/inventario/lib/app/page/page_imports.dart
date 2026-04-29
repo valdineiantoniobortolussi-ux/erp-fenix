@@ -1,0 +1,12 @@
+export 'home_page.dart';
+export 'modules/inventario_contagem_cab/inventario_contagem_det_list_page.dart';
+export 'modules/inventario_contagem_cab/inventario_contagem_det_edit_page.dart';
+export 'modules/inventario_ajuste_cab/inventario_ajuste_det_list_page.dart';
+export 'modules/inventario_ajuste_cab/inventario_ajuste_det_edit_page.dart';
+export 'modules/inventario_contagem_cab/inventario_contagem_cab_list_page.dart';
+export 'modules/inventario_contagem_cab/inventario_contagem_cab_tab_page.dart';
+export 'modules/inventario_contagem_cab/inventario_contagem_cab_edit_page.dart';
+export 'modules/inventario_ajuste_cab/inventario_ajuste_cab_list_page.dart';
+export 'modules/inventario_ajuste_cab/inventario_ajuste_cab_tab_page.dart';
+export 'modules/inventario_ajuste_cab/inventario_ajuste_cab_edit_page.dart';
+export 'payment/payment_page.dart';

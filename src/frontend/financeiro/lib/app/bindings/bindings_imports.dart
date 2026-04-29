@@ -1,0 +1,13 @@
+export 'login_bindings.dart';
+export 'talonario_cheque_bindings.dart';
+export 'fin_lancamento_pagar_bindings.dart';
+export 'fin_lancamento_receber_bindings.dart';
+export 'banco_conta_caixa_bindings.dart';
+export 'fin_documento_origem_bindings.dart';
+export 'fin_natureza_financeira_bindings.dart';
+export 'fin_status_parcela_bindings.dart';
+export 'fin_tipo_pagamento_bindings.dart';
+export 'fin_cheque_emitido_bindings.dart';
+export 'fin_tipo_recebimento_bindings.dart';
+export 'fin_cheque_recebido_bindings.dart';
+export 'fin_configuracao_boleto_bindings.dart';

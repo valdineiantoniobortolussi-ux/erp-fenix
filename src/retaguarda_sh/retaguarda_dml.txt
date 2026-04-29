@@ -1,0 +1,345 @@
+-- ================================================================
+-- Retaguarda HS — DML Completo (5/5 tabelas — 100%)
+-- Dados: funcionais para testes + estrutura real de planos SaaS
+-- ================================================================
+
+SET FOREIGN_KEY_CHECKS = 0;
+SET SQL_MODE = '';
+
+-- ================================================================
+-- 1. PDV_TIPO_PLANO — Catálogo de planos disponíveis
+-- ================================================================
+
+INSERT INTO `PDV_TIPO_PLANO` (`ID`,`MODULO`,`PLANO`,`MODULO_FISCAL`,`VALOR`) VALUES
+-- Plano Gratuito
+(1,'G','M','NFC',0.00),
+-- Planos Fiscal NFC-e
+(2,'F','M','NFC',49.90),
+(3,'F','S','NFC',249.90),
+(4,'F','A','NFC',449.90),
+-- Planos Fiscal SAT
+(5,'F','M','SAT',59.90),
+(6,'F','S','SAT',299.90),
+(7,'F','A','SAT',539.90),
+-- Planos Fiscal MFE (Ceará)
+(8,'F','M','MFE',59.90),
+(9,'F','S','MFE',299.90),
+(10,'F','A','MFE',539.90),
+-- Planos Premium NFC-e
+(11,'P','M','NFC',89.90),
+(12,'P','S','NFC',449.90),
+(13,'P','A','NFC',799.90),
+-- Planos Premium SAT
+(14,'P','M','SAT',99.90),
+(15,'P','S','SAT',499.90),
+(16,'P','A','SAT',899.90),
+-- Planos Premium MFE
+(17,'P','M','MFE',99.90),
+(18,'P','S','MFE',499.90),
+(19,'P','A','MFE',899.90);
+
+-- ================================================================
+-- 2. EMPRESA — Clientes da softhouse HS
+-- ================================================================
+
+INSERT INTO `EMPRESA`
+  (`ID`,`RAZAO_SOCIAL`,`NOME_FANTASIA`,`CNPJ`,`INSCRICAO_ESTADUAL`,`INSCRICAO_MUNICIPAL`,
+   `TIPO_REGIME`,`CRT`,`DATA_CONSTITUICAO`,`TIPO`,`EMAIL`,
+   `LOGRADOURO`,`NUMERO`,`COMPLEMENTO`,`CEP`,`BAIRRO`,`CIDADE`,`UF`,
+   `FONE`,`CONTATO`,`CODIGO_IBGE_CIDADE`,`CODIGO_IBGE_UF`,
+   `LOGOTIPO`,`REGISTRADO`,`NATUREZA_JURIDICA`,`SIMEI`,
+   `EMAIL_PAGAMENTO`,`DATA_REGISTRO`,`HORA_REGISTRO`) VALUES
+(1,'EMPRESA COMERCIAL LTDA','COMERCIAL SP','12345678000115','123456789012',NULL,
+ '1','1','2015-03-10','M','comercial@empresa.com.br',
+ 'Rua das Flores','100','Sala 101','01001000','Centro','Sao Paulo','SP',
+ '1122223333','João Silva',3550308,35,
+ NULL,'S','Sociedade Empresaria Limitada','N',
+ 'pagamento@empresa.com.br','2023-01-05','08:30:00'),
+
+(2,'LOJA DO JOAO ME','LOJA JOAO','23456789000126','234567890123',NULL,
+ '1','1','2018-06-15','M','lojajoao@gmail.com',
+ 'Av. Brasil','500','Loja 3','20040020','Centro','Rio de Janeiro','RJ',
+ '2133334444','João Pereira',3304557,33,
+ NULL,'S','Microempresa','N',
+ 'lojajoao@gmail.com','2023-02-10','09:15:00'),
+
+(3,'FARMACIA SAO JOSE LTDA','FARMACIA SAO JOSE','34567890000137','345678901234',NULL,
+ '1','1','2010-11-20','M','farmacia@saojose.com.br',
+ 'Rua Principal','200',NULL,'31000000','Savassi','Belo Horizonte','MG',
+ '3133335555','Maria Costa',3106200,31,
+ NULL,'S','Sociedade Empresaria Limitada','N',
+ 'farmacia@saojose.com.br','2023-03-01','10:00:00'),
+
+(4,'RESTAURANTE BOM SABOR EIRELI','BOM SABOR','45678901000148',NULL,'654321',
+ '1','1','2019-08-05','M','restaurante@bomsabor.com.br',
+ 'Rua da Gastronomia','750',NULL,'80010010','Centro','Curitiba','PR',
+ '4133336666','Carlos Mendes',4106902,41,
+ NULL,'S','Empresa Individual de Responsabilidade Limitada','N',
+ 'restaurante@bomsabor.com.br','2023-04-15','11:30:00'),
+
+(5,'PAPELARIA ESCOLAR ME','PAPELARIA DO BAIRRO','56789012000159',NULL,NULL,
+ '1','1','2020-02-14','M','papelaria@escolar.com.br',
+ 'Av. da Escola','1200',NULL,'90010020','Centro Historico','Porto Alegre','RS',
+ '5133337777','Ana Lima',4314902,43,
+ NULL,'S','Microempresa','N',
+ 'papelaria@escolar.com.br','2023-05-20','14:00:00'),
+
+(6,'AUTO PECAS NORTE LTDA','AUTO PECAS NORTE','67890123000160','678901234567',NULL,
+ '1','1','2012-09-30','M','autopecas@norte.com.br',
+ 'Rua das Oficinas','300','Galpao 2','69010010','Centro','Manaus','AM',
+ '9233338888','Roberto Ferreira',1302603,13,
+ NULL,'S','Sociedade Empresaria Limitada','N',
+ 'autopecas@norte.com.br','2023-06-01','08:00:00'),
+
+(7,'MERCADINHO DA ESQUINA ME','MERCADINHO ESQUINA','78901234000171',NULL,NULL,
+ '1','1','2021-04-22','M','mercadinho@esquina.com.br',
+ 'Rua da Feira','45',NULL,'40010010','Centro','Salvador','BA',
+ '7133339999','Sandra Oliveira',2927408,29,
+ NULL,'S','Microempresa','S',
+ 'mercadinho@esquina.com.br','2023-07-10','09:45:00'),
+
+(8,'SUPERMERCADO BELO LTDA','SUPER BELO','89012345000182','890123456789',NULL,
+ '2','2','2008-05-18','M','super@belo.com.br',
+ 'Av. do Comercio','2000',NULL,'50010000','Boa Vista','Recife','PE',
+ '8133330000','Paulo Belo',2611606,26,
+ NULL,'S','Sociedade Empresaria Limitada','N',
+ 'super@belo.com.br','2023-08-05','07:30:00'),
+
+(9,'LANCHONETE RAPIDA ME','LANCHE RAPIDO','90123456000193',NULL,'123456',
+ '1','1','2022-01-10','M','lanche@rapido.com.br',
+ 'Rua do Lanche','88',NULL,'60010010','Centro','Fortaleza','CE',
+ '8533331111','Marcos Alves',2304400,23,
+ NULL,'S','Microempresa','N',
+ 'lanche@rapido.com.br','2023-09-12','10:30:00'),
+
+(10,'DISTRIBUIDORA CENTRO OESTE LTDA','DISTRIB CENTRO OESTE','01234567000204','012345678901',NULL,
+ '1','1','2016-07-25','M','distrib@centrooeste.com.br',
+ 'Rua da Logistica','500','Galpao 1','74000010','Setor Industrial','Goiania','GO',
+ '6233332222','Fernanda Gomes',5208707,52,
+ NULL,'S','Sociedade Empresaria Limitada','N',
+ 'distrib@centrooeste.com.br','2023-10-01','08:15:00');
+
+-- ================================================================
+-- 3. NFE_CONFIGURACAO — Config NF-e por empresa
+-- ================================================================
+
+INSERT INTO `NFE_CONFIGURACAO`
+  (`ID`,`ID_EMPRESA`,`CERTIFICADO_DIGITAL_SERIE`,`CERTIFICADO_DIGITAL_CAMINHO`,
+   `CERTIFICADO_DIGITAL_SENHA`,`TIPO_EMISSAO`,`FORMATO_IMPRESSAO_DANFE`,
+   `PROCESSO_EMISSAO`,`VERSAO_PROCESSO_EMISSAO`,`CAMINHO_LOGOMARCA`,
+   `SALVAR_XML`,`CAMINHO_SALVAR_XML`,`CAMINHO_SCHEMAS`,
+   `CAMINHO_ARQUIVO_DANFE`,`CAMINHO_SALVAR_PDF`,
+   `WEBSERVICE_UF`,`WEBSERVICE_AMBIENTE`,
+   `WEBSERVICE_PROXY_HOST`,`WEBSERVICE_PROXY_PORTA`,
+   `WEBSERVICE_PROXY_USUARIO`,`WEBSERVICE_PROXY_SENHA`,`WEBSERVICE_VISUALIZAR`,
+   `EMAIL_SERVIDOR_SMTP`,`EMAIL_PORTA`,`EMAIL_USUARIO`,`EMAIL_SENHA`,
+   `EMAIL_ASSUNTO`,`EMAIL_AUTENTICA_SSL`,`EMAIL_TEXTO`,
+   `NFCE_ID_CSC`,`NFCE_CSC`,`NFCE_MODELO_IMPRESSAO`,
+   `NFCE_IMPRIMIR_ITENS_UMA_LINHA`,`NFCE_IMPRIMIR_DESCONTO_POR_ITEM`,
+   `NFCE_IMPRIMIR_QRCODE_LATERAL`,`NFCE_IMPRIMIR_GTIN`,
+   `NFCE_IMPRIMIR_NOME_FANTASIA`,`NFCE_IMPRESSAO_TRIBUTOS`,
+   `NFCE_MARGEM_SUPERIOR`,`NFCE_MARGEM_INFERIOR`,`NFCE_MARGEM_DIREITA`,`NFCE_MARGEM_ESQUERDA`,
+   `NFCE_RESOLUCAO_IMPRESSAO`,`NFCE_TAMANHO_FONTE_ITEM`,
+   `RESP_TEC_CNPJ`,`RESP_TEC_CONTATO`,`RESP_TEC_EMAIL`,`RESP_TEC_FONE`,
+   `RESP_TEC_ID_CSRT`,`RESP_TEC_HASH_CSRT`) VALUES
+
+(1,1,'CERT-SN-EMPRESA-001','/certs/empresa1.pfx','hash_senha_cert_1',
+ 1,1,0,'3.10','/logos/empresa1.jpg',
+ 'S','/xmls/empresa1/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/empresa1/',
+ 'SP',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.gmail.com',587,'nfe@empresa.com.br','hash_smtp_1',
+ 'NF-e - Empresa Comercial Ltda','S',
+ 'Prezado cliente, segue em anexo sua Nota Fiscal Eletronica.',
+ '000001','CSC-EMPRESA1-NEXCORE-2024-HASH',
+ '80','N','S','N','S','S','Normal',
+ 2.00,2.00,2.00,2.00,203,8,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT001'),
+
+(2,2,'CERT-SN-LOJA-002','/certs/loja2.pfx','hash_senha_cert_2',
+ 1,1,0,'3.10','/logos/loja2.jpg',
+ 'S','/xmls/loja2/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/loja2/',
+ 'RJ',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.gmail.com',587,'nfe@lojajoao.com.br','hash_smtp_2',
+ 'NF-e/NFC-e - Loja do Joao','S',
+ 'Prezado cliente, segue em anexo sua Nota Fiscal.',
+ '000002','CSC-LOJAJOAO-NEXCORE-2024-HASH',
+ '80','N','N','N','S','S','Normal',
+ 2.00,2.00,2.00,2.00,203,8,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT002'),
+
+(3,3,'CERT-SN-FARM-003','/certs/farmacia3.pfx','hash_senha_cert_3',
+ 1,1,0,'3.10','/logos/farmacia3.jpg',
+ 'S','/xmls/farmacia3/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/farmacia3/',
+ 'MG',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.outlook.com',587,'nfe@farmacia.com.br','hash_smtp_3',
+ 'Nota Fiscal - Farmacia Sao Jose','S',
+ 'Prezado cliente, sua NF-e esta disponivel em anexo.',
+ '000003','CSC-FARMSAOJOSE-NEXCORE-2024',
+ '58','N','S','S','S','S','Normal',
+ 3.00,3.00,3.00,3.00,203,9,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT003'),
+
+(4,4,'CERT-SN-REST-004','/certs/restaurante4.pfx','hash_senha_cert_4',
+ 1,1,0,'3.10','/logos/restaurante4.jpg',
+ 'S','/xmls/restaurante4/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/restaurante4/',
+ 'PR',1,NULL,NULL,NULL,NULL,'N',
+ 'smtp.gmail.com',587,'nfe@bomsabor.com.br','hash_smtp_4',
+ 'Cupom Fiscal - Bom Sabor','S',
+ 'Obrigado pela sua visita!',
+ '000004','CSC-BOMSABOR-NEXCORE-2024-HS',
+ '57','S','S','N','S','S','Normal',
+ 0.00,0.00,0.00,0.00,203,7,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT004'),
+
+(5,5,'CERT-SN-PAP-005','/certs/papelaria5.pfx','hash_senha_cert_5',
+ 1,1,0,'3.10',NULL,
+ 'S','/xmls/papelaria5/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/papelaria5/',
+ 'RS',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.gmail.com',587,'nfe@papelaria.com.br','hash_smtp_5',
+ 'NFC-e - Papelaria do Bairro','S',
+ 'Obrigado pela compra!',
+ '000005','CSC-PAPELARIA-NEXCORE-2024-HS',
+ '80','N','N','N','S','N','Normal',
+ 2.00,2.00,2.00,2.00,203,8,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT005'),
+
+(6,6,'CERT-SN-AUTO-006','/certs/autopecas6.pfx','hash_senha_cert_6',
+ 1,1,0,'3.10','/logos/autopecas6.jpg',
+ 'S','/xmls/autopecas6/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/autopecas6/',
+ 'AM',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.gmail.com',587,'nfe@autopecasnorte.com.br','hash_smtp_6',
+ 'NF-e - Auto Pecas Norte','S',
+ 'Prezado cliente, segue NF-e em anexo.',
+ '000006','CSC-AUTOPECAS-NEXCORE-2024-HS',
+ '80','N','S','S','S','S','Normal',
+ 2.00,2.00,2.00,2.00,203,8,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT006'),
+
+(7,7,'CERT-SN-MERC-007','/certs/mercadinho7.pfx','hash_senha_cert_7',
+ 1,1,0,'3.10',NULL,
+ 'S','/xmls/mercadinho7/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/mercadinho7/',
+ 'BA',2,NULL,NULL,NULL,NULL,'S',
+ 'smtp.gmail.com',587,'nfe@mercadinho.com.br','hash_smtp_7',
+ 'Cupom Fiscal - Mercadinho','S',
+ 'Obrigado!',
+ '000007','CSC-MERCADINHO-NEXCORE-2024',
+ '57','S','N','N','S','N','Normal',
+ 0.00,0.00,0.00,0.00,203,7,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT007'),
+
+(8,8,'CERT-SN-SUP-008','/certs/superbelo8.pfx','hash_senha_cert_8',
+ 1,1,0,'3.10','/logos/superbelo8.jpg',
+ 'S','/xmls/superbelo8/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/superbelo8/',
+ 'PE',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.outlook.com',465,'nfe@superbelo.com.br','hash_smtp_8',
+ 'NF-e/NFC-e - Supermercado Belo','S',
+ 'Prezado cliente, sua nota fiscal esta em anexo.',
+ '000008','CSC-SUPERBELO-NEXCORE-2024-HS',
+ '80','N','S','N','S','S','Separado',
+ 2.00,2.00,2.00,2.00,203,8,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT008'),
+
+(9,9,'CERT-SN-LCH-009','/certs/lanche9.pfx','hash_senha_cert_9',
+ 1,1,0,'3.10',NULL,
+ 'S','/xmls/lanche9/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/lanche9/',
+ 'CE',1,NULL,NULL,NULL,NULL,'N',
+ 'smtp.gmail.com',587,'nfe@lancherafido.com.br','hash_smtp_9',
+ 'Cupom - Lanche Rapido','S',
+ 'Volte sempre!',
+ '000009','CSC-LANCHERAP-NEXCORE-2024-HS',
+ '57','S','S','N','N','N','Normal',
+ 0.00,0.00,0.00,0.00,203,7,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT009'),
+
+(10,10,'CERT-SN-DIS-010','/certs/distribuidora10.pfx','hash_senha_cert_10',
+ 1,1,0,'3.10','/logos/distribuidora10.jpg',
+ 'S','/xmls/distribuidora10/','C:/ACBr/Schemas/','C:/ACBr/DANFE/','C:/PDFs/distribuidora10/',
+ 'GO',1,NULL,NULL,NULL,NULL,'S',
+ 'smtp.gmail.com',587,'nfe@centrooeste.com.br','hash_smtp_10',
+ 'NF-e - Distribuidora Centro Oeste','S',
+ 'Prezado parceiro, segue Nota Fiscal Eletronica.',
+ '000010','CSC-DISTRIBCO-NEXCORE-2024-HS',
+ '80','N','S','S','S','S','Normal',
+ 2.00,2.00,2.00,2.00,203,8,
+ '12345678000115','Suporte NexCore','suporte@nexcore.com.br','1199999001','01','HASHCSRT010');
+
+-- ================================================================
+-- 4. PDV_PLANO_PAGAMENTO — Assinaturas das empresas
+-- ================================================================
+
+INSERT INTO `PDV_PLANO_PAGAMENTO`
+  (`ID`,`ID_EMPRESA`,`ID_PDV_TIPO_PLANO`,`DATA_SOLICITACAO`,`DATA_PAGAMENTO`,
+   `PLANO`,`VALOR`,`STATUS_PAGAMENTO`,`CODIGO_TRANSACAO`,`METODO_PAGAMENTO`,
+   `CODIGO_TIPO_PAGAMENTO`,`DATA_PLANO_EXPIRA`,`EMAIL_PAGAMENTO`) VALUES
+-- Empresa 1 — Premium Anual NFC-e (ativo)
+(1,1,13,'2023-01-05','2023-01-06','A',799.90,'3','PS-TXN-001-2023-ABC123','1','102','2024-01-06','pagamento@empresa.com.br'),
+-- Empresa 1 — renovação 2024
+(2,1,13,'2024-01-04','2024-01-05','A',799.90,'3','PS-TXN-002-2024-DEF456','1','101','2025-01-05','pagamento@empresa.com.br'),
+-- Empresa 2 — Fiscal Semestral NFC-e
+(3,2,3,'2023-02-10','2023-02-11','S',249.90,'3','PS-TXN-003-2023-GHI789','2','201','2023-08-11','lojajoao@gmail.com'),
+-- Empresa 2 — renovação semestral
+(4,2,3,'2023-08-10','2023-08-12','S',249.90,'3','PS-TXN-004-2023-JKL012','2','201','2024-02-12','lojajoao@gmail.com'),
+-- Empresa 3 — Fiscal Anual NFC-e (farmácia)
+(5,3,4,'2023-03-01','2023-03-02','A',449.90,'3','PS-TXN-005-2023-MNO345','1','107','2024-03-02','farmacia@saojose.com.br'),
+-- Empresa 4 — Premium Mensal NFC-e
+(6,4,11,'2023-04-15','2023-04-16','M',89.90,'3','PS-TXN-006-2023-PQR678','3','304','2023-05-16','restaurante@bomsabor.com.br'),
+(7,4,11,'2023-05-14','2023-05-15','M',89.90,'3','PS-TXN-007-2023-STU901','3','304','2023-06-15','restaurante@bomsabor.com.br'),
+(8,4,11,'2023-06-13','2023-06-14','M',89.90,'3','PS-TXN-008-2023-VWX234','1','107','2023-07-14','restaurante@bomsabor.com.br'),
+-- Empresa 5 — Gratuito (MEI papelaria)
+(9,5,1,'2023-05-20',NULL,'M',0.00,'1','PS-TXN-009-2023-YZA567',NULL,NULL,'2023-06-20','papelaria@escolar.com.br'),
+-- Empresa 5 — upgrade para Fiscal Mensal
+(10,5,2,'2023-06-19','2023-06-20','M',49.90,'3','PS-TXN-010-2023-BCD890','1','102','2023-07-20','papelaria@escolar.com.br'),
+-- Empresa 6 — Fiscal Anual SAT (Zona Franca AM)
+(11,6,7,'2023-06-01','2023-06-02','A',539.90,'3','PS-TXN-011-2023-EFG123','2','202','2024-06-02','autopecas@norte.com.br'),
+-- Empresa 7 — Fiscal Mensal SAT (SIMEI)
+(12,7,5,'2023-07-10','2023-07-11','M',59.90,'3','PS-TXN-012-2023-HIJ456','1','101','2023-08-11','mercadinho@esquina.com.br'),
+-- Empresa 7 — pagamento cancelado
+(13,7,5,'2023-08-09',NULL,'M',59.90,'7','PS-TXN-013-2023-KLM789','2','201',NULL,'mercadinho@esquina.com.br'),
+-- Empresa 7 — reativação
+(14,7,5,'2023-08-12','2023-08-13','M',59.90,'3','PS-TXN-014-2023-NOP012','1','101','2023-09-13','mercadinho@esquina.com.br'),
+-- Empresa 8 — Premium Semestral NFC-e (supermercado)
+(15,8,12,'2023-08-05','2023-08-06','S',449.90,'3','PS-TXN-015-2023-QRS345','1','102','2024-02-06','super@belo.com.br'),
+-- Empresa 9 — Fiscal Mensal MFE (Ceará)
+(16,9,8,'2023-09-12','2023-09-13','M',59.90,'3','PS-TXN-016-2023-TUV678','3','301','2023-10-13','lanche@rapido.com.br'),
+(17,9,8,'2023-10-12','2023-10-13','M',59.90,'3','PS-TXN-017-2023-WXY901','3','301','2023-11-13','lanche@rapido.com.br'),
+-- Empresa 10 — Premium Anual NFC-e (distribuidora)
+(18,10,13,'2023-10-01','2023-10-02','A',799.90,'3','PS-TXN-018-2023-ZAB234','1','102','2024-10-02','distrib@centrooeste.com.br'),
+-- Empresa 1 — pagamento em disputa (histórico)
+(19,1,13,'2022-01-06','2022-01-07','A',699.90,'4','PS-TXN-019-2022-CDE567','1','102','2023-01-07','pagamento@empresa.com.br'),
+-- Empresa 3 — renovação 2024
+(20,3,4,'2024-03-01','2024-03-02','A',449.90,'3','PS-TXN-020-2024-FGH890','1','107','2025-03-02','farmacia@saojose.com.br');
+
+-- ================================================================
+-- 5. ACBR_MONITOR_PORTA — Portas do ACBr por empresa
+-- ================================================================
+-- Cada registro representa uma instância do ACBr Monitor.
+-- O ID controla a porta: porta = 1024 + ID (por convenção)
+-- Empresa 1 tem 2 caixas, empresa 8 tem 3 caixas (supermercado), etc.
+
+INSERT INTO `ACBR_MONITOR_PORTA` (`ID`,`ID_EMPRESA`) VALUES
+-- Empresa 1 — 2 caixas
+(1,1),(2,1),
+-- Empresa 2 — 1 caixa
+(3,2),
+-- Empresa 3 — 2 caixas (farmácia com balcão + caixa)
+(4,3),(5,3),
+-- Empresa 4 — 1 caixa (restaurante)
+(6,4),
+-- Empresa 5 — 1 caixa (papelaria pequena)
+(7,5),
+-- Empresa 6 — 2 caixas (auto peças)
+(8,6),(9,6),
+-- Empresa 7 — 1 caixa (mercadinho)
+(10,7),
+-- Empresa 8 — 4 caixas (supermercado)
+(11,8),(12,8),(13,8),(14,8),
+-- Empresa 9 — 1 caixa (lanchonete)
+(15,9),
+-- Empresa 10 — 3 caixas (distribuidora com depósito)
+(16,10),(17,10),(18,10);
+
+-- ================================================================
+-- FIM DO DML — Retaguarda HS (5/5 tabelas — 100%)
+-- ================================================================
+
+SET FOREIGN_KEY_CHECKS = 1;

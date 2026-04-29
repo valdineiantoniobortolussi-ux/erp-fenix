@@ -1,0 +1,75 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:nfe/app/infra/util.dart';
+import 'package:get/get.dart';
+
+List<PlutoColumn> nfeDetalheImpostoPisStGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+			hide: true,
+		),
+		PlutoColumn(
+			title: "Valor Base Calculo Pis St",
+			field: "valorBaseCalculoPisSt",
+			type: PlutoColumnType.currency(format: '###,###.##', decimalDigits: 2, locale: Get.locale.toString(),),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.right,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Aliquota Pis St Percentual",
+			field: "aliquotaPisStPercentual",
+			type: PlutoColumnType.currency(format: '###,###.##', decimalDigits: 2, locale: Get.locale.toString(),),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.right,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Quantidade Vendida Pis St",
+			field: "quantidadeVendidaPisSt",
+			type: PlutoColumnType.currency(format: '###,###.##', decimalDigits: 2, locale: Get.locale.toString(),),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.right,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Aliquota Pis St Reais",
+			field: "aliquotaPisStReais",
+			type: PlutoColumnType.currency(format: '###,###.##', decimalDigits: 2, locale: Get.locale.toString(),),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.right,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Valor Pis St",
+			field: "valorPisSt",
+			type: PlutoColumnType.currency(format: '###,###.##', decimalDigits: 2, locale: Get.locale.toString(),),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.right,
+			width: 200,
+		),
+	];
+}

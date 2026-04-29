@@ -1,0 +1,13 @@
+export 'filter_controller.dart';
+export 'lookup_controller.dart';
+export 'login_controller.dart';
+export 'theme_controller.dart';
+export 'agenda_notificacao_controller.dart';
+export 'agenda_compromisso_convidado_controller.dart';
+export 'reuniao_sala_evento_controller.dart';
+export 'recado_destinatario_controller.dart';
+export 'agenda_compromisso_controller.dart';
+export 'recado_remetente_controller.dart';
+export 'agenda_categoria_compromisso_controller.dart';
+export 'reuniao_sala_controller.dart';
+export 'payment_controller.dart';

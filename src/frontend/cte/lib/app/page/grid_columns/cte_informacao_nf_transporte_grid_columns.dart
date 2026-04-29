@@ -1,0 +1,67 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:cte/app/infra/util.dart';
+
+List<PlutoColumn> cteInformacaoNfTransporteGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+		),
+		PlutoColumn(
+			title: "Id Cte Informacao Nf",
+			field: "cteInformacaoNfOutros",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 400,
+			hide: isForLookup,
+		),
+		PlutoColumn(
+			title: "Tipo Unidade Transporte",
+			field: "tipoUnidadeTransporte",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Id Unidade Transporte",
+			field: "idUnidadeTransporte",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Id Cte Informacao Nf",
+			field: "idCteInformacaoNf",
+			type: PlutoColumnType.number(),
+			enableFilterMenuItem: false,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 200,
+			hide: !isForLookup,
+		),
+	];
+}

@@ -1,0 +1,9 @@
+export 'home_page.dart';
+export 'modules/etiqueta_layout/etiqueta_template_list_page.dart';
+export 'modules/etiqueta_layout/etiqueta_template_edit_page.dart';
+export 'modules/etiqueta_layout/etiqueta_layout_list_page.dart';
+export 'modules/etiqueta_layout/etiqueta_layout_tab_page.dart';
+export 'modules/etiqueta_layout/etiqueta_layout_edit_page.dart';
+export 'modules/etiqueta_formato_papel/etiqueta_formato_papel_list_page.dart';
+export 'modules/etiqueta_formato_papel/etiqueta_formato_papel_edit_page.dart';
+export 'payment/payment_page.dart';

@@ -1,0 +1,67 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:nfe/app/infra/util.dart';
+
+List<PlutoColumn> nfeDetEspecificoArmamentoGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+			hide: true,
+		),
+		PlutoColumn(
+			title: "Tipo Arma",
+			field: "tipoArma",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Numero Serie Arma",
+			field: "numeroSerieArma",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Numero Serie Cano",
+			field: "numeroSerieCano",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Descricao",
+			field: "descricao",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 400,
+		),
+	];
+}

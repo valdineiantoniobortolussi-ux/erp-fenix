@@ -1,0 +1,33 @@
+from src.controller.login_controller import login_bp
+from src.controller.produto_grupo_controller import produto_grupo_bp
+from src.controller.produto_subgrupo_controller import produto_subgrupo_bp
+from src.controller.produto_marca_controller import produto_marca_bp
+from src.controller.produto_unidade_controller import produto_unidade_bp
+from src.controller.venda_condicoes_pagamento_controller import venda_condicoes_pagamento_bp
+from src.controller.venda_orcamento_cabecalho_controller import venda_orcamento_cabecalho_bp
+from src.controller.venda_cabecalho_controller import venda_cabecalho_bp
+from src.controller.nota_fiscal_modelo_controller import nota_fiscal_modelo_bp
+from src.controller.nota_fiscal_tipo_controller import nota_fiscal_tipo_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.view_pessoa_cliente_controller import view_pessoa_cliente_bp
+from src.controller.view_pessoa_vendedor_controller import view_pessoa_vendedor_bp
+from src.controller.view_pessoa_transportadora_controller import view_pessoa_transportadora_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(produto_grupo_bp)
+		app.register_blueprint(produto_subgrupo_bp)
+		app.register_blueprint(produto_marca_bp)
+		app.register_blueprint(produto_unidade_bp)
+		app.register_blueprint(venda_condicoes_pagamento_bp)
+		app.register_blueprint(venda_orcamento_cabecalho_bp)
+		app.register_blueprint(venda_cabecalho_bp)
+		app.register_blueprint(nota_fiscal_modelo_bp)
+		app.register_blueprint(nota_fiscal_tipo_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(view_pessoa_cliente_bp)
+		app.register_blueprint(view_pessoa_vendedor_bp)
+		app.register_blueprint(view_pessoa_transportadora_bp)
+		app.register_blueprint(login_bp)

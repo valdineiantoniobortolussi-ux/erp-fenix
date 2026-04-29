@@ -1,0 +1,67 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:cadastros/app/infra/util.dart';
+
+List<PlutoColumn> papelFuncaoGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+			hide: true,
+		),
+		PlutoColumn(
+			title: "Habilitado",
+			field: "habilitado",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Pode Inserir",
+			field: "podeInserir",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Pode Alterar",
+			field: "podeAlterar",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Pode Excluir",
+			field: "podeExcluir",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+	];
+}

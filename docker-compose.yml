@@ -1,0 +1,118 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: fenix-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fenix
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # --- MICROSERVIÇOS ---
+  # Padrão: porta 5000 interna, mapeada sequencialmente para evitar conflitos
+
+  administrativo:
+    build:
+      context: .
+      dockerfile: src/backend/administrativo/Dockerfile
+    container_name: fenix-administrativo
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5001:5000"
+    depends_on:
+      - db
+
+  agenda:
+    build:
+      context: .
+      dockerfile: src/backend/agenda/Dockerfile
+    container_name: fenix-agenda
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5002:5000"
+    depends_on:
+      - db
+
+  financeiro:
+    build:
+      context: .
+      dockerfile: src/backend/financeiro/Dockerfile
+    container_name: fenix-financeiro
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5003:5000"
+    depends_on:
+      - db
+
+  vendas:
+    build:
+      context: .
+      dockerfile: src/backend/vendas/Dockerfile
+    container_name: fenix-vendas
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5004:5000"
+    depends_on:
+      - db
+
+  wms:
+    build:
+      context: .
+      dockerfile: src/backend/wms/Dockerfile
+    container_name: fenix-wms
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5005:5000"
+    depends_on:
+      - db
+
+  fiscal:
+    build:
+      context: .
+      dockerfile: src/backend/fiscal/Dockerfile
+    container_name: fenix-fiscal
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5006:5000"
+    depends_on:
+      - db
+
+  retaguarda_sh:
+    build:
+      context: .
+      dockerfile: src/retaguarda_sh/Dockerfile
+    container_name: fenix-retaguarda
+    restart: always
+    environment:
+      - PRODUCTION_DATABASE_URL=mysql://root:root@db:3306/fenix
+      - CONFIG_MODE=production
+    ports:
+      - "5007:5000"
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

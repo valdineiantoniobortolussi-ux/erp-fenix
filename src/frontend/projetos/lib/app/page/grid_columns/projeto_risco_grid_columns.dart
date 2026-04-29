@@ -1,0 +1,65 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:projetos/app/infra/util.dart';
+
+List<PlutoColumn> projetoRiscoGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+			hide: true,
+		),
+		PlutoColumn(
+			title: "Nome",
+			field: "nome",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 400,
+		),
+		PlutoColumn(
+			title: "Probabilidade",
+			field: "probabilidade",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+		),
+		PlutoColumn(
+			title: "Impacto",
+			field: "impacto",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+		),
+		PlutoColumn(
+			title: "Descricao",
+			field: "descricao",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+	];
+}

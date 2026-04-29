@@ -1,0 +1,12 @@
+export 'home_page.dart';
+export 'modules/esocial_natureza_juridica/esocial_natureza_juridica_list_page.dart';
+export 'modules/esocial_natureza_juridica/esocial_natureza_juridica_edit_page.dart';
+export 'modules/esocial_rubrica/esocial_rubrica_list_page.dart';
+export 'modules/esocial_rubrica/esocial_rubrica_edit_page.dart';
+export 'modules/esocial_tipo_afastamento/esocial_tipo_afastamento_list_page.dart';
+export 'modules/esocial_tipo_afastamento/esocial_tipo_afastamento_edit_page.dart';
+export 'modules/esocial_motivo_desligamento/esocial_motivo_desligamento_list_page.dart';
+export 'modules/esocial_motivo_desligamento/esocial_motivo_desligamento_edit_page.dart';
+export 'modules/esocial_classificacao_tribut/esocial_classificacao_tribut_list_page.dart';
+export 'modules/esocial_classificacao_tribut/esocial_classificacao_tribut_edit_page.dart';
+export 'payment/payment_page.dart';

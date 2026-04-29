@@ -1,0 +1,12 @@
+export 'home_page.dart';
+export 'modules/sped_contabil/sped_contabil_list_page.dart';
+export 'modules/sped_contabil/sped_contabil_edit_page.dart';
+export 'modules/sped_fiscal/sped_fiscal_list_page.dart';
+export 'modules/sped_fiscal/sped_fiscal_edit_page.dart';
+export 'modules/sintegra/sintegra_list_page.dart';
+export 'modules/sintegra/sintegra_edit_page.dart';
+export 'modules/efd_contribuicoes/efd_contribuicoes_list_page.dart';
+export 'modules/efd_contribuicoes/efd_contribuicoes_edit_page.dart';
+export 'modules/efd_reinf/efd_reinf_list_page.dart';
+export 'modules/efd_reinf/efd_reinf_edit_page.dart';
+export 'payment/payment_page.dart';

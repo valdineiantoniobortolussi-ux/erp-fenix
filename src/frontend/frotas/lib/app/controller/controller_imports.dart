@@ -1,0 +1,17 @@
+export 'filter_controller.dart';
+export 'lookup_controller.dart';
+export 'login_controller.dart';
+export 'theme_controller.dart';
+export 'frota_ipva_controle_controller.dart';
+export 'frota_dpvat_controle_controller.dart';
+export 'frota_veiculo_sinistro_controller.dart';
+export 'frota_veiculo_movimentacao_controller.dart';
+export 'frota_veiculo_pneu_controller.dart';
+export 'frota_veiculo_manutencao_controller.dart';
+export 'frota_multa_controle_controller.dart';
+export 'frota_combustivel_controle_controller.dart';
+export 'frota_veiculo_controller.dart';
+export 'frota_veiculo_tipo_controller.dart';
+export 'frota_combustivel_tipo_controller.dart';
+export 'frota_motorista_controller.dart';
+export 'payment_controller.dart';

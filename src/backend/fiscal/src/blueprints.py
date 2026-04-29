@@ -1,0 +1,29 @@
+from src.controller.login_controller import login_bp
+from src.controller.fiscal_parametro_controller import fiscal_parametro_bp
+from src.controller.fiscal_livro_controller import fiscal_livro_bp
+from src.controller.simples_nacional_cabecalho_controller import simples_nacional_cabecalho_bp
+from src.controller.nfe_cabecalho_controller import nfe_cabecalho_bp
+from src.controller.fiscal_municipal_regime_controller import fiscal_municipal_regime_bp
+from src.controller.fiscal_estadual_regime_controller import fiscal_estadual_regime_bp
+from src.controller.fiscal_estadual_porte_controller import fiscal_estadual_porte_bp
+from src.controller.fiscal_nota_fiscal_entrada_controller import fiscal_nota_fiscal_entrada_bp
+from src.controller.fiscal_apuracao_icms_controller import fiscal_apuracao_icms_bp
+from src.controller.fiscal_nota_fiscal_saida_controller import fiscal_nota_fiscal_saida_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(fiscal_parametro_bp)
+		app.register_blueprint(fiscal_livro_bp)
+		app.register_blueprint(simples_nacional_cabecalho_bp)
+		app.register_blueprint(nfe_cabecalho_bp)
+		app.register_blueprint(fiscal_municipal_regime_bp)
+		app.register_blueprint(fiscal_estadual_regime_bp)
+		app.register_blueprint(fiscal_estadual_porte_bp)
+		app.register_blueprint(fiscal_nota_fiscal_entrada_bp)
+		app.register_blueprint(fiscal_apuracao_icms_bp)
+		app.register_blueprint(fiscal_nota_fiscal_saida_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(login_bp)

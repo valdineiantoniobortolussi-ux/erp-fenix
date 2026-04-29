@@ -1,0 +1,66 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:cadastros/app/infra/util.dart';
+
+List<PlutoColumn> usuarioGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+			hide: true,
+		),
+		PlutoColumn(
+			title: "Login",
+			field: "login",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Senha",
+			field: "senha",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Administrador",
+			field: "administrador",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Data Cadastro",
+			field: "dataCadastro",
+			type: PlutoColumnType.date(format: "dd/MM/yyyy"),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 200,
+		),
+	];
+}

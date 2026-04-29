@@ -1,0 +1,66 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:gondolas/app/infra/util.dart';
+
+List<PlutoColumn> gondolaEstanteGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+		),
+		PlutoColumn(
+			title: "Rua",
+			field: "gondolaRua",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 400,
+			hide: isForLookup,
+		),
+		PlutoColumn(
+			title: "Codigo",
+			field: "codigo",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Quantidade Caixas",
+			field: "quantidadeCaixa",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+		),
+		PlutoColumn(
+			title: "Id Gondola Rua",
+			field: "idGondolaRua",
+			type: PlutoColumnType.number(),
+			enableFilterMenuItem: false,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 200,
+			hide: !isForLookup,
+		),
+	];
+}

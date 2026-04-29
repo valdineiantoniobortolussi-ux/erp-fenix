@@ -1,0 +1,37 @@
+from src.controller.login_controller import login_bp
+from src.controller.cte_cabecalho_controller import cte_cabecalho_bp
+from src.controller.cte_informacao_nf_transporte_controller import cte_informacao_nf_transporte_bp
+from src.controller.cte_inf_nf_transporte_lacre_controller import cte_inf_nf_transporte_lacre_bp
+from src.controller.cte_informacao_nf_carga_controller import cte_informacao_nf_carga_bp
+from src.controller.cte_inf_nf_carga_lacre_controller import cte_inf_nf_carga_lacre_bp
+from src.controller.cte_documento_anterior_id_controller import cte_documento_anterior_id_bp
+from src.controller.cte_rodoviario_occ_controller import cte_rodoviario_occ_bp
+from src.controller.cte_rodoviario_pedagio_controller import cte_rodoviario_pedagio_bp
+from src.controller.cte_rodoviario_veiculo_controller import cte_rodoviario_veiculo_bp
+from src.controller.cte_rodoviario_lacre_controller import cte_rodoviario_lacre_bp
+from src.controller.cte_rodoviario_motorista_controller import cte_rodoviario_motorista_bp
+from src.controller.cte_aquaviario_balsa_controller import cte_aquaviario_balsa_bp
+from src.controller.cte_ferroviario_ferrovia_controller import cte_ferroviario_ferrovia_bp
+from src.controller.cte_ferroviario_vagao_controller import cte_ferroviario_vagao_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(cte_cabecalho_bp)
+		app.register_blueprint(cte_informacao_nf_transporte_bp)
+		app.register_blueprint(cte_inf_nf_transporte_lacre_bp)
+		app.register_blueprint(cte_informacao_nf_carga_bp)
+		app.register_blueprint(cte_inf_nf_carga_lacre_bp)
+		app.register_blueprint(cte_documento_anterior_id_bp)
+		app.register_blueprint(cte_rodoviario_occ_bp)
+		app.register_blueprint(cte_rodoviario_pedagio_bp)
+		app.register_blueprint(cte_rodoviario_veiculo_bp)
+		app.register_blueprint(cte_rodoviario_lacre_bp)
+		app.register_blueprint(cte_rodoviario_motorista_bp)
+		app.register_blueprint(cte_aquaviario_balsa_bp)
+		app.register_blueprint(cte_ferroviario_ferrovia_bp)
+		app.register_blueprint(cte_ferroviario_vagao_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(login_bp)

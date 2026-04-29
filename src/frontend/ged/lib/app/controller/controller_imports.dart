@@ -1,0 +1,9 @@
+export 'filter_controller.dart';
+export 'lookup_controller.dart';
+export 'login_controller.dart';
+export 'theme_controller.dart';
+export 'ged_documento_detalhe_controller.dart';
+export 'ged_documento_cabecalho_controller.dart';
+export 'ged_tipo_documento_controller.dart';
+export 'ged_versao_documento_controller.dart';
+export 'payment_controller.dart';

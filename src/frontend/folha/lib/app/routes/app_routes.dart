@@ -1,0 +1,50 @@
+abstract class Routes{
+	
+	static const splashPage = '/splashPage';
+	static const loginPage = '/loginPage';
+	static const homePage = '/homePage';
+	static const filterPage = '/filterPage';
+	static const lookupPage = '/lookupPage';
+  static const menuModulesPage = '/menuModulesPage';
+		
+	static const empresaTransporteListPage = '/empresaTransporteListPage'; 
+	static const empresaTransporteTabPage = '/empresaTransporteTabPage';
+	static const folhaLancamentoCabecalhoListPage = '/folhaLancamentoCabecalhoListPage'; 
+	static const folhaLancamentoCabecalhoTabPage = '/folhaLancamentoCabecalhoTabPage';
+	static const folhaInssListPage = '/folhaInssListPage'; 
+	static const folhaInssTabPage = '/folhaInssTabPage';
+	static const folhaPppListPage = '/folhaPppListPage'; 
+	static const folhaPppTabPage = '/folhaPppTabPage';
+	static const operadoraPlanoSaudeListPage = '/operadoraPlanoSaudeListPage'; 
+	static const operadoraPlanoSaudeEditPage = '/operadoraPlanoSaudeEditPage';
+	static const folhaLancamentoComissaoListPage = '/folhaLancamentoComissaoListPage'; 
+	static const folhaLancamentoComissaoEditPage = '/folhaLancamentoComissaoEditPage';
+	static const folhaParametroListPage = '/folhaParametroListPage'; 
+	static const folhaParametroEditPage = '/folhaParametroEditPage';
+	static const guiasAcumuladasListPage = '/guiasAcumuladasListPage'; 
+	static const guiasAcumuladasEditPage = '/guiasAcumuladasEditPage';
+	static const folhaFechamentoListPage = '/folhaFechamentoListPage'; 
+	static const folhaFechamentoEditPage = '/folhaFechamentoEditPage';
+	static const feriasPeriodoAquisitivoListPage = '/feriasPeriodoAquisitivoListPage'; 
+	static const feriasPeriodoAquisitivoEditPage = '/feriasPeriodoAquisitivoEditPage';
+	static const folhaTipoAfastamentoListPage = '/folhaTipoAfastamentoListPage'; 
+	static const folhaTipoAfastamentoEditPage = '/folhaTipoAfastamentoEditPage';
+	static const folhaAfastamentoListPage = '/folhaAfastamentoListPage'; 
+	static const folhaAfastamentoEditPage = '/folhaAfastamentoEditPage';
+	static const folhaPlanoSaudeListPage = '/folhaPlanoSaudeListPage'; 
+	static const folhaPlanoSaudeEditPage = '/folhaPlanoSaudeEditPage';
+	static const folhaEventoListPage = '/folhaEventoListPage'; 
+	static const folhaEventoEditPage = '/folhaEventoEditPage';
+	static const folhaRescisaoListPage = '/folhaRescisaoListPage'; 
+	static const folhaRescisaoEditPage = '/folhaRescisaoEditPage';
+	static const folhaFeriasColetivasListPage = '/folhaFeriasColetivasListPage'; 
+	static const folhaFeriasColetivasEditPage = '/folhaFeriasColetivasEditPage';
+	static const folhaValeTransporteListPage = '/folhaValeTransporteListPage'; 
+	static const folhaValeTransporteEditPage = '/folhaValeTransporteEditPage';
+	static const folhaInssServicoListPage = '/folhaInssServicoListPage'; 
+	static const folhaInssServicoEditPage = '/folhaInssServicoEditPage';
+	static const folhaHistoricoSalarialListPage = '/folhaHistoricoSalarialListPage'; 
+	static const folhaHistoricoSalarialEditPage = '/folhaHistoricoSalarialEditPage';
+	static const feriadosListPage = '/feriadosListPage'; 
+	static const feriadosEditPage = '/feriadosEditPage';
+}

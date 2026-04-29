@@ -1,0 +1,57 @@
+from src.controller.login_controller import login_bp
+from src.controller.contabil_lancamento_cabecalho_controller import contabil_lancamento_cabecalho_bp
+from src.controller.contabil_dre_cabecalho_controller import contabil_dre_cabecalho_bp
+from src.controller.contabil_livro_controller import contabil_livro_bp
+from src.controller.contabil_encerramento_exe_cab_controller import contabil_encerramento_exe_cab_bp
+from src.controller.centro_resultado_controller import centro_resultado_bp
+from src.controller.rateio_centro_resultado_cab_controller import rateio_centro_resultado_cab_bp
+from src.controller.contabil_indice_controller import contabil_indice_bp
+from src.controller.fin_natureza_financeira_controller import fin_natureza_financeira_bp
+from src.controller.aidf_aimdf_controller import aidf_aimdf_bp
+from src.controller.fap_controller import fap_bp
+from src.controller.registro_cartorio_controller import registro_cartorio_bp
+from src.controller.contabil_parametro_controller import contabil_parametro_bp
+from src.controller.plano_conta_ref_sped_controller import plano_conta_ref_sped_bp
+from src.controller.plano_conta_controller import plano_conta_bp
+from src.controller.contabil_conta_controller import contabil_conta_bp
+from src.controller.contabil_historico_controller import contabil_historico_bp
+from src.controller.contabil_lancamento_padrao_controller import contabil_lancamento_padrao_bp
+from src.controller.contabil_lote_controller import contabil_lote_bp
+from src.controller.contabil_lancamento_orcado_controller import contabil_lancamento_orcado_bp
+from src.controller.lanca_centro_resultado_controller import lanca_centro_resultado_bp
+from src.controller.encerra_centro_resultado_controller import encerra_centro_resultado_bp
+from src.controller.contabil_conta_rateio_controller import contabil_conta_rateio_bp
+from src.controller.contabil_fechamento_controller import contabil_fechamento_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.plano_centro_resultado_controller import plano_centro_resultado_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(contabil_lancamento_cabecalho_bp)
+		app.register_blueprint(contabil_dre_cabecalho_bp)
+		app.register_blueprint(contabil_livro_bp)
+		app.register_blueprint(contabil_encerramento_exe_cab_bp)
+		app.register_blueprint(centro_resultado_bp)
+		app.register_blueprint(rateio_centro_resultado_cab_bp)
+		app.register_blueprint(contabil_indice_bp)
+		app.register_blueprint(fin_natureza_financeira_bp)
+		app.register_blueprint(aidf_aimdf_bp)
+		app.register_blueprint(fap_bp)
+		app.register_blueprint(registro_cartorio_bp)
+		app.register_blueprint(contabil_parametro_bp)
+		app.register_blueprint(plano_conta_ref_sped_bp)
+		app.register_blueprint(plano_conta_bp)
+		app.register_blueprint(contabil_conta_bp)
+		app.register_blueprint(contabil_historico_bp)
+		app.register_blueprint(contabil_lancamento_padrao_bp)
+		app.register_blueprint(contabil_lote_bp)
+		app.register_blueprint(contabil_lancamento_orcado_bp)
+		app.register_blueprint(lanca_centro_resultado_bp)
+		app.register_blueprint(encerra_centro_resultado_bp)
+		app.register_blueprint(contabil_conta_rateio_bp)
+		app.register_blueprint(contabil_fechamento_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(plano_centro_resultado_bp)
+		app.register_blueprint(login_bp)

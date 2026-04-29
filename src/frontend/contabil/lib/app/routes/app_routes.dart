@@ -1,0 +1,56 @@
+abstract class Routes{
+	
+	static const splashPage = '/splashPage';
+	static const loginPage = '/loginPage';
+	static const homePage = '/homePage';
+	static const filterPage = '/filterPage';
+	static const lookupPage = '/lookupPage';
+  static const menuModulesPage = '/menuModulesPage';
+		
+	static const contabilLancamentoCabecalhoListPage = '/contabilLancamentoCabecalhoListPage'; 
+	static const contabilLancamentoCabecalhoTabPage = '/contabilLancamentoCabecalhoTabPage';
+	static const contabilDreCabecalhoListPage = '/contabilDreCabecalhoListPage'; 
+	static const contabilDreCabecalhoTabPage = '/contabilDreCabecalhoTabPage';
+	static const contabilLivroListPage = '/contabilLivroListPage'; 
+	static const contabilLivroTabPage = '/contabilLivroTabPage';
+	static const contabilEncerramentoExeCabListPage = '/contabilEncerramentoExeCabListPage'; 
+	static const contabilEncerramentoExeCabTabPage = '/contabilEncerramentoExeCabTabPage';
+	static const centroResultadoListPage = '/centroResultadoListPage'; 
+	static const centroResultadoTabPage = '/centroResultadoTabPage';
+	static const rateioCentroResultadoCabListPage = '/rateioCentroResultadoCabListPage'; 
+	static const rateioCentroResultadoCabTabPage = '/rateioCentroResultadoCabTabPage';
+	static const contabilIndiceListPage = '/contabilIndiceListPage'; 
+	static const contabilIndiceTabPage = '/contabilIndiceTabPage';
+	static const aidfAimdfListPage = '/aidfAimdfListPage'; 
+	static const aidfAimdfEditPage = '/aidfAimdfEditPage';
+	static const fapListPage = '/fapListPage'; 
+	static const fapEditPage = '/fapEditPage';
+	static const registroCartorioListPage = '/registroCartorioListPage'; 
+	static const registroCartorioEditPage = '/registroCartorioEditPage';
+	static const contabilParametroListPage = '/contabilParametroListPage'; 
+	static const contabilParametroEditPage = '/contabilParametroEditPage';
+	static const planoContaRefSpedListPage = '/planoContaRefSpedListPage'; 
+	static const planoContaRefSpedEditPage = '/planoContaRefSpedEditPage';
+	static const planoContaListPage = '/planoContaListPage'; 
+	static const planoContaEditPage = '/planoContaEditPage';
+	static const contabilContaListPage = '/contabilContaListPage'; 
+	static const contabilContaEditPage = '/contabilContaEditPage';
+	static const contabilHistoricoListPage = '/contabilHistoricoListPage'; 
+	static const contabilHistoricoEditPage = '/contabilHistoricoEditPage';
+	static const contabilLancamentoPadraoListPage = '/contabilLancamentoPadraoListPage'; 
+	static const contabilLancamentoPadraoEditPage = '/contabilLancamentoPadraoEditPage';
+	static const contabilLoteListPage = '/contabilLoteListPage'; 
+	static const contabilLoteEditPage = '/contabilLoteEditPage';
+	static const contabilLancamentoOrcadoListPage = '/contabilLancamentoOrcadoListPage'; 
+	static const contabilLancamentoOrcadoEditPage = '/contabilLancamentoOrcadoEditPage';
+	static const lancaCentroResultadoListPage = '/lancaCentroResultadoListPage'; 
+	static const lancaCentroResultadoEditPage = '/lancaCentroResultadoEditPage';
+	static const encerraCentroResultadoListPage = '/encerraCentroResultadoListPage'; 
+	static const encerraCentroResultadoEditPage = '/encerraCentroResultadoEditPage';
+	static const contabilContaRateioListPage = '/contabilContaRateioListPage'; 
+	static const contabilContaRateioEditPage = '/contabilContaRateioEditPage';
+	static const contabilFechamentoListPage = '/contabilFechamentoListPage'; 
+	static const contabilFechamentoEditPage = '/contabilFechamentoEditPage';
+	static const planoCentroResultadoListPage = '/planoCentroResultadoListPage'; 
+	static const planoCentroResultadoEditPage = '/planoCentroResultadoEditPage';
+}

@@ -1,0 +1,27 @@
+
+export 'package:ordem_servico/app/data/provider/drift/database/table/produto_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/os_abertura_equipamento_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/os_produto_servico_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/os_evolucao_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/produto_grupo_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/produto_grupo_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/produto_subgrupo_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/produto_subgrupo_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/produto_marca_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/produto_marca_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/produto_unidade_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/produto_unidade_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/os_abertura_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/os_abertura_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/os_status_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/os_status_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/os_equipamento_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/os_equipamento_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/view_controle_acesso_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/view_controle_acesso_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/view_pessoa_usuario_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/view_pessoa_usuario_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/view_pessoa_cliente_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/view_pessoa_cliente_dao.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/table/view_pessoa_colaborador_drift.dart';
+export 'package:ordem_servico/app/data/provider/drift/database/dao/view_pessoa_colaborador_dao.dart';

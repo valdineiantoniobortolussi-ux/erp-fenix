@@ -1,0 +1,17 @@
+export 'filter_controller.dart';
+export 'lookup_controller.dart';
+export 'login_controller.dart';
+export 'theme_controller.dart';
+export 'patrim_documento_bem_controller.dart';
+export 'patrim_depreciacao_bem_controller.dart';
+export 'patrim_movimentacao_bem_controller.dart';
+export 'patrim_apolice_seguro_controller.dart';
+export 'patrim_bem_controller.dart';
+export 'patrim_indice_atualizacao_controller.dart';
+export 'patrim_taxa_depreciacao_controller.dart';
+export 'patrim_grupo_bem_controller.dart';
+export 'patrim_tipo_aquisicao_bem_controller.dart';
+export 'patrim_estado_conservacao_controller.dart';
+export 'seguradora_controller.dart';
+export 'patrim_tipo_movimentacao_controller.dart';
+export 'payment_controller.dart';

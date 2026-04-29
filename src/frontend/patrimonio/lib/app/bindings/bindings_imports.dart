@@ -1,0 +1,9 @@
+export 'login_bindings.dart';
+export 'patrim_bem_bindings.dart';
+export 'patrim_indice_atualizacao_bindings.dart';
+export 'patrim_taxa_depreciacao_bindings.dart';
+export 'patrim_grupo_bem_bindings.dart';
+export 'patrim_tipo_aquisicao_bem_bindings.dart';
+export 'patrim_estado_conservacao_bindings.dart';
+export 'seguradora_bindings.dart';
+export 'patrim_tipo_movimentacao_bindings.dart';

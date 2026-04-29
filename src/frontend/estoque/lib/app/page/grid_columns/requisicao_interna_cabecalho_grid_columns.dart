@@ -1,0 +1,66 @@
+import 'package:pluto_grid/pluto_grid.dart';
+import 'package:estoque/app/infra/util.dart';
+
+List<PlutoColumn> requisicaoInternaCabecalhoGridColumns({bool isForLookup = false}) {
+	return <PlutoColumn>[
+		PlutoColumn(
+			title: "Id",
+			field: "id",
+			type: PlutoColumnType.number(format: '##########',),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 100,
+		),
+		PlutoColumn(
+			title: "Colaborador",
+			field: "viewPessoaColaborador",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 400,
+			hide: isForLookup,
+		),
+		PlutoColumn(
+			title: "Data Requisicao",
+			field: "dataRequisicao",
+			type: PlutoColumnType.date(format: "dd/MM/yyyy"),
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Situacao",
+			field: "situacao",
+			type: PlutoColumnType.text(),
+			formatter: Util.stringFormat,
+			enableFilterMenuItem: true,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.left,
+			width: 200,
+		),
+		PlutoColumn(
+			title: "Id Colaborador",
+			field: "idColaborador",
+			type: PlutoColumnType.number(),
+			enableFilterMenuItem: false,
+			enableSetColumnsMenuItem: false,
+			enableHideColumnMenuItem: false,
+			titleTextAlign: PlutoColumnTextAlign.center,
+			textAlign: PlutoColumnTextAlign.center,
+			width: 200,
+			hide: !isForLookup,
+		),
+	];
+}

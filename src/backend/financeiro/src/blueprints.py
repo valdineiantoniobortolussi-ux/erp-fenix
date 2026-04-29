@@ -1,0 +1,45 @@
+from src.controller.login_controller import login_bp
+from src.controller.talonario_cheque_controller import talonario_cheque_bp
+from src.controller.fin_lancamento_pagar_controller import fin_lancamento_pagar_bp
+from src.controller.fin_lancamento_receber_controller import fin_lancamento_receber_bp
+from src.controller.banco_controller import banco_bp
+from src.controller.banco_agencia_controller import banco_agencia_bp
+from src.controller.banco_conta_caixa_controller import banco_conta_caixa_bp
+from src.controller.fin_fechamento_caixa_banco_controller import fin_fechamento_caixa_banco_bp
+from src.controller.fin_extrato_conta_banco_controller import fin_extrato_conta_banco_bp
+from src.controller.fin_documento_origem_controller import fin_documento_origem_bp
+from src.controller.fin_natureza_financeira_controller import fin_natureza_financeira_bp
+from src.controller.fin_status_parcela_controller import fin_status_parcela_bp
+from src.controller.fin_tipo_pagamento_controller import fin_tipo_pagamento_bp
+from src.controller.fin_cheque_emitido_controller import fin_cheque_emitido_bp
+from src.controller.fin_tipo_recebimento_controller import fin_tipo_recebimento_bp
+from src.controller.fin_cheque_recebido_controller import fin_cheque_recebido_bp
+from src.controller.fin_configuracao_boleto_controller import fin_configuracao_boleto_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.view_pessoa_cliente_controller import view_pessoa_cliente_bp
+from src.controller.view_pessoa_fornecedor_controller import view_pessoa_fornecedor_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(talonario_cheque_bp)
+		app.register_blueprint(fin_lancamento_pagar_bp)
+		app.register_blueprint(fin_lancamento_receber_bp)
+		app.register_blueprint(banco_bp)
+		app.register_blueprint(banco_agencia_bp)
+		app.register_blueprint(banco_conta_caixa_bp)
+		app.register_blueprint(fin_fechamento_caixa_banco_bp)
+		app.register_blueprint(fin_extrato_conta_banco_bp)
+		app.register_blueprint(fin_documento_origem_bp)
+		app.register_blueprint(fin_natureza_financeira_bp)
+		app.register_blueprint(fin_status_parcela_bp)
+		app.register_blueprint(fin_tipo_pagamento_bp)
+		app.register_blueprint(fin_cheque_emitido_bp)
+		app.register_blueprint(fin_tipo_recebimento_bp)
+		app.register_blueprint(fin_cheque_recebido_bp)
+		app.register_blueprint(fin_configuracao_boleto_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(view_pessoa_cliente_bp)
+		app.register_blueprint(view_pessoa_fornecedor_bp)
+		app.register_blueprint(login_bp)

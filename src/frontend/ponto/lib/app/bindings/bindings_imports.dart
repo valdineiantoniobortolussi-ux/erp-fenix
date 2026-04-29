@@ -1,0 +1,10 @@
+export 'login_bindings.dart';
+export 'ponto_escala_bindings.dart';
+export 'ponto_banco_horas_bindings.dart';
+export 'ponto_abono_bindings.dart';
+export 'ponto_parametro_bindings.dart';
+export 'ponto_horario_bindings.dart';
+export 'ponto_relogio_bindings.dart';
+export 'ponto_classificacao_jornada_bindings.dart';
+export 'ponto_horario_autorizado_bindings.dart';
+export 'ponto_fechamento_jornada_bindings.dart';

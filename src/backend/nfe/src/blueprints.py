@@ -1,0 +1,55 @@
+from src.controller.login_controller import login_bp
+from src.controller.produto_grupo_controller import produto_grupo_bp
+from src.controller.produto_subgrupo_controller import produto_subgrupo_bp
+from src.controller.produto_marca_controller import produto_marca_bp
+from src.controller.produto_unidade_controller import produto_unidade_bp
+from src.controller.nfe_cabecalho_controller import nfe_cabecalho_bp
+from src.controller.nfe_detalhe_controller import nfe_detalhe_bp
+from src.controller.tribut_operacao_fiscal_controller import tribut_operacao_fiscal_bp
+from src.controller.venda_cabecalho_controller import venda_cabecalho_bp
+from src.controller.nfe_duplicata_controller import nfe_duplicata_bp
+from src.controller.nfe_importacao_detalhe_controller import nfe_importacao_detalhe_bp
+from src.controller.nfe_cana_fornecimento_diario_controller import nfe_cana_fornecimento_diario_bp
+from src.controller.nfe_cana_deducoes_safra_controller import nfe_cana_deducoes_safra_bp
+from src.controller.nfe_numero_controller import nfe_numero_bp
+from src.controller.nfe_transporte_reboque_controller import nfe_transporte_reboque_bp
+from src.controller.nfe_transporte_volume_controller import nfe_transporte_volume_bp
+from src.controller.nfe_transporte_volume_lacre_controller import nfe_transporte_volume_lacre_bp
+from src.controller.nfe_configuracao_controller import nfe_configuracao_bp
+from src.controller.nfe_numero_inutilizado_controller import nfe_numero_inutilizado_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.view_pessoa_cliente_controller import view_pessoa_cliente_bp
+from src.controller.view_pessoa_fornecedor_controller import view_pessoa_fornecedor_bp
+from src.controller.view_pessoa_colaborador_controller import view_pessoa_colaborador_bp
+from src.controller.view_pessoa_vendedor_controller import view_pessoa_vendedor_bp
+from src.controller.view_pessoa_transportadora_controller import view_pessoa_transportadora_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(produto_grupo_bp)
+		app.register_blueprint(produto_subgrupo_bp)
+		app.register_blueprint(produto_marca_bp)
+		app.register_blueprint(produto_unidade_bp)
+		app.register_blueprint(nfe_cabecalho_bp)
+		app.register_blueprint(nfe_detalhe_bp)
+		app.register_blueprint(tribut_operacao_fiscal_bp)
+		app.register_blueprint(venda_cabecalho_bp)
+		app.register_blueprint(nfe_duplicata_bp)
+		app.register_blueprint(nfe_importacao_detalhe_bp)
+		app.register_blueprint(nfe_cana_fornecimento_diario_bp)
+		app.register_blueprint(nfe_cana_deducoes_safra_bp)
+		app.register_blueprint(nfe_numero_bp)
+		app.register_blueprint(nfe_transporte_reboque_bp)
+		app.register_blueprint(nfe_transporte_volume_bp)
+		app.register_blueprint(nfe_transporte_volume_lacre_bp)
+		app.register_blueprint(nfe_configuracao_bp)
+		app.register_blueprint(nfe_numero_inutilizado_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(view_pessoa_cliente_bp)
+		app.register_blueprint(view_pessoa_fornecedor_bp)
+		app.register_blueprint(view_pessoa_colaborador_bp)
+		app.register_blueprint(view_pessoa_vendedor_bp)
+		app.register_blueprint(view_pessoa_transportadora_bp)
+		app.register_blueprint(login_bp)

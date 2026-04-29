@@ -1,0 +1,11 @@
+export 'home_page.dart';
+export 'modules/gondola_caixa/gondola_armazenamento_list_page.dart';
+export 'modules/gondola_caixa/gondola_armazenamento_edit_page.dart';
+export 'modules/gondola_caixa/gondola_caixa_list_page.dart';
+export 'modules/gondola_caixa/gondola_caixa_tab_page.dart';
+export 'modules/gondola_caixa/gondola_caixa_edit_page.dart';
+export 'modules/gondola_rua/gondola_rua_list_page.dart';
+export 'modules/gondola_rua/gondola_rua_edit_page.dart';
+export 'modules/gondola_estante/gondola_estante_list_page.dart';
+export 'modules/gondola_estante/gondola_estante_edit_page.dart';
+export 'payment/payment_page.dart';

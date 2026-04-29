@@ -1,0 +1,19 @@
+from src.controller.login_controller import login_bp
+from src.controller.esocial_natureza_juridica_controller import esocial_natureza_juridica_bp
+from src.controller.esocial_rubrica_controller import esocial_rubrica_bp
+from src.controller.esocial_tipo_afastamento_controller import esocial_tipo_afastamento_bp
+from src.controller.esocial_motivo_desligamento_controller import esocial_motivo_desligamento_bp
+from src.controller.view_controle_acesso_controller import view_controle_acesso_bp
+from src.controller.view_pessoa_usuario_controller import view_pessoa_usuario_bp
+from src.controller.esocial_classificacao_tribut_controller import esocial_classificacao_tribut_bp
+
+# Register the blueprints with the Flask application
+def register_blueprints(app):
+		app.register_blueprint(esocial_natureza_juridica_bp)
+		app.register_blueprint(esocial_rubrica_bp)
+		app.register_blueprint(esocial_tipo_afastamento_bp)
+		app.register_blueprint(esocial_motivo_desligamento_bp)
+		app.register_blueprint(view_controle_acesso_bp)
+		app.register_blueprint(view_pessoa_usuario_bp)
+		app.register_blueprint(esocial_classificacao_tribut_bp)
+		app.register_blueprint(login_bp)
