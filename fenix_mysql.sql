@@ -1,7 +1,8 @@
--- =============================================================
--- Fenix ERP -- Script DDL completo para MySQL 8.0+
+-- ================================================================
+-- NexCRM / Fênix ERP — Script DDL MySQL 8.0+
+-- Gerado a partir do modelo MySQL Workbench (fenix.mwb)
 -- Tabelas: 478  |  Colunas: 4118  |  FKs: 432
--- =============================================================
+-- ================================================================
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -12,9 +13,9 @@ CREATE DATABASE IF NOT EXISTS `fenix`
   DEFAULT COLLATE utf8mb4_unicode_ci;
 USE `fenix`;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(150),
@@ -29,9 +30,9 @@ CREATE TABLE IF NOT EXISTS `PESSOA` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA_FISICA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA_FISICA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA_FISICA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -47,12 +48,13 @@ CREATE TABLE IF NOT EXISTS `PESSOA_FISICA` (
   `NACIONALIDADE` VARCHAR(100),
   `NATURALIDADE` VARCHAR(100),
   `NOME_PAI` VARCHAR(200),
-  `NOME_MAE` VARCHAR(200)
+  `NOME_MAE` VARCHAR(200),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA_JURIDICA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA_JURIDICA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA_JURIDICA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -62,12 +64,13 @@ CREATE TABLE IF NOT EXISTS `PESSOA_JURIDICA` (
   `INSCRICAO_MUNICIPAL` VARCHAR(45),
   `DATA_CONSTITUICAO` DATE,
   `TIPO_REGIME` CHAR(1),
-  `CRT` CHAR(1)
+  `CRT` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CLIENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CLIENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CLIENTE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -76,43 +79,47 @@ CREATE TABLE IF NOT EXISTS `CLIENTE` (
   `DATA_CADASTRO` DATE,
   `TAXA_DESCONTO` DECIMAL(18,6),
   `LIMITE_CREDITO` DECIMAL(18,6),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FORNECEDOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FORNECEDOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FORNECEDOR` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
   `DESDE` DATE,
   `DATA_CADASTRO` DATE,
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRANSPORTADORA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRANSPORTADORA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRANSPORTADORA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
   `DATA_CADASTRO` DATE,
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTADOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTADOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTADOR` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
   `CRC_INSCRICAO` VARCHAR(15),
-  `CRC_UF` CHAR(2)
+  `CRC_UF` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COLABORADOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COLABORADOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COLABORADOR` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -130,23 +137,25 @@ CREATE TABLE IF NOT EXISTS `COLABORADOR` (
   `CTPS_SERIE` VARCHAR(10),
   `CTPS_DATA_EXPEDICAO` DATE,
   `CTPS_UF` CHAR(2),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDEDOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDEDOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDEDOR` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `ID_COMISSAO_PERFIL` INT UNSIGNED,
   `COMISSAO` DECIMAL(18,6),
-  `META_VENDA` DECIMAL(18,6)
+  `META_VENDA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA_ENDERECO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA_ENDERECO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA_ENDERECO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -161,63 +170,69 @@ CREATE TABLE IF NOT EXISTS `PESSOA_ENDERECO` (
   `PRINCIPAL` CHAR(1),
   `ENTREGA` CHAR(1),
   `COBRANCA` CHAR(1),
-  `CORRESPONDENCIA` CHAR(1)
+  `CORRESPONDENCIA` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA_CONTATO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA_CONTATO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA_CONTATO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
   `NOME` VARCHAR(150),
   `EMAIL` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA_TELEFONE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA_TELEFONE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA_TELEFONE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
   `TIPO` CHAR(1),
-  `NUMERO` VARCHAR(15)
+  `NUMERO` VARCHAR(15),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NIVEL_FORMACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NIVEL_FORMACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NIVEL_FORMACAO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTADO_CIVIL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTADO_CIVIL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTADO_CIVIL` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CARGO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CARGO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CARGO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
   `DESCRICAO` VARCHAR(250),
   `SALARIO` DECIMAL(18,6),
   `CBO_1994` VARCHAR(10),
-  `CBO_2002` VARCHAR(10)
+  `CBO_2002` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: USUARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- USUARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `USUARIO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -225,30 +240,33 @@ CREATE TABLE IF NOT EXISTS `USUARIO` (
   `LOGIN` VARCHAR(50),
   `SENHA` VARCHAR(50),
   `ADMINISTRADOR` CHAR(1),
-  `DATA_CADASTRO` DATE
+  `DATA_CADASTRO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FUNCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FUNCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FUNCAO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PAPEL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PAPEL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PAPEL` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PAPEL_FUNCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PAPEL_FUNCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PAPEL_FUNCAO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PAPEL` INT NOT NULL,
@@ -256,12 +274,13 @@ CREATE TABLE IF NOT EXISTS `PAPEL_FUNCAO` (
   `HABILITADO` CHAR(1),
   `PODE_INSERIR` CHAR(1),
   `PODE_ALTERAR` CHAR(1),
-  `PODE_EXCLUIR` CHAR(1)
+  `PODE_EXCLUIR` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `RAZAO_SOCIAL` VARCHAR(150),
@@ -282,21 +301,23 @@ CREATE TABLE IF NOT EXISTS `EMPRESA` (
   `CODIGO_IBGE_UF` INT DEFAULT NULL,
   `CEI` VARCHAR(12) DEFAULT NULL,
   `CODIGO_CNAE_PRINCIPAL` VARCHAR(7) DEFAULT NULL,
-  `IMAGEM_LOGOTIPO` TEXT
+  `IMAGEM_LOGOTIPO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SETOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SETOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SETOR` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO_SUBGRUPO` INT NOT NULL,
@@ -314,60 +335,66 @@ CREATE TABLE IF NOT EXISTS `PRODUTO` (
   `ESTOQUE_MINIMO` DECIMAL(18,6),
   `ESTOQUE_MAXIMO` DECIMAL(18,6),
   `QUANTIDADE_ESTOQUE` DECIMAL(18,6),
-  `DATA_CADASTRO` DATE
+  `DATA_CADASTRO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_GRUPO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_GRUPO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_GRUPO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_SUBGRUPO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_SUBGRUPO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_SUBGRUPO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO_GRUPO` INT NOT NULL,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_MARCA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_MARCA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_MARCA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_UNIDADE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_UNIDADE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_UNIDADE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `SIGLA` VARCHAR(10),
   `DESCRICAO` VARCHAR(250),
-  `PODE_FRACIONAR` CHAR(1)
+  `PODE_FRACIONAR` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BANCO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BANCO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BANCO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(10),
   `NOME` VARCHAR(100),
-  `URL` VARCHAR(250)
+  `URL` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BANCO_AGENCIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BANCO_AGENCIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BANCO_AGENCIA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_BANCO` INT NOT NULL,
@@ -377,12 +404,13 @@ CREATE TABLE IF NOT EXISTS `BANCO_AGENCIA` (
   `TELEFONE` VARCHAR(15),
   `CONTATO` VARCHAR(100),
   `OBSERVACAO` VARCHAR(250),
-  `GERENTE` VARCHAR(100)
+  `GERENTE` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BANCO_CONTA_CAIXA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BANCO_CONTA_CAIXA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BANCO_CONTA_CAIXA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_BANCO_AGENCIA` INT,
@@ -390,12 +418,13 @@ CREATE TABLE IF NOT EXISTS `BANCO_CONTA_CAIXA` (
   `DIGITO` CHAR(1),
   `NOME` VARCHAR(100),
   `TIPO` CHAR(1),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CEP
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CEP
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CEP` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NUMERO` VARCHAR(8),
@@ -404,104 +433,114 @@ CREATE TABLE IF NOT EXISTS `CEP` (
   `BAIRRO` VARCHAR(100),
   `MUNICIPIO` VARCHAR(100),
   `UF` CHAR(2),
-  `CODIGO_IBGE_MUNICIPIO` INT
+  `CODIGO_IBGE_MUNICIPIO` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MUNICIPIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MUNICIPIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MUNICIPIO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_UF` INT NOT NULL,
   `NOME` VARCHAR(100),
   `CODIGO_IBGE` INT,
   `CODIGO_RECEITA_FEDERAL` INT,
-  `CODIGO_ESTADUAL` INT
+  `CODIGO_ESTADUAL` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: UF
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- UF
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `UF` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `SIGLA` CHAR(2),
   `NOME` VARCHAR(100),
-  `CODIGO_IBGE` INT
+  `CODIGO_IBGE` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NCM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NCM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NCM` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(8),
   `DESCRICAO` VARCHAR(1000),
-  `OBSERVACAO` VARCHAR(1000)
+  `OBSERVACAO` VARCHAR(1000),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CFOP
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CFOP
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CFOP` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` INT,
   `DESCRICAO` VARCHAR(1000),
-  `APLICACAO` VARCHAR(1000)
+  `APLICACAO` VARCHAR(1000),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CST_ICMS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CST_ICMS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CST_ICMS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CST_IPI
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CST_IPI
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CST_IPI` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CST_COFINS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CST_COFINS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CST_COFINS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CST_PIS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CST_PIS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CST_PIS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CSOSN
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CSOSN
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CSOSN` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `DESCRICAO` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(1000)
+  `OBSERVACAO` VARCHAR(1000),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA_ENDERECO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA_ENDERECO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA_ENDERECO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_EMPRESA` INT NOT NULL,
@@ -516,64 +555,70 @@ CREATE TABLE IF NOT EXISTS `EMPRESA_ENDERECO` (
   `PRINCIPAL` CHAR(1),
   `ENTREGA` CHAR(1),
   `COBRANCA` CHAR(1),
-  `CORRESPONDENCIA` CHAR(1)
+  `CORRESPONDENCIA` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA_CONTATO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA_CONTATO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA_CONTATO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_EMPRESA` INT NOT NULL,
   `NOME` VARCHAR(150),
   `EMAIL` VARCHAR(250),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA_TELEFONE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA_TELEFONE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA_TELEFONE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_EMPRESA` INT NOT NULL,
   `TIPO` CHAR(1),
-  `NUMERO` VARCHAR(15)
+  `NUMERO` VARCHAR(15),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CNAE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CNAE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CNAE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(7),
-  `DENOMINACAO` VARCHAR(1000)
+  `DENOMINACAO` VARCHAR(1000),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TALONARIO_CHEQUE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TALONARIO_CHEQUE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TALONARIO_CHEQUE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BANCO_CONTA_CAIXA` INT NOT NULL,
   `TALAO` VARCHAR(10),
   `NUMERO` INT UNSIGNED,
-  `STATUS_TALAO` CHAR(1)
+  `STATUS_TALAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CHEQUE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CHEQUE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CHEQUE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TALONARIO_CHEQUE` INT UNSIGNED NOT NULL,
   `NUMERO` INT UNSIGNED,
   `STATUS_CHEQUE` CHAR(1),
-  `DATA_STATUS` DATE
+  `DATA_STATUS` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_FECHAMENTO_CAIXA_BANCO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_FECHAMENTO_CAIXA_BANCO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_FECHAMENTO_CAIXA_BANCO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BANCO_CONTA_CAIXA` INT NOT NULL,
@@ -586,12 +631,13 @@ CREATE TABLE IF NOT EXISTS `FIN_FECHAMENTO_CAIXA_BANCO` (
   `PAGAMENTOS` DECIMAL(18,6),
   `SALDO_CONTA` DECIMAL(18,6),
   `CHEQUE_NAO_COMPENSADO` DECIMAL(18,6),
-  `SALDO_DISPONIVEL` DECIMAL(18,6)
+  `SALDO_DISPONIVEL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_EXTRATO_CONTA_BANCO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_EXTRATO_CONTA_BANCO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_EXTRATO_CONTA_BANCO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BANCO_CONTA_CAIXA` INT NOT NULL,
@@ -604,12 +650,13 @@ CREATE TABLE IF NOT EXISTS `FIN_EXTRATO_CONTA_BANCO` (
   `DOCUMENTO` VARCHAR(50),
   `VALOR` DECIMAL(18,6),
   `CONCILIADO` CHAR(1),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_LANCAMENTO_PAGAR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_LANCAMENTO_PAGAR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_LANCAMENTO_PAGAR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FIN_DOCUMENTO_ORIGEM` INT UNSIGNED NOT NULL,
@@ -623,12 +670,13 @@ CREATE TABLE IF NOT EXISTS `FIN_LANCAMENTO_PAGAR` (
   `IMAGEM_DOCUMENTO` TEXT,
   `PRIMEIRO_VENCIMENTO` DATE,
   `INTERVALO_ENTRE_PARCELAS` INT UNSIGNED,
-  `DIA_FIXO` CHAR(2)
+  `DIA_FIXO` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_PARCELA_PAGAR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_PARCELA_PAGAR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_PARCELA_PAGAR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FIN_LANCAMENTO_PAGAR` INT UNSIGNED NOT NULL,
@@ -648,41 +696,45 @@ CREATE TABLE IF NOT EXISTS `FIN_PARCELA_PAGAR` (
   `VALOR_MULTA` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
   `VALOR_PAGO` DECIMAL(18,6),
-  `HISTORICO` TEXT
+  `HISTORICO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_DOCUMENTO_ORIGEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_DOCUMENTO_ORIGEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_DOCUMENTO_ORIGEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `SIGLA` CHAR(10),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_STATUS_PARCELA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_STATUS_PARCELA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_STATUS_PARCELA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `SITUACAO` CHAR(2) NOT NULL,
   `DESCRICAO` VARCHAR(30),
-  `PROCEDIMENTO` TEXT
+  `PROCEDIMENTO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_TIPO_PAGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_TIPO_PAGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_TIPO_PAGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` VARCHAR(30)
+  `DESCRICAO` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_CHEQUE_EMITIDO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_CHEQUE_EMITIDO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_CHEQUE_EMITIDO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CHEQUE` INT UNSIGNED NOT NULL,
@@ -690,32 +742,35 @@ CREATE TABLE IF NOT EXISTS `FIN_CHEQUE_EMITIDO` (
   `BOM_PARA` DATE,
   `DATA_COMPENSACAO` DATE,
   `VALOR` DECIMAL(18,6),
-  `NOMINAL_A` VARCHAR(100)
+  `NOMINAL_A` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_NATUREZA_FINANCEIRA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_NATUREZA_FINANCEIRA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_NATUREZA_FINANCEIRA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(4),
   `DESCRICAO` VARCHAR(100),
   `TIPO` CHAR(1),
-  `APLICACAO` VARCHAR(250)
+  `APLICACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_TIPO_RECEBIMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_TIPO_RECEBIMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_TIPO_RECEBIMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_LANCAMENTO_RECEBER
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_LANCAMENTO_RECEBER
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_LANCAMENTO_RECEBER` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FIN_DOCUMENTO_ORIGEM` INT UNSIGNED NOT NULL,
@@ -730,12 +785,13 @@ CREATE TABLE IF NOT EXISTS `FIN_LANCAMENTO_RECEBER` (
   `TAXA_COMISSAO` DECIMAL(18,6),
   `VALOR_COMISSAO` DECIMAL(18,6),
   `INTERVALO_ENTRE_PARCELAS` INT,
-  `DIA_FIXO` CHAR(2)
+  `DIA_FIXO` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_PARCELA_RECEBER
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_PARCELA_RECEBER
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_PARCELA_RECEBER` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FIN_LANCAMENTO_RECEBER` INT UNSIGNED NOT NULL,
@@ -757,12 +813,13 @@ CREATE TABLE IF NOT EXISTS `FIN_PARCELA_RECEBER` (
   `EMITIU_BOLETO` CHAR(1),
   `BOLETO_NOSSO_NUMERO` VARCHAR(50),
   `VALOR_RECEBIDO` DECIMAL(18,6),
-  `HISTORICO` TEXT
+  `HISTORICO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_CHEQUE_RECEBIDO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_CHEQUE_RECEBIDO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_CHEQUE_RECEBIDO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT,
@@ -783,12 +840,13 @@ CREATE TABLE IF NOT EXISTS `FIN_CHEQUE_RECEBIDO` (
   `DESCONTO_DATA` DATE,
   `DESCONTO_TARIFA` DECIMAL(18,6),
   `DESCONTO_COMISSAO` DECIMAL(18,6),
-  `VALOR_RECEBIDO` DECIMAL(18,6)
+  `VALOR_RECEBIDO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FIN_CONFIGURACAO_BOLETO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FIN_CONFIGURACAO_BOLETO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FIN_CONFIGURACAO_BOLETO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BANCO_CONTA_CAIXA` INT NOT NULL,
@@ -809,23 +867,25 @@ CREATE TABLE IF NOT EXISTS `FIN_CONFIGURACAO_BOLETO` (
   `TAXA_MULTA` DECIMAL(18,6),
   `TAXA_JURO` DECIMAL(18,6),
   `DIAS_PROTESTO` INT UNSIGNED,
-  `NOSSO_NUMERO_ANTERIOR` VARCHAR(50)
+  `NOSSO_NUMERO_ANTERIOR` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_OPERACAO_FISCAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_OPERACAO_FISCAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_OPERACAO_FISCAL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
   `DESCRICAO_NA_NF` VARCHAR(100),
   `CFOP` INT UNSIGNED,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_ICMS_UF
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_ICMS_UF
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_ICMS_UF` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_CONFIGURA_OF_GT` INT UNSIGNED NOT NULL,
@@ -845,12 +905,13 @@ CREATE TABLE IF NOT EXISTS `TRIBUT_ICMS_UF` (
   `PORCENTO_BC_ST` DECIMAL(18,6),
   `ALIQUOTA_ICMS_ST` DECIMAL(18,6),
   `VALOR_PAUTA_ST` DECIMAL(18,6),
-  `VALOR_PRECO_MAXIMO_ST` DECIMAL(18,6)
+  `VALOR_PRECO_MAXIMO_ST` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_PIS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_PIS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_PIS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_CONFIGURA_OF_GT` INT UNSIGNED NOT NULL,
@@ -861,12 +922,13 @@ CREATE TABLE IF NOT EXISTS `TRIBUT_PIS` (
   `ALIQUOTA_PORCENTO` DECIMAL(18,6),
   `ALIQUOTA_UNIDADE` DECIMAL(18,6),
   `VALOR_PRECO_MAXIMO` DECIMAL(18,6),
-  `VALOR_PAUTA_FISCAL` DECIMAL(18,6)
+  `VALOR_PAUTA_FISCAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_COFINS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_COFINS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_COFINS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_CONFIGURA_OF_GT` INT UNSIGNED NOT NULL,
@@ -877,12 +939,13 @@ CREATE TABLE IF NOT EXISTS `TRIBUT_COFINS` (
   `ALIQUOTA_PORCENTO` DECIMAL(18,6),
   `ALIQUOTA_UNIDADE` DECIMAL(18,6),
   `VALOR_PRECO_MAXIMO` DECIMAL(18,6),
-  `VALOR_PAUTA_FISCAL` DECIMAL(18,6)
+  `VALOR_PAUTA_FISCAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_IPI
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_IPI
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_IPI` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_CONFIGURA_OF_GT` INT UNSIGNED NOT NULL,
@@ -892,22 +955,24 @@ CREATE TABLE IF NOT EXISTS `TRIBUT_IPI` (
   `ALIQUOTA_PORCENTO` DECIMAL(18,6),
   `ALIQUOTA_UNIDADE` DECIMAL(18,6),
   `VALOR_PRECO_MAXIMO` DECIMAL(18,6),
-  `VALOR_PAUTA_FISCAL` DECIMAL(18,6)
+  `VALOR_PAUTA_FISCAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_GRUPO_TRIBUTARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_GRUPO_TRIBUTARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_GRUPO_TRIBUTARIO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
   `ORIGEM_MERCADORIA` CHAR(1),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_ISS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_ISS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_ISS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_OPERACAO_FISCAL` INT UNSIGNED NOT NULL,
@@ -918,54 +983,59 @@ CREATE TABLE IF NOT EXISTS `TRIBUT_ISS` (
   `VALOR_PRECO_MAXIMO` DECIMAL(18,6),
   `VALOR_PAUTA_FISCAL` DECIMAL(18,6),
   `ITEM_LISTA_SERVICO` INT UNSIGNED,
-  `CODIGO_TRIBUTACAO` CHAR(1)
+  `CODIGO_TRIBUTACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_TIPO_REQUISICAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_TIPO_REQUISICAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_TIPO_REQUISICAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `NOME` VARCHAR(30),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_REQUISICAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_REQUISICAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_REQUISICAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_TIPO_REQUISICAO` INT UNSIGNED NOT NULL,
   `ID_COLABORADOR` INT NOT NULL,
   `DESCRICAO` VARCHAR(100),
   `DATA_REQUISICAO` DATE,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_REQUISICAO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_REQUISICAO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_REQUISICAO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_REQUISICAO` INT UNSIGNED NOT NULL,
   `ID_PRODUTO` INT NOT NULL,
-  `QUANTIDADE` DECIMAL(18,6)
+  `QUANTIDADE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_COTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_COTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_COTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_REQUISICAO` INT UNSIGNED NOT NULL,
   `DATA_COTACAO` DATE,
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_FORNECEDOR_COTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_FORNECEDOR_COTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_FORNECEDOR_COTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_COTACAO` INT UNSIGNED NOT NULL,
@@ -976,12 +1046,13 @@ CREATE TABLE IF NOT EXISTS `COMPRA_FORNECEDOR_COTACAO` (
   `VALOR_SUBTOTAL` DECIMAL(18,6),
   `TAXA_DESCONTO` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_COTACAO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_COTACAO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_COTACAO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_FORNECEDOR_COTACAO` INT UNSIGNED NOT NULL,
@@ -991,12 +1062,13 @@ CREATE TABLE IF NOT EXISTS `COMPRA_COTACAO_DETALHE` (
   `VALOR_SUBTOTAL` DECIMAL(18,6),
   `TAXA_DESCONTO` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_PEDIDO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_PEDIDO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_PEDIDO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_TIPO_PEDIDO` INT UNSIGNED NOT NULL,
@@ -1028,12 +1100,13 @@ CREATE TABLE IF NOT EXISTS `COMPRA_PEDIDO` (
   `DIA_PRIMEIRO_VENCIMENTO` CHAR(2),
   `INTERVALO_ENTRE_PARCELAS` INT UNSIGNED,
   `DIA_FIXO_PARCELA` CHAR(2),
-  `CODIGO_COTACAO` VARCHAR(32)
+  `CODIGO_COTACAO` VARCHAR(32),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_PEDIDO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_PEDIDO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_PEDIDO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMPRA_PEDIDO` INT UNSIGNED NOT NULL,
@@ -1051,22 +1124,24 @@ CREATE TABLE IF NOT EXISTS `COMPRA_PEDIDO_DETALHE` (
   `VALOR_ICMS` DECIMAL(18,6),
   `VALOR_IPI` DECIMAL(18,6),
   `ALIQUOTA_ICMS` DECIMAL(18,6),
-  `ALIQUOTA_IPI` DECIMAL(18,6)
+  `ALIQUOTA_IPI` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMPRA_TIPO_PEDIDO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMPRA_TIPO_PEDIDO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMPRA_TIPO_PEDIDO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `NOME` VARCHAR(30),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_ORCAMENTO_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_ORCAMENTO_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_ORCAMENTO_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_CONDICOES_PAGAMENTO` INT UNSIGNED NOT NULL,
@@ -1085,12 +1160,13 @@ CREATE TABLE IF NOT EXISTS `VENDA_ORCAMENTO_CABECALHO` (
   `TAXA_DESCONTO` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
   `VALOR_TOTAL` DECIMAL(18,6),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NOTA_FISCAL_TIPO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NOTA_FISCAL_TIPO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NOTA_FISCAL_TIPO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NOTA_FISCAL_MODELO` INT UNSIGNED NOT NULL,
@@ -1098,12 +1174,13 @@ CREATE TABLE IF NOT EXISTS `NOTA_FISCAL_TIPO` (
   `DESCRICAO` TEXT,
   `SERIE` CHAR(3),
   `SERIE_SCAN` CHAR(3),
-  `ULTIMO_NUMERO` INT UNSIGNED
+  `ULTIMO_NUMERO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_ORCAMENTO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_ORCAMENTO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_ORCAMENTO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_ORCAMENTO_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1113,12 +1190,13 @@ CREATE TABLE IF NOT EXISTS `VENDA_ORCAMENTO_DETALHE` (
   `VALOR_SUBTOTAL` DECIMAL(18,6),
   `TAXA_DESCONTO` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_ORCAMENTO_CABECALHO` INT UNSIGNED,
@@ -1145,12 +1223,13 @@ CREATE TABLE IF NOT EXISTS `VENDA_CABECALHO` (
   `VALOR_SEGURO` DECIMAL(18,6),
   `OBSERVACAO` TEXT,
   `SITUACAO` CHAR(1),
-  `DIA_FIXO_PARCELA` CHAR(2)
+  `DIA_FIXO_PARCELA` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1160,12 +1239,13 @@ CREATE TABLE IF NOT EXISTS `VENDA_DETALHE` (
   `VALOR_SUBTOTAL` DECIMAL(18,6),
   `TAXA_DESCONTO` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_CONDICOES_PAGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_CONDICOES_PAGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_CONDICOES_PAGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
@@ -1176,23 +1256,25 @@ CREATE TABLE IF NOT EXISTS `VENDA_CONDICOES_PAGAMENTO` (
   `DIAS_TOLERANCIA` INT UNSIGNED,
   `VALOR_TOLERANCIA` DECIMAL(18,6),
   `PRAZO_MEDIO` INT UNSIGNED,
-  `VISTA_PRAZO` CHAR(1)
+  `VISTA_PRAZO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_CONDICOES_PARCELAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_CONDICOES_PARCELAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_CONDICOES_PARCELAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_CONDICOES_PAGAMENTO` INT UNSIGNED NOT NULL,
   `PARCELA` INT UNSIGNED,
   `DIAS` INT UNSIGNED,
-  `TAXA` DECIMAL(18,6)
+  `TAXA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_FRETE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_FRETE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_FRETE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1206,12 +1288,13 @@ CREATE TABLE IF NOT EXISTS `VENDA_FRETE` (
   `MARCA_VOLUME` VARCHAR(50),
   `ESPECIE_VOLUME` VARCHAR(20),
   `PESO_BRUTO` DECIMAL(18,6),
-  `PESO_LIQUIDO` DECIMAL(18,6)
+  `PESO_LIQUIDO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDA_COMISSAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDA_COMISSAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDA_COMISSAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDA_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1220,55 +1303,60 @@ CREATE TABLE IF NOT EXISTS `VENDA_COMISSAO` (
   `TIPO_CONTABIL` CHAR(1),
   `VALOR_COMISSAO` DECIMAL(18,6),
   `SITUACAO` CHAR(1),
-  `DATA_LANCAMENTO` DATE
+  `DATA_LANCAMENTO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: REQUISICAO_INTERNA_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- REQUISICAO_INTERNA_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `REQUISICAO_INTERNA_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `DATA_REQUISICAO` DATE,
-  `SITUACAO` CHAR(1)
+  `SITUACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: REQUISICAO_INTERNA_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- REQUISICAO_INTERNA_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `REQUISICAO_INTERNA_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_REQUISICAO_INTERNA_CABECALHO` INT UNSIGNED NOT NULL,
   `ID_PRODUTO` INT NOT NULL,
-  `QUANTIDADE` DECIMAL(18,6) NOT NULL
+  `QUANTIDADE` DECIMAL(18,6) NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_REAJUSTE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_REAJUSTE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_REAJUSTE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `DATA_REAJUSTE` DATE,
   `TAXA` DECIMAL(18,6),
   `TIPO_REAJUSTE` CHAR(1),
-  `JUSTIFICATIVA` VARCHAR(100)
+  `JUSTIFICATIVA` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_REAJUSTE_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_REAJUSTE_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_REAJUSTE_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ESTOQUE_REAJUSTE_CABECALHO` INT UNSIGNED NOT NULL,
   `ID_PRODUTO` INT NOT NULL,
   `VALOR_ORIGINAL` DECIMAL(18,6),
-  `VALOR_REAJUSTE` DECIMAL(18,6)
+  `VALOR_REAJUSTE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_GRADE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_GRADE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_GRADE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ESTOQUE_MARCA` INT UNSIGNED,
@@ -1277,52 +1365,57 @@ CREATE TABLE IF NOT EXISTS `ESTOQUE_GRADE` (
   `ID_ESTOQUE_COR` INT UNSIGNED,
   `ID_PRODUTO` INT NOT NULL,
   `CODIGO` VARCHAR(50),
-  `QUANTIDADE` DECIMAL(18,6)
+  `QUANTIDADE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_COR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_COR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_COR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(4),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_TAMANHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_TAMANHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_TAMANHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(4),
   `NOME` VARCHAR(50),
   `ALTURA` DECIMAL(18,6),
   `COMPRIMENTO` DECIMAL(18,6),
-  `LARGURA` DECIMAL(18,6)
+  `LARGURA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NOTA_FISCAL_MODELO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NOTA_FISCAL_MODELO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NOTA_FISCAL_MODELO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` VARCHAR(100),
-  `MODELO` VARCHAR(10)
+  `MODELO` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_CONFIGURA_OF_GT
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_CONFIGURA_OF_GT
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_CONFIGURA_OF_GT` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_GRUPO_TRIBUTARIO` INT NOT NULL,
-  `ID_TRIBUT_OPERACAO_FISCAL` INT UNSIGNED NOT NULL
+  `ID_TRIBUT_OPERACAO_FISCAL` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_ICMS_CUSTOM_DET
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_ICMS_CUSTOM_DET
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_ICMS_CUSTOM_DET` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TRIBUT_ICMS_CUSTOM_CAB` INT UNSIGNED NOT NULL,
@@ -1342,47 +1435,52 @@ CREATE TABLE IF NOT EXISTS `TRIBUT_ICMS_CUSTOM_DET` (
   `PORCENTO_BC_ST` DECIMAL(18,6),
   `ALIQUOTA_ICMS_ST` DECIMAL(18,6),
   `VALOR_PAUTA_ST` DECIMAL(18,6),
-  `VALOR_PRECO_MAXIMO_ST` DECIMAL(18,6)
+  `VALOR_PRECO_MAXIMO_ST` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TRIBUT_ICMS_CUSTOM_CAB
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TRIBUT_ICMS_CUSTOM_CAB
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TRIBUT_ICMS_CUSTOM_CAB` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
-  `ORIGEM_MERCADORIA` CHAR(1)
+  `ORIGEM_MERCADORIA` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_SABOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_SABOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_SABOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(4),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESTOQUE_MARCA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESTOQUE_MARCA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESTOQUE_MARCA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(4),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: DIA_PARCELA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- DIA_PARCELA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DIA_PARCELA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `DIA` CHAR(2)
+  `DIA` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDEDOR` INT,
@@ -1466,12 +1564,13 @@ CREATE TABLE IF NOT EXISTS `NFE_CABECALHO` (
   `ID_NFCE_MOVIMENTO` INT UNSIGNED,
   `ID_VENDA_CABECALHO` INT UNSIGNED,
   `ID_TRIBUT_OPERACAO_FISCAL` INT UNSIGNED,
-  `ID_CLIENTE` INT
+  `ID_CLIENTE` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1510,21 +1609,23 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE` (
   `VALOR_IPI_DEVOLVIDO` DECIMAL(18,6),
   `INFORMACOES_ADICIONAIS` TEXT,
   `VALOR_SUBTOTAL` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_REFERENCIADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_REFERENCIADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_REFERENCIADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
-  `CHAVE_ACESSO` VARCHAR(44)
+  `CHAVE_ACESSO` VARCHAR(44),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_EMITENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_EMITENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_EMITENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1547,12 +1648,13 @@ CREATE TABLE IF NOT EXISTS `NFE_EMITENTE` (
   `INSCRICAO_ESTADUAL_ST` VARCHAR(14),
   `INSCRICAO_MUNICIPAL` VARCHAR(15),
   `CNAE` VARCHAR(7),
-  `CRT` CHAR(1)
+  `CRT` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DESTINATARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DESTINATARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DESTINATARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1575,12 +1677,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DESTINATARIO` (
   `INSCRICAO_ESTADUAL` VARCHAR(14),
   `SUFRAMA` INT UNSIGNED,
   `INSCRICAO_MUNICIPAL` VARCHAR(15),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_LOCAL_RETIRADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_LOCAL_RETIRADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_LOCAL_RETIRADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1599,12 +1702,13 @@ CREATE TABLE IF NOT EXISTS `NFE_LOCAL_RETIRADA` (
   `NOME_PAIS` VARCHAR(60),
   `TELEFONE` VARCHAR(14),
   `EMAIL` VARCHAR(60),
-  `INSCRICAO_ESTADUAL` VARCHAR(14)
+  `INSCRICAO_ESTADUAL` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_LOCAL_ENTREGA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_LOCAL_ENTREGA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_LOCAL_ENTREGA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1623,12 +1727,13 @@ CREATE TABLE IF NOT EXISTS `NFE_LOCAL_ENTREGA` (
   `NOME_PAIS` VARCHAR(60),
   `TELEFONE` VARCHAR(14),
   `EMAIL` VARCHAR(60),
-  `INSCRICAO_ESTADUAL` VARCHAR(14)
+  `INSCRICAO_ESTADUAL` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DET_ESPECIFICO_VEICULO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DET_ESPECIFICO_VEICULO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DET_ESPECIFICO_VEICULO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1655,35 +1760,38 @@ CREATE TABLE IF NOT EXISTS `NFE_DET_ESPECIFICO_VEICULO` (
   `CODIGO_MARCA_MODELO` VARCHAR(6),
   `CODIGO_COR_DENATRAN` CHAR(2),
   `LOTACAO_MAXIMA` INT UNSIGNED,
-  `RESTRICAO` CHAR(1)
+  `RESTRICAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DET_ESPECIFICO_MEDICAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DET_ESPECIFICO_MEDICAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DET_ESPECIFICO_MEDICAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
   `CODIGO_ANVISA` VARCHAR(13),
   `MOTIVO_ISENCAO` VARCHAR(250),
-  `PRECO_MAXIMO_CONSUMIDOR` DECIMAL(18,6)
+  `PRECO_MAXIMO_CONSUMIDOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DET_ESPECIFICO_ARMAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DET_ESPECIFICO_ARMAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DET_ESPECIFICO_ARMAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
   `TIPO_ARMA` CHAR(1),
   `NUMERO_SERIE_ARMA` VARCHAR(15),
   `NUMERO_SERIE_CANO` VARCHAR(15),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DET_ESPECIFICO_COMBUSTIVEL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DET_ESPECIFICO_COMBUSTIVEL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DET_ESPECIFICO_COMBUSTIVEL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1703,12 +1811,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DET_ESPECIFICO_COMBUSTIVEL` (
   `ENCERRANTE_BOMBA` INT,
   `ENCERRANTE_TANQUE` INT,
   `ENCERRANTE_VALOR_INICIO` DECIMAL(18,6),
-  `ENCERRANTE_VALOR_FIM` DECIMAL(18,6)
+  `ENCERRANTE_VALOR_FIM` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_TRANSPORTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_TRANSPORTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1729,35 +1838,38 @@ CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE` (
   `MUNICIPIO` INT UNSIGNED,
   `PLACA_VEICULO` VARCHAR(7),
   `UF_VEICULO` CHAR(2),
-  `RNTC_VEICULO` VARCHAR(20)
+  `RNTC_VEICULO` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_FATURA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_FATURA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_FATURA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
   `NUMERO` VARCHAR(60),
   `VALOR_ORIGINAL` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_LIQUIDO` DECIMAL(18,6)
+  `VALOR_LIQUIDO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DUPLICATA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DUPLICATA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DUPLICATA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_FATURA` INT UNSIGNED NOT NULL,
   `NUMERO` VARCHAR(60),
   `DATA_VENCIMENTO` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DECLARACAO_IMPORTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DECLARACAO_IMPORTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DECLARACAO_IMPORTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1771,12 +1883,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DECLARACAO_IMPORTACAO` (
   `FORMA_INTERMEDIACAO` CHAR(1),
   `CNPJ` VARCHAR(14),
   `UF_TERCEIRO` CHAR(2),
-  `CODIGO_EXPORTADOR` VARCHAR(60)
+  `CODIGO_EXPORTADOR` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_IMPORTACAO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_IMPORTACAO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_IMPORTACAO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DECLARACAO_IMPORTACAO` INT UNSIGNED NOT NULL,
@@ -1784,22 +1897,24 @@ CREATE TABLE IF NOT EXISTS `NFE_IMPORTACAO_DETALHE` (
   `NUMERO_SEQUENCIAL` INT UNSIGNED,
   `CODIGO_FABRICANTE_ESTRANGEIRO` VARCHAR(60),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `DRAWBACK` INT UNSIGNED
+  `DRAWBACK` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CANA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CANA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CANA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
   `SAFRA` VARCHAR(9),
-  `MES_ANO_REFERENCIA` VARCHAR(7)
+  `MES_ANO_REFERENCIA` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CANA_FORNECIMENTO_DIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CANA_FORNECIMENTO_DIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CANA_FORNECIMENTO_DIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CANA` INT UNSIGNED NOT NULL,
@@ -1807,12 +1922,13 @@ CREATE TABLE IF NOT EXISTS `NFE_CANA_FORNECIMENTO_DIARIO` (
   `QUANTIDADE` DECIMAL(18,6),
   `QUANTIDADE_TOTAL_MES` DECIMAL(18,6),
   `QUANTIDADE_TOTAL_ANTERIOR` DECIMAL(18,6),
-  `QUANTIDADE_TOTAL_GERAL` DECIMAL(18,6)
+  `QUANTIDADE_TOTAL_GERAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CANA_DEDUCOES_SAFRA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CANA_DEDUCOES_SAFRA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CANA_DEDUCOES_SAFRA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CANA` INT UNSIGNED NOT NULL,
@@ -1820,12 +1936,13 @@ CREATE TABLE IF NOT EXISTS `NFE_CANA_DEDUCOES_SAFRA` (
   `VALOR_DEDUCAO` DECIMAL(18,6),
   `VALOR_FORNECIMENTO` DECIMAL(18,6),
   `VALOR_TOTAL_DEDUCAO` DECIMAL(18,6),
-  `VALOR_LIQUIDO_FORNECIMENTO` DECIMAL(18,6)
+  `VALOR_LIQUIDO_FORNECIMENTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CUPOM_FISCAL_REFERENCIADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CUPOM_FISCAL_REFERENCIADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CUPOM_FISCAL_REFERENCIADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1834,21 +1951,23 @@ CREATE TABLE IF NOT EXISTS `NFE_CUPOM_FISCAL_REFERENCIADO` (
   `COO` INT UNSIGNED,
   `DATA_EMISSAO_CUPOM` DATE,
   `NUMERO_CAIXA` INT UNSIGNED,
-  `NUMERO_SERIE_ECF` VARCHAR(21)
+  `NUMERO_SERIE_ECF` VARCHAR(21),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_NUMERO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_NUMERO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_NUMERO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `SERIE` CHAR(3),
-  `NUMERO` INT UNSIGNED
+  `NUMERO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_PROD_RURAL_REFERENCIADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_PROD_RURAL_REFERENCIADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_PROD_RURAL_REFERENCIADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1859,12 +1978,13 @@ CREATE TABLE IF NOT EXISTS `NFE_PROD_RURAL_REFERENCIADA` (
   `INSCRICAO_ESTADUAL` VARCHAR(14),
   `MODELO` CHAR(2),
   `SERIE` CHAR(3),
-  `NUMERO_NF` INT UNSIGNED
+  `NUMERO_NF` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_NF_REFERENCIADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_NF_REFERENCIADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_NF_REFERENCIADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -1873,12 +1993,13 @@ CREATE TABLE IF NOT EXISTS `NFE_NF_REFERENCIADA` (
   `CNPJ` VARCHAR(14),
   `MODELO` CHAR(2) DEFAULT '''01''',
   `SERIE` CHAR(3),
-  `NUMERO_NF` INT UNSIGNED
+  `NUMERO_NF` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_ICMS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_ICMS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_ICMS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1923,12 +2044,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_ICMS` (
   `PERCENTUAL_REDUCAO_BC_EFETIVO` DECIMAL(18,6),
   `VALOR_BC_EFETIVO` DECIMAL(18,6),
   `ALIQUOTA_ICMS_EFETIVO` DECIMAL(18,6),
-  `VALOR_ICMS_EFETIVO` DECIMAL(18,6)
+  `VALOR_ICMS_EFETIVO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_IPI
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_IPI
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_IPI` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1941,24 +2063,26 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_IPI` (
   `QUANTIDADE_UNIDADE_TRIBUTAVEL` DECIMAL(18,6),
   `VALOR_UNIDADE_TRIBUTAVEL` DECIMAL(18,6),
   `ALIQUOTA_IPI` DECIMAL(18,6),
-  `VALOR_IPI` DECIMAL(18,6)
+  `VALOR_IPI` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_II
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_II
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_II` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
   `VALOR_BC_II` DECIMAL(18,6),
   `VALOR_DESPESAS_ADUANEIRAS` DECIMAL(18,6),
   `VALOR_IMPOSTO_IMPORTACAO` DECIMAL(18,6),
-  `VALOR_IOF` DECIMAL(18,6)
+  `VALOR_IOF` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_PIS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_PIS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_PIS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1967,12 +2091,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_PIS` (
   `ALIQUOTA_PIS_PERCENTUAL` DECIMAL(18,6),
   `VALOR_PIS` DECIMAL(18,6),
   `QUANTIDADE_VENDIDA` DECIMAL(18,6),
-  `ALIQUOTA_PIS_REAIS` DECIMAL(18,6)
+  `ALIQUOTA_PIS_REAIS` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_COFINS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_COFINS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_COFINS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -1981,12 +2106,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_COFINS` (
   `ALIQUOTA_COFINS_PERCENTUAL` DECIMAL(18,6),
   `QUANTIDADE_VENDIDA` DECIMAL(18,6),
   `ALIQUOTA_COFINS_REAIS` DECIMAL(18,6),
-  `VALOR_COFINS` DECIMAL(18,6)
+  `VALOR_COFINS` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_ISSQN
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_ISSQN
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_ISSQN` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -2005,12 +2131,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_ISSQN` (
   `MUNICIPIO_INCIDENCIA` INT UNSIGNED,
   `PAIS_SEVICO_PRESTADO` INT UNSIGNED,
   `NUMERO_PROCESSO` VARCHAR(30),
-  `INDICADOR_INCENTIVO_FISCAL` CHAR(1)
+  `INDICADOR_INCENTIVO_FISCAL` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_TRANSPORTE_REBOQUE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_TRANSPORTE_REBOQUE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE_REBOQUE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_TRANSPORTE` INT UNSIGNED NOT NULL,
@@ -2018,12 +2145,13 @@ CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE_REBOQUE` (
   `UF` CHAR(2),
   `RNTC` VARCHAR(20),
   `VAGAO` VARCHAR(20),
-  `BALSA` VARCHAR(20)
+  `BALSA` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_TRANSPORTE_VOLUME
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_TRANSPORTE_VOLUME
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE_VOLUME` (
   `ID` INT UNSIGNED NOT NULL,
   `ID_NFE_TRANSPORTE` INT UNSIGNED NOT NULL,
@@ -2032,40 +2160,44 @@ CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE_VOLUME` (
   `MARCA` VARCHAR(60),
   `NUMERACAO` VARCHAR(60),
   `PESO_LIQUIDO` DECIMAL(18,6),
-  `PESO_BRUTO` DECIMAL(18,6)
+  `PESO_BRUTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_TRANSPORTE_VOLUME_LACRE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_TRANSPORTE_VOLUME_LACRE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_TRANSPORTE_VOLUME_LACRE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_TRANSPORTE_VOLUME` INT UNSIGNED NOT NULL,
-  `NUMERO` VARCHAR(60)
+  `NUMERO` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_PROCESSO_REFERENCIADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_PROCESSO_REFERENCIADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_PROCESSO_REFERENCIADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
   `IDENTIFICADOR` VARCHAR(60),
-  `ORIGEM` CHAR(1)
+  `ORIGEM` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CTE_REFERENCIADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CTE_REFERENCIADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CTE_REFERENCIADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
-  `CHAVE_ACESSO` VARCHAR(44)
+  `CHAVE_ACESSO` VARCHAR(44),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_CONFIGURACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_CONFIGURACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_CONFIGURACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CERTIFICADO_DIGITAL_SERIE` VARCHAR(100),
@@ -2094,34 +2226,37 @@ CREATE TABLE IF NOT EXISTS `NFE_CONFIGURACAO` (
   `EMAIL_SENHA` VARCHAR(100),
   `EMAIL_ASSUNTO` VARCHAR(100),
   `EMAIL_AUTENTICA_SSL` CHAR(1),
-  `EMAIL_TEXTO` TEXT
+  `EMAIL_TEXTO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_ACESSO_XML
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_ACESSO_XML
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_ACESSO_XML` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
   `CNPJ` VARCHAR(14),
-  `CPF` VARCHAR(11)
+  `CPF` VARCHAR(11),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_EXPORTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_EXPORTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_EXPORTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
   `DRAWBACK` INT UNSIGNED,
   `NUMERO_REGISTRO` INT UNSIGNED,
   `CHAVE_ACESSO` VARCHAR(44),
-  `QUANTIDADE` DECIMAL(18,6)
+  `QUANTIDADE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_INFORMACAO_PAGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_INFORMACAO_PAGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_INFORMACAO_PAGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2132,23 +2267,25 @@ CREATE TABLE IF NOT EXISTS `NFE_INFORMACAO_PAGAMENTO` (
   `CNPJ_OPERADORA_CARTAO` VARCHAR(14),
   `BANDEIRA` CHAR(2),
   `NUMERO_AUTORIZACAO` VARCHAR(20),
-  `TROCO` DECIMAL(18,6)
+  `TROCO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_NUMERO_INUTILIZADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_NUMERO_INUTILIZADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_NUMERO_INUTILIZADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `SERIE` CHAR(3),
   `NUMERO` INT UNSIGNED,
   `DATA_INUTILIZACAO` DATE,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_ITEM_RASTREADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_ITEM_RASTREADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_ITEM_RASTREADO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -2156,12 +2293,13 @@ CREATE TABLE IF NOT EXISTS `NFE_ITEM_RASTREADO` (
   `QUANTIDADE_ITENS` DECIMAL(18,6),
   `DATA_FABRICACAO` DATE,
   `DATA_VALIDADE` DATE,
-  `CODIGO_AGREGACAO` VARCHAR(20)
+  `CODIGO_AGREGACAO` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_PIS_ST
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_PIS_ST
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_PIS_ST` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -2169,12 +2307,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_PIS_ST` (
   `ALIQUOTA_PIS_ST_PERCENTUAL` DECIMAL(18,6),
   `QUANTIDADE_VENDIDA_PIS_ST` DECIMAL(18,6),
   `ALIQUOTA_PIS_ST_REAIS` DECIMAL(18,6),
-  `VALOR_PIS_ST` DECIMAL(18,6)
+  `VALOR_PIS_ST` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_ICMS_UFDEST
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_ICMS_UFDEST
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_ICMS_UFDEST` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -2186,12 +2325,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_ICMS_UFDEST` (
   `PERCENTUAL_PROVISORIO_PARTILHA_ICMS` DECIMAL(18,6),
   `VALOR_ICMS_FCP_UF_DESTINO` DECIMAL(18,6),
   `VALOR_INTERESTADUAL_UF_DESTINO` DECIMAL(18,6),
-  `VALOR_INTERESTADUAL_UF_REMETENTE` DECIMAL(18,6)
+  `VALOR_INTERESTADUAL_UF_REMETENTE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_DETALHE_IMPOSTO_COFINS_ST
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_DETALHE_IMPOSTO_COFINS_ST
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_COFINS_ST` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_DETALHE` INT UNSIGNED NOT NULL,
@@ -2199,12 +2339,13 @@ CREATE TABLE IF NOT EXISTS `NFE_DETALHE_IMPOSTO_COFINS_ST` (
   `ALIQUOTA_COFINS_ST_PERCENTUAL` DECIMAL(18,6),
   `QUANTIDADE_VENDIDA_COFINS_ST` DECIMAL(18,6),
   `ALIQUOTA_COFINS_ST_REAIS` DECIMAL(18,6),
-  `VALOR_COFINS_ST` DECIMAL(18,6)
+  `VALOR_COFINS_ST` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFE_RESPONSAVEL_TECNICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFE_RESPONSAVEL_TECNICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFE_RESPONSAVEL_TECNICO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2213,23 +2354,25 @@ CREATE TABLE IF NOT EXISTS `NFE_RESPONSAVEL_TECNICO` (
   `EMAIL` VARCHAR(60),
   `TELEFONE` VARCHAR(14),
   `IDENTIFICADOR_CSRT` CHAR(2),
-  `HASH_CSRT` VARCHAR(28)
+  `HASH_CSRT` VARCHAR(28),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CBO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CBO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CBO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(10),
   `CODIGO_1994` VARCHAR(10),
   `NOME` VARCHAR(250),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PAIS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PAIS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PAIS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` INT,
@@ -2237,32 +2380,35 @@ CREATE TABLE IF NOT EXISTS `PAIS` (
   `NOME_PTBR` VARCHAR(100),
   `SIGLA2` CHAR(2),
   `SIGLA3` CHAR(3),
-  `CODIGO_BACEN` INT
+  `CODIGO_BACEN` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TABELA_PRECO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TABELA_PRECO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TABELA_PRECO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
   `PRINCIPAL` CHAR(1),
-  `COEFICIENTE` DECIMAL(18,6)
+  `COEFICIENTE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TABELA_PRECO_PRODUTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TABELA_PRECO_PRODUTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TABELA_PRECO_PRODUTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TABELA_PRECO` INT UNSIGNED NOT NULL,
   `ID_PRODUTO` INT NOT NULL,
-  `PRECO` DECIMAL(18,6)
+  `PRECO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GED_DOCUMENTO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GED_DOCUMENTO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GED_DOCUMENTO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_GED_DOCUMENTO_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2274,21 +2420,23 @@ CREATE TABLE IF NOT EXISTS `GED_DOCUMENTO_DETALHE` (
   `PODE_ALTERAR` CHAR(1),
   `ASSINADO` CHAR(1),
   `DATA_FIM_VIGENCIA` DATE,
-  `DATA_EXCLUSAO` DATE
+  `DATA_EXCLUSAO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GED_TIPO_DOCUMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GED_TIPO_DOCUMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GED_TIPO_DOCUMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `TAMANHO_MAXIMO` DECIMAL(18,6)
+  `TAMANHO_MAXIMO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GED_VERSAO_DOCUMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GED_VERSAO_DOCUMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GED_VERSAO_DOCUMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_GED_DOCUMENTO_DETALHE` INT UNSIGNED NOT NULL,
@@ -2298,22 +2446,24 @@ CREATE TABLE IF NOT EXISTS `GED_VERSAO_DOCUMENTO` (
   `HORA_VERSAO` VARCHAR(8),
   `HASH_ARQUIVO` VARCHAR(250),
   `CAMINHO` VARCHAR(250),
-  `ACAO` CHAR(1)
+  `ACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GED_DOCUMENTO_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GED_DOCUMENTO_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GED_DOCUMENTO_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
   `DESCRICAO` TEXT,
-  `DATA_INCLUSAO` DATE
+  `DATA_INCLUSAO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OS_ABERTURA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OS_ABERTURA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OS_ABERTURA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_OS_STATUS` INT UNSIGNED NOT NULL,
@@ -2329,41 +2479,45 @@ CREATE TABLE IF NOT EXISTS `OS_ABERTURA` (
   `NOME_CONTATO` VARCHAR(50),
   `FONE_CONTATO` VARCHAR(15),
   `OBSERVACAO_CLIENTE` TEXT,
-  `OBSERVACAO_ABERTURA` TEXT
+  `OBSERVACAO_ABERTURA` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OS_STATUS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OS_STATUS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OS_STATUS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `NOME` VARCHAR(100)
+  `NOME` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OS_EQUIPAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OS_EQUIPAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OS_EQUIPAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OS_ABERTURA_EQUIPAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OS_ABERTURA_EQUIPAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OS_ABERTURA_EQUIPAMENTO` (
   `ID` INT UNSIGNED NOT NULL,
   `ID_OS_EQUIPAMENTO` INT UNSIGNED NOT NULL,
   `ID_OS_ABERTURA` INT UNSIGNED NOT NULL,
   `NUMERO_SERIE` VARCHAR(50),
-  `TIPO_COBERTURA` CHAR(1)
+  `TIPO_COBERTURA` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OS_PRODUTO_SERVICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OS_PRODUTO_SERVICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OS_PRODUTO_SERVICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_OS_ABERTURA` INT UNSIGNED NOT NULL,
@@ -2375,33 +2529,36 @@ CREATE TABLE IF NOT EXISTS `OS_PRODUTO_SERVICO` (
   `VALOR_SUBTOTAL` DECIMAL(18,6),
   `TAXA_DESCONTO` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OS_EVOLUCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OS_EVOLUCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OS_EVOLUCAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_OS_ABERTURA` INT UNSIGNED NOT NULL,
   `DATA_REGISTRO` DATE,
   `HORA_REGISTRO` VARCHAR(8),
   `OBSERVACAO` TEXT,
-  `ENVIAR_EMAIL` CHAR(1)
+  `ENVIAR_EMAIL` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMISSAO_PERFIL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMISSAO_PERFIL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMISSAO_PERFIL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
-  `NOME` VARCHAR(100)
+  `NOME` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COMISSAO_OBJETIVO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COMISSAO_OBJETIVO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COMISSAO_OBJETIVO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COMISSAO_PERFIL` INT UNSIGNED NOT NULL,
@@ -2413,22 +2570,24 @@ CREATE TABLE IF NOT EXISTS `COMISSAO_OBJETIVO` (
   `TAXA_PAGAMENTO` DECIMAL(18,6),
   `VALOR_PAGAMENTO` DECIMAL(18,6),
   `VALOR_META` DECIMAL(18,6),
-  `QUANTIDADE` DECIMAL(18,6)
+  `QUANTIDADE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDEDOR_ROTA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDEDOR_ROTA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDEDOR_ROTA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_VENDEDOR` INT NOT NULL,
   `ID_CLIENTE` INT NOT NULL,
-  `POSICAO` INT
+  `POSICAO` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: VENDEDOR_META
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- VENDEDOR_META
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `VENDEDOR_META` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_VENDEDOR` INT NOT NULL,
@@ -2437,23 +2596,25 @@ CREATE TABLE IF NOT EXISTS `VENDEDOR_META` (
   `META_ORCADA` DECIMAL(18,6),
   `META_REALIZADA` DECIMAL(18,6),
   `DATA_INICIO` DATE,
-  `DATA_FIM` DATE
+  `DATA_FIM` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_SANGRIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_SANGRIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_SANGRIA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFCE_MOVIMENTO` INT UNSIGNED NOT NULL,
   `DATA_SANGRIA` DATE,
   `VALOR` DECIMAL(18,6),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_MOVIMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_MOVIMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_MOVIMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFCE_CAIXA` INT UNSIGNED NOT NULL,
@@ -2473,73 +2634,80 @@ CREATE TABLE IF NOT EXISTS `NFCE_MOVIMENTO` (
   `TOTAL_RECEBIDO` DECIMAL(18,6),
   `TOTAL_TROCO` DECIMAL(18,6),
   `TOTAL_CANCELADO` DECIMAL(18,6),
-  `STATUS_MOVIMENTO` CHAR(1)
+  `STATUS_MOVIMENTO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_OPERADOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_OPERADOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_OPERADOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `LOGIN` VARCHAR(20),
   `SENHA` VARCHAR(20),
-  `NIVEL_AUTORIZACAO` CHAR(1)
+  `NIVEL_AUTORIZACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_CAIXA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_CAIXA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_CAIXA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
-  `DATA_CADASTRO` DATE
+  `DATA_CADASTRO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_FECHAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_FECHAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_FECHAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFCE_MOVIMENTO` INT UNSIGNED NOT NULL,
   `ID_NFCE_TIPO_PAGAMENTO` INT UNSIGNED NOT NULL,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_SUPRIMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_SUPRIMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_SUPRIMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFCE_MOVIMENTO` INT UNSIGNED NOT NULL,
   `DATA_SUPRIMENTO` DATE,
   `VALOR` DECIMAL(18,6),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFCE_TIPO_PAGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFCE_TIPO_PAGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFCE_TIPO_PAGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` VARCHAR(20),
   `PERMITE_TROCO` CHAR(1),
-  `GERA_PARCELAS` CHAR(1)
+  `GERA_PARCELAS` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFSE_LISTA_SERVICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFSE_LISTA_SERVICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFSE_LISTA_SERVICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(5),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFSE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFSE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFSE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CLIENTE` INT NOT NULL,
@@ -2557,12 +2725,13 @@ CREATE TABLE IF NOT EXISTS `NFSE_CABECALHO` (
   `SERIE_RPS` VARCHAR(5),
   `TIPO_RPS` CHAR(1),
   `DATA_EMISSAO_RPS` DATE,
-  `OUTRAS_INFORMACOES` TEXT
+  `OUTRAS_INFORMACOES` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFSE_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFSE_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFSE_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFSE_LISTA_SERVICO` INT UNSIGNED NOT NULL,
@@ -2587,23 +2756,25 @@ CREATE TABLE IF NOT EXISTS `NFSE_DETALHE` (
   `VALOR_DESCONTO_CONDICIONADO` DECIMAL(18,6),
   `VALOR_DESCONTO_INCONDICIONADO` DECIMAL(18,6),
   `DISCRIMINACAO` TEXT,
-  `MUNICIPIO_PRESTACAO` INT UNSIGNED
+  `MUNICIPIO_PRESTACAO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: NFSE_INTERMEDIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- NFSE_INTERMEDIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NFSE_INTERMEDIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFSE_CABECALHO` INT UNSIGNED NOT NULL,
   `CNPJ` VARCHAR(14),
   `RAZAO` VARCHAR(150),
-  `INSCRICAO_MUNICIPAL` VARCHAR(15)
+  `INSCRICAO_MUNICIPAL` VARCHAR(15),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF_EMITENTE` INT UNSIGNED,
@@ -2677,12 +2848,13 @@ CREATE TABLE IF NOT EXISTS `CTE_CABECALHO` (
   `PRODUTO_PREDOMINANTE` VARCHAR(60),
   `CARGA_OUTRAS_CARACTERISTICAS` VARCHAR(30),
   `MODAL_VERSAO_LAYOUT` INT UNSIGNED,
-  `CHAVE_CTE_SUBSTITUIDO` VARCHAR(44)
+  `CHAVE_CTE_SUBSTITUIDO` VARCHAR(44),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_EMITENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_EMITENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_EMITENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2698,12 +2870,13 @@ CREATE TABLE IF NOT EXISTS `CTE_EMITENTE` (
   `NOME_MUNICIPIO` VARCHAR(60),
   `UF` CHAR(2),
   `CEP` VARCHAR(8),
-  `TELEFONE` VARCHAR(14)
+  `TELEFONE` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_LOCAL_COLETA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_LOCAL_COLETA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_LOCAL_COLETA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2716,12 +2889,13 @@ CREATE TABLE IF NOT EXISTS `CTE_LOCAL_COLETA` (
   `BAIRRO` VARCHAR(60),
   `CODIGO_MUNICIPIO` INT UNSIGNED,
   `NOME_MUNICIPIO` VARCHAR(60),
-  `UF` CHAR(2)
+  `UF` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_TOMADOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_TOMADOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_TOMADOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2741,23 +2915,25 @@ CREATE TABLE IF NOT EXISTS `CTE_TOMADOR` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_PASSAGEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_PASSAGEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_PASSAGEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `SIGLA_PASSAGEM` VARCHAR(15),
   `SIGLA_DESTINO` VARCHAR(15),
-  `ROTA` VARCHAR(10)
+  `ROTA` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_REMETENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_REMETENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_REMETENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2777,12 +2953,13 @@ CREATE TABLE IF NOT EXISTS `CTE_REMETENTE` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_EXPEDIDOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_EXPEDIDOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_EXPEDIDOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2802,12 +2979,13 @@ CREATE TABLE IF NOT EXISTS `CTE_EXPEDIDOR` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RECEBEDOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RECEBEDOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RECEBEDOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2827,12 +3005,13 @@ CREATE TABLE IF NOT EXISTS `CTE_RECEBEDOR` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_DESTINATARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_DESTINATARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_DESTINATARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2852,12 +3031,13 @@ CREATE TABLE IF NOT EXISTS `CTE_DESTINATARIO` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_LOCAL_ENTREGA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_LOCAL_ENTREGA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_LOCAL_ENTREGA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2870,33 +3050,36 @@ CREATE TABLE IF NOT EXISTS `CTE_LOCAL_ENTREGA` (
   `BAIRRO` VARCHAR(60),
   `CODIGO_MUNICIPIO` INT UNSIGNED,
   `NOME_MUNICIPIO` VARCHAR(60),
-  `UF` CHAR(2)
+  `UF` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_COMPONENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_COMPONENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_COMPONENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `NOME` VARCHAR(15),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_CARGA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_CARGA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_CARGA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `CODIGO_UNIDADE_MEDIDA` CHAR(2),
   `TIPO_MEDIDA` VARCHAR(20),
-  `QUANTIDADE` DECIMAL(18,6)
+  `QUANTIDADE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_INFORMACAO_NF_OUTROS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_INFORMACAO_NF_OUTROS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_INFORMACAO_NF_OUTROS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2920,51 +3103,56 @@ CREATE TABLE IF NOT EXISTS `CTE_INFORMACAO_NF_OUTROS` (
   `DATA_PREVISTA_ENTREGA` DATE,
   `OUTRO_TIPO_DOC_ORIG` CHAR(2),
   `OUTRO_DESCRICAO` VARCHAR(100),
-  `OUTRO_VALOR_DOCUMENTO` DECIMAL(18,6)
+  `OUTRO_VALOR_DOCUMENTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_INFORMACAO_NF_TRANSPORTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_INFORMACAO_NF_TRANSPORTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_INFORMACAO_NF_TRANSPORTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_INFORMACAO_NF` INT UNSIGNED NOT NULL,
   `TIPO_UNIDADE_TRANSPORTE` CHAR(1),
-  `ID_UNIDADE_TRANSPORTE` VARCHAR(20)
+  `ID_UNIDADE_TRANSPORTE` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_INF_NF_TRANSPORTE_LACRE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_INF_NF_TRANSPORTE_LACRE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_INF_NF_TRANSPORTE_LACRE` (
   `ID` INT UNSIGNED NOT NULL,
   `ID_CTE_INFORMACAO_NF_TRANSPORTE` INT UNSIGNED NOT NULL,
-  `NUMERO` VARCHAR(20)
+  `NUMERO` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_INFORMACAO_NF_CARGA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_INFORMACAO_NF_CARGA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_INFORMACAO_NF_CARGA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_INFORMACAO_NF` INT UNSIGNED NOT NULL,
   `TIPO_UNIDADE_CARGA` CHAR(1),
-  `ID_UNIDADE_CARGA` VARCHAR(20)
+  `ID_UNIDADE_CARGA` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_INF_NF_CARGA_LACRE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_INF_NF_CARGA_LACRE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_INF_NF_CARGA_LACRE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_INFORMACAO_NF_CARGA` INT UNSIGNED NOT NULL,
   `NUMERO` VARCHAR(20),
-  `QUANTIDADE_RATEADA` DECIMAL(18,6)
+  `QUANTIDADE_RATEADA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_DOCUMENTO_ANTERIOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_DOCUMENTO_ANTERIOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_DOCUMENTO_ANTERIOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2972,12 +3160,13 @@ CREATE TABLE IF NOT EXISTS `CTE_DOCUMENTO_ANTERIOR` (
   `CPF` VARCHAR(11),
   `IE` VARCHAR(20),
   `UF` CHAR(2),
-  `NOME` VARCHAR(60)
+  `NOME` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_DOCUMENTO_ANTERIOR_ID
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_DOCUMENTO_ANTERIOR_ID
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_DOCUMENTO_ANTERIOR_ID` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_DOCUMENTO_ANTERIOR` INT UNSIGNED NOT NULL,
@@ -2986,12 +3175,13 @@ CREATE TABLE IF NOT EXISTS `CTE_DOCUMENTO_ANTERIOR_ID` (
   `SUBSERIE` CHAR(2),
   `NUMERO` VARCHAR(20),
   `DATA_EMISSAO` DATE,
-  `CHAVE_CTE` VARCHAR(44)
+  `CHAVE_CTE` VARCHAR(44),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_SEGURO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_SEGURO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_SEGURO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -2999,12 +3189,13 @@ CREATE TABLE IF NOT EXISTS `CTE_SEGURO` (
   `SEGURADORA` VARCHAR(30),
   `APOLICE` VARCHAR(20),
   `AVERBACAO` VARCHAR(20),
-  `VALOR_CARGA` DECIMAL(18,6)
+  `VALOR_CARGA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_PERIGOSO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_PERIGOSO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_PERIGOSO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -3014,12 +3205,13 @@ CREATE TABLE IF NOT EXISTS `CTE_PERIGOSO` (
   `GRUPO_EMBALAGEM` VARCHAR(6),
   `QUANTIDADE_TOTAL_PRODUTO` VARCHAR(20),
   `QUANTIDADE_TIPO_VOLUME` VARCHAR(60),
-  `PONTO_FULGOR` VARCHAR(6)
+  `PONTO_FULGOR` VARCHAR(6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_VEICULO_NOVO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_VEICULO_NOVO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_VEICULO_NOVO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -3028,47 +3220,51 @@ CREATE TABLE IF NOT EXISTS `CTE_VEICULO_NOVO` (
   `DESCRICAO_COR` VARCHAR(40),
   `CODIGO_MARCA_MODELO` VARCHAR(6),
   `VALOR_UNITARIO` DECIMAL(18,6),
-  `VALOR_FRETE` DECIMAL(18,6)
+  `VALOR_FRETE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_FATURA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_FATURA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_FATURA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `NUMERO` VARCHAR(60),
   `VALOR_ORIGINAL` DECIMAL(18,6),
   `VALOR_DESCONTO` DECIMAL(18,6),
-  `VALOR_LIQUIDO` DECIMAL(18,6)
+  `VALOR_LIQUIDO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_DUPLICATA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_DUPLICATA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_DUPLICATA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `NUMERO` VARCHAR(60),
   `DATA_VENCIMENTO` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RODOVIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RODOVIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `RNTRC` VARCHAR(8),
   `DATA_PREVISTA_ENTREGA` DATE,
   `INDICADOR_LOTACAO` CHAR(1),
-  `CIOT` INT UNSIGNED
+  `CIOT` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RODOVIARIO_OCC
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RODOVIARIO_OCC
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_OCC` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_RODOVIARIO` INT UNSIGNED NOT NULL,
@@ -3079,24 +3275,26 @@ CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_OCC` (
   `CODIGO_INTERNO` VARCHAR(10),
   `IE` VARCHAR(14),
   `UF` CHAR(2),
-  `TELEFONE` VARCHAR(14)
+  `TELEFONE` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RODOVIARIO_PEDAGIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RODOVIARIO_PEDAGIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_PEDAGIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_RODOVIARIO` INT UNSIGNED NOT NULL,
   `CNPJ_FORNECEDOR` VARCHAR(14),
   `COMPROVANTE_COMPRA` VARCHAR(20),
   `CNPJ_RESPONSAVEL` VARCHAR(14),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RODOVIARIO_VEICULO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RODOVIARIO_VEICULO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_VEICULO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_RODOVIARIO` INT UNSIGNED NOT NULL,
@@ -3117,31 +3315,34 @@ CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_VEICULO` (
   `PROPRIETARIO_NOME` VARCHAR(60),
   `PROPRIETARIO_IE` VARCHAR(14),
   `PROPRIETARIO_UF` CHAR(2),
-  `PROPRIETARIO_TIPO` CHAR(1)
+  `PROPRIETARIO_TIPO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RODOVIARIO_LACRE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RODOVIARIO_LACRE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_LACRE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_RODOVIARIO` INT UNSIGNED NOT NULL,
-  `NUMERO` VARCHAR(20)
+  `NUMERO` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_RODOVIARIO_MOTORISTA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_RODOVIARIO_MOTORISTA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_RODOVIARIO_MOTORISTA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_RODOVIARIO` INT UNSIGNED NOT NULL,
   `NOME` VARCHAR(60),
-  `CPF` VARCHAR(11)
+  `CPF` VARCHAR(11),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_AEREO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_AEREO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_AEREO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -3155,12 +3356,13 @@ CREATE TABLE IF NOT EXISTS `CTE_AEREO` (
   `TARIFA_VALOR` DECIMAL(18,6),
   `CARGA_DIMENSAO` VARCHAR(14),
   `CARGA_INFORMACAO_MANUSEIO` CHAR(1),
-  `CARGA_ESPECIAL` CHAR(3)
+  `CARGA_ESPECIAL` CHAR(3),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_AQUAVIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_AQUAVIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_AQUAVIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -3168,12 +3370,13 @@ CREATE TABLE IF NOT EXISTS `CTE_AQUAVIARIO` (
   `AFRMM` DECIMAL(18,6),
   `NUMERO_BOOKING` VARCHAR(10),
   `NUMERO_CONTROLE` VARCHAR(10),
-  `ID_NAVIO` VARCHAR(60)
+  `ID_NAVIO` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_AQUAVIARIO_BALSA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_AQUAVIARIO_BALSA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_AQUAVIARIO_BALSA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_AQUAVIARIO` INT UNSIGNED NOT NULL,
@@ -3184,12 +3387,13 @@ CREATE TABLE IF NOT EXISTS `CTE_AQUAVIARIO_BALSA` (
   `PORTO_TRANSBORDO` VARCHAR(60),
   `PORTO_DESTINO` VARCHAR(60),
   `TIPO_NAVEGACAO` CHAR(1),
-  `IRIN` VARCHAR(10)
+  `IRIN` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_FERROVIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_FERROVIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_FERROVIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -3198,12 +3402,13 @@ CREATE TABLE IF NOT EXISTS `CTE_FERROVIARIO` (
   `FERROVIA_EMITENTE_CTE` CHAR(1),
   `FLUXO` VARCHAR(10),
   `ID_TREM` VARCHAR(7),
-  `VALOR_FRETE` DECIMAL(18,6)
+  `VALOR_FRETE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_FERROVIARIO_FERROVIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_FERROVIARIO_FERROVIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_FERROVIARIO_FERROVIA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_FERROVIARIO` INT UNSIGNED NOT NULL,
@@ -3218,12 +3423,13 @@ CREATE TABLE IF NOT EXISTS `CTE_FERROVIARIO_FERROVIA` (
   `CODIGO_MUNICIPIO` INT UNSIGNED,
   `NOME_MUNICIPIO` VARCHAR(60),
   `UF` CHAR(2),
-  `CEP` VARCHAR(8)
+  `CEP` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_FERROVIARIO_VAGAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_FERROVIARIO_VAGAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_FERROVIARIO_VAGAO` (
   `ID` INT UNSIGNED NOT NULL,
   `ID_CTE_FERROVIARIO` INT UNSIGNED NOT NULL,
@@ -3231,33 +3437,36 @@ CREATE TABLE IF NOT EXISTS `CTE_FERROVIARIO_VAGAO` (
   `CAPACIDADE` DECIMAL(18,6),
   `TIPO_VAGAO` CHAR(3),
   `PESO_REAL` DECIMAL(18,6),
-  `PESO_BC` DECIMAL(18,6)
+  `PESO_BC` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_DUTOVIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_DUTOVIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_DUTOVIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `VALOR_TARIFA` DECIMAL(18,6),
   `DATA_INICIO` DATE,
-  `DATA_FIM` DATE
+  `DATA_FIM` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CTE_MULTIMODAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CTE_MULTIMODAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CTE_MULTIMODAL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CTE_CABECALHO` INT UNSIGNED NOT NULL,
   `COTM` VARCHAR(20),
-  `INDICADOR_NEGOCIAVEL` CHAR(1)
+  `INDICADOR_NEGOCIAVEL` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OPERADORA_CARTAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OPERADORA_CARTAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OPERADORA_CARTAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BANCO_CONTA_CAIXA` INT NOT NULL,
@@ -3269,12 +3478,13 @@ CREATE TABLE IF NOT EXISTS `OPERADORA_CARTAO` (
   `VENCIMENTO_ALUGUEL` INT UNSIGNED,
   `FONE1` VARCHAR(14),
   `FONE2` VARCHAR(14),
-  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30)
+  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COLABORADOR_RELACIONAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COLABORADOR_RELACIONAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COLABORADOR_RELACIONAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_TIPO_RELACIONAMENTO` INT UNSIGNED NOT NULL,
@@ -3292,31 +3502,34 @@ CREATE TABLE IF NOT EXISTS `COLABORADOR_RELACIONAMENTO` (
   `SALARIO_FAMILIA_IDADE_LIMITE` INT UNSIGNED,
   `SALARIO_FAMILIA_DATA_FIM` DATE,
   `IMPOSTO_RENDA_IDADE_LIMITE` INT UNSIGNED,
-  `IMPOSTO_RENDA_DATA_FIM` INT UNSIGNED
+  `IMPOSTO_RENDA_DATA_FIM` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TIPO_RELACIONAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TIPO_RELACIONAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TIPO_RELACIONAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COLABORADOR_TIPO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COLABORADOR_TIPO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COLABORADOR_TIPO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(20),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FORNECEDOR_PRODUTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FORNECEDOR_PRODUTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FORNECEDOR_PRODUTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO` INT NOT NULL,
@@ -3326,24 +3539,26 @@ CREATE TABLE IF NOT EXISTS `FORNECEDOR_PRODUTO` (
   `PRECO_ULTIMA_COMPRA` DECIMAL(18,6),
   `LOTE_MINIMO_COMPRA` DECIMAL(18,6),
   `MENOR_EMBALAGEM_COMPRA` DECIMAL(18,6),
-  `CUSTO_ULTIMA_COMPRA` DECIMAL(18,6)
+  `CUSTO_ULTIMA_COMPRA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: AIDF_AIMDF
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- AIDF_AIMDF
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AIDF_AIMDF` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NUMERO` INT UNSIGNED,
   `DATA_VALIDADE` DATE,
   `DATA_AUTORIZACAO` DATE,
   `NUMERO_AUTORIZACAO` VARCHAR(20),
-  `FORMULARIO_DISPONIVEL` CHAR(1)
+  `FORMULARIO_DISPONIVEL` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_PROMOCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_PROMOCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_PROMOCAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO` INT NOT NULL,
@@ -3351,90 +3566,99 @@ CREATE TABLE IF NOT EXISTS `PRODUTO_PROMOCAO` (
   `DATA_FIM` DATE,
   `QUANTIDADE_EM_PROMOCAO` DECIMAL(18,6),
   `QUANTIDADE_MAXIMA_CLIENTE` DECIMAL(18,6),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_FICHA_TECNICA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_FICHA_TECNICA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_FICHA_TECNICA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO` INT NOT NULL,
   `DESCRICAO` VARCHAR(100),
   `ID_PRODUTO_FILHO` INT UNSIGNED,
   `QUANTIDADE` DECIMAL(18,6),
-  `SEQUENCIA_PRODUCAO` INT UNSIGNED
+  `SEQUENCIA_PRODUCAO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TIPO_ITEM_SPED
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TIPO_ITEM_SPED
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TIPO_ITEM_SPED` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` VARCHAR(50)
+  `DESCRICAO` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_CODIGO_ADICIONAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_CODIGO_ADICIONAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_CODIGO_ADICIONAL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO` INT NOT NULL,
-  `CODIGO` VARCHAR(14)
+  `CODIGO` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ALMOXARIFADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ALMOXARIFADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ALMOXARIFADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COLABORADOR_SITUACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COLABORADOR_SITUACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COLABORADOR_SITUACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TIPO_ADMISSAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TIPO_ADMISSAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TIPO_ADMISSAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: OPERADORA_PLANO_SAUDE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- OPERADORA_PLANO_SAUDE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `OPERADORA_PLANO_SAUDE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `REGISTRO_ANS` VARCHAR(20),
   `NOME` VARCHAR(100),
-  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30)
+  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: IRRF
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- IRRF
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `IRRF` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `COMPETENCIA` VARCHAR(7),
   `DESCONTO_POR_DEPENDENTE` DECIMAL(18,6),
-  `MINIMO_PARA_RETENCAO` DECIMAL(18,6)
+  `MINIMO_PARA_RETENCAO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: IRRF_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- IRRF_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `IRRF_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_IRRF` INT UNSIGNED NOT NULL,
@@ -3442,44 +3666,48 @@ CREATE TABLE IF NOT EXISTS `IRRF_DETALHE` (
   `DE` DECIMAL(18,6),
   `ATE` DECIMAL(18,6),
   `TAXA` DECIMAL(18,6),
-  `DESCONTO` DECIMAL(18,6)
+  `DESCONTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: INSS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- INSS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `INSS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `COMPETENCIA` VARCHAR(7)
+  `COMPETENCIA` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: INSS_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- INSS_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `INSS_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_INSS` INT UNSIGNED NOT NULL,
   `FAIXA` INT UNSIGNED,
   `DE` DECIMAL(18,6),
   `ATE` DECIMAL(18,6),
-  `TAXA` DECIMAL(18,6)
+  `TAXA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SALARIO_FAMILIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SALARIO_FAMILIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SALARIO_FAMILIA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_INSS` INT UNSIGNED NOT NULL,
   `FAIXA` INT UNSIGNED,
   `DE` DECIMAL(18,6),
   `ATE` DECIMAL(18,6),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SALARIO_MINIMO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SALARIO_MINIMO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SALARIO_MINIMO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `VIGENCIA` DATE,
@@ -3487,12 +3715,13 @@ CREATE TABLE IF NOT EXISTS `SALARIO_MINIMO` (
   `VALOR_DIARIO` DECIMAL(18,6),
   `VALOR_HORA` DECIMAL(18,6),
   `NORMA_LEGAL` VARCHAR(100),
-  `DOU` DATE
+  `DOU` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SINDICATO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SINDICATO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SINDICATO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
@@ -3512,63 +3741,69 @@ CREATE TABLE IF NOT EXISTS `SINDICATO` (
   `DATA_BASE` DATE,
   `PISO_SALARIAL` DECIMAL(18,6),
   `CNPJ` VARCHAR(14),
-  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30)
+  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRIB_SIND_PATRONAL_CAB
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRIB_SIND_PATRONAL_CAB
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRIB_SIND_PATRONAL_CAB` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_SINDICATO` INT UNSIGNED NOT NULL,
-  `VIGENCIA_ANO` CHAR(4)
+  `VIGENCIA_ANO` CHAR(4),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRIB_SIND_PATRONAL_DET
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRIB_SIND_PATRONAL_DET
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRIB_SIND_PATRONAL_DET` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTRIB_SIND_PATRONAL_CAB` INT UNSIGNED NOT NULL,
   `DE` DECIMAL(18,6),
   `ATE` DECIMAL(18,6),
   `PERCENTUAL` DECIMAL(18,6),
-  `VALOR_ADICIONAR` DECIMAL(18,6)
+  `VALOR_ADICIONAR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA_TRANSPORTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA_TRANSPORTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA_TRANSPORTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF` CHAR(2),
   `NOME` VARCHAR(100),
-  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30)
+  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA_TRANSPORTE_ITINERARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA_TRANSPORTE_ITINERARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA_TRANSPORTE_ITINERARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_EMPRESA_TRANSPORTE` INT UNSIGNED NOT NULL,
   `NOME` VARCHAR(100),
   `TARIFA` DECIMAL(18,6),
-  `TRAJETO` TEXT
+  `TRAJETO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_CAIXA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_CAIXA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_CAIXA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(30),
-  `DATA_CADASTRO` DATE
+  `DATA_CADASTRO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_IMPRESSORA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_IMPRESSORA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_IMPRESSORA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NUMERO` INT UNSIGNED,
@@ -3591,12 +3826,13 @@ CREATE TABLE IF NOT EXISTS `ECF_IMPRESSORA` (
   `DATA_INSTALACAO_SB` DATE,
   `HORA_INSTALACAO_SB` VARCHAR(8),
   `DOCTO` VARCHAR(60),
-  `ECF_IMPRESSORA` VARCHAR(3)
+  `ECF_IMPRESSORA` VARCHAR(3),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_TIPO_PAGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_TIPO_PAGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_TIPO_PAGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
@@ -3605,12 +3841,13 @@ CREATE TABLE IF NOT EXISTS `PDV_TIPO_PAGAMENTO` (
   `IMPRIME_VINCULADO` CHAR(1),
   `PERMITE_TROCO` CHAR(1),
   `TEF_TIPO_GP` CHAR(1),
-  `GERA_PARCELAS` CHAR(1)
+  `GERA_PARCELAS` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_MOVIMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_MOVIMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_MOVIMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3636,12 +3873,13 @@ CREATE TABLE IF NOT EXISTS `PDV_MOVIMENTO` (
   `TOTAL_CANCELADO` DECIMAL(18,6),
   `STATUS_MOVIMENTO` CHAR(1) NOT NULL,
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_VENDA_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_VENDA_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_VENDA_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3683,12 +3921,13 @@ CREATE TABLE IF NOT EXISTS `PDV_VENDA_CABECALHO` (
   `CUPOM_CANCELADO` CHAR(1),
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_VENDA_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_VENDA_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_VENDA_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3728,12 +3967,13 @@ CREATE TABLE IF NOT EXISTS `PDV_VENDA_DETALHE` (
   `ECF_ICMS_ST` VARCHAR(4),
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_TOTAL_TIPO_PAGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_TOTAL_TIPO_PAGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_TOTAL_TIPO_PAGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3753,12 +3993,13 @@ CREATE TABLE IF NOT EXISTS `PDV_TOTAL_TIPO_PAGAMENTO` (
   `DATA_VENDA` DATE,
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_CONFIGURACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_CONFIGURACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_CONFIGURACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3797,12 +4038,13 @@ CREATE TABLE IF NOT EXISTS `PDV_CONFIGURACAO` (
   `INDICE_GERENCIAL` VARCHAR(100),
   `DATA_ATUALIZACAO_ESTOQUE` DATE,
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_DOCUMENTOS_EMITIDOS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_DOCUMENTOS_EMITIDOS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_DOCUMENTOS_EMITIDOS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3814,12 +4056,13 @@ CREATE TABLE IF NOT EXISTS `ECF_DOCUMENTOS_EMITIDOS` (
   `TIPO` CHAR(2),
   `COO` INT UNSIGNED,
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_FECHAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_FECHAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_FECHAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3829,12 +4072,13 @@ CREATE TABLE IF NOT EXISTS `PDV_FECHAMENTO` (
   `TIPO_PAGAMENTO` VARCHAR(20),
   `VALOR` DECIMAL(18,6),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_RECEBIMENTO_NAO_FISCAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_RECEBIMENTO_NAO_FISCAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_RECEBIMENTO_NAO_FISCAL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3845,12 +4089,13 @@ CREATE TABLE IF NOT EXISTS `ECF_RECEBIMENTO_NAO_FISCAL` (
   `DESCRICAO` VARCHAR(50),
   `VALOR` DECIMAL(18,6),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_SUPRIMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_SUPRIMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_SUPRIMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3860,12 +4105,13 @@ CREATE TABLE IF NOT EXISTS `PDV_SUPRIMENTO` (
   `DATA_SUPRIMENTO` DATE,
   `VALOR` DECIMAL(18,6),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_R02
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_R02
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_R02` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3885,12 +4131,13 @@ CREATE TABLE IF NOT EXISTS `ECF_R02` (
   `GRANDE_TOTAL` DECIMAL(18,6),
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_R03
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_R03
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_R03` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3903,12 +4150,13 @@ CREATE TABLE IF NOT EXISTS `ECF_R03` (
   `CRZ` INT UNSIGNED,
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_R06
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_R06
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_R06` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -3927,12 +4175,13 @@ CREATE TABLE IF NOT EXISTS `ECF_R06` (
   `HORA_EMISSAO` VARCHAR(8),
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_R07
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_R07
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_R07` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(8),
@@ -3946,41 +4195,45 @@ CREATE TABLE IF NOT EXISTS `ECF_R07` (
   `VALOR_ESTORNO` DECIMAL(18,6),
   `HASH_REGISTRO` VARCHAR(32),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SEFIP_CODIGO_RECOLHIMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SEFIP_CODIGO_RECOLHIMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SEFIP_CODIGO_RECOLHIMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
-  `APLICACAO` TEXT
+  `APLICACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SEFIP_CATEGORIA_TRABALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SEFIP_CATEGORIA_TRABALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SEFIP_CATEGORIA_TRABALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
-  `NOME` TEXT
+  `NOME` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SEFIP_CODIGO_MOVIMENTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SEFIP_CODIGO_MOVIMENTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SEFIP_CODIGO_MOVIMENTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `DESCRICAO` TEXT,
-  `APLICACAO` TEXT
+  `APLICACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FPAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FPAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FPAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
@@ -3989,77 +4242,85 @@ CREATE TABLE IF NOT EXISTS `FPAS` (
   `DESCRICAO` VARCHAR(250),
   `PERCENTUAL_INSS_PATRONAL` DECIMAL(18,6),
   `CODIGO_TERCEIRO` CHAR(4),
-  `PERCENTUAL_TERCEIROS` DECIMAL(18,6)
+  `PERCENTUAL_TERCEIROS` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CODIGO_GPS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CODIGO_GPS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CODIGO_GPS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FAP
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FAP
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FAP` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `FAP` DECIMAL(18,6),
   `DATA_INICIAL` DATE,
-  `DATA_FINAL` DATE
+  `DATA_FINAL` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TIPO_RECEITA_DACON
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TIPO_RECEITA_DACON
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TIPO_RECEITA_DACON` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` VARCHAR(50),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_435
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_435
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_435` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: COD_APURACAO_RECEITA_DACON
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- COD_APURACAO_RECEITA_DACON
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `COD_APURACAO_RECEITA_DACON` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CODIGO_APURACAO_EFD` INT UNSIGNED NOT NULL,
-  `ID_TIPO_RECEITA_DACON` INT UNSIGNED NOT NULL
+  `ID_TIPO_RECEITA_DACON` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TIPO_RECEITA_DIPI
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TIPO_RECEITA_DIPI
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TIPO_RECEITA_DIPI` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ORCAMENTO_FLUXO_CAIXA_PERIODO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ORCAMENTO_FLUXO_CAIXA_PERIODO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ORCAMENTO_FLUXO_CAIXA_PERIODO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BANCO_CONTA_CAIXA` INT NOT NULL,
   `PERIODO` CHAR(2),
-  `NOME` VARCHAR(30)
+  `NOME` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ORCAMENTO_FLUXO_CAIXA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ORCAMENTO_FLUXO_CAIXA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ORCAMENTO_FLUXO_CAIXA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ORC_FLUXO_CAIXA_PERIODO` INT UNSIGNED NOT NULL,
@@ -4067,12 +4328,13 @@ CREATE TABLE IF NOT EXISTS `ORCAMENTO_FLUXO_CAIXA` (
   `DESCRICAO` TEXT,
   `DATA_INICIAL` DATE,
   `NUMERO_PERIODOS` INT UNSIGNED,
-  `DATA_BASE` DATE
+  `DATA_BASE` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ORCAMENTO_FLUXO_CAIXA_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ORCAMENTO_FLUXO_CAIXA_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ORCAMENTO_FLUXO_CAIXA_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ORCAMENTO_FLUXO_CAIXA` INT UNSIGNED NOT NULL,
@@ -4081,12 +4343,13 @@ CREATE TABLE IF NOT EXISTS `ORCAMENTO_FLUXO_CAIXA_DETALHE` (
   `VALOR_ORCADO` DECIMAL(18,6),
   `VALOR_REALIZADO` DECIMAL(18,6),
   `TAXA_VARIACAO` DECIMAL(18,6),
-  `VALOR_VARIACAO` DECIMAL(18,6)
+  `VALOR_VARIACAO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: REGISTRO_CARTORIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- REGISTRO_CARTORIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `REGISTRO_CARTORIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CARTORIO` VARCHAR(100),
@@ -4094,12 +4357,13 @@ CREATE TABLE IF NOT EXISTS `REGISTRO_CARTORIO` (
   `NUMERO` INT UNSIGNED,
   `FOLHA` INT UNSIGNED,
   `LIVRO` INT UNSIGNED,
-  `NIRE` VARCHAR(11)
+  `NIRE` VARCHAR(11),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_PARAMETRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_PARAMETRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_PARAMETRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `MASCARA` VARCHAR(30),
@@ -4137,12 +4401,13 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_PARAMETRO` (
   `CONTA_JUROS_APROPRIAR` VARCHAR(30),
   `ID_HIST_PADRAO_RESULTADO` INT UNSIGNED,
   `ID_HIST_PADRAO_LUCRO` INT UNSIGNED,
-  `ID_HIST_PADRAO_PREJUIZO` INT UNSIGNED
+  `ID_HIST_PADRAO_PREJUIZO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_CONTA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_CONTA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_CONTA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PLANO_CONTA` INT UNSIGNED NOT NULL,
@@ -4159,33 +4424,36 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_CONTA` (
   `DFC` CHAR(1),
   `ORDEM` VARCHAR(20),
   `CODIGO_REDUZIDO` VARCHAR(10),
-  `CODIGO_EFD` CHAR(2)
+  `CODIGO_EFD` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_HISTORICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_HISTORICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_HISTORICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
   `HISTORICO` VARCHAR(250),
-  `PEDE_COMPLEMENTO` CHAR(1)
+  `PEDE_COMPLEMENTO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_LANCAMENTO_PADRAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_LANCAMENTO_PADRAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_PADRAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
   `HISTORICO` VARCHAR(250),
   `ID_CONTA_DEBITO` INT UNSIGNED,
-  `ID_CONTA_CREDITO` INT UNSIGNED
+  `ID_CONTA_CREDITO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_LANCAMENTO_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_LANCAMENTO_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_LOTE` INT UNSIGNED,
@@ -4193,12 +4461,13 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_CABECALHO` (
   `DATA_INCLUSAO` DATE,
   `TIPO` CHAR(4),
   `LIBERADO` CHAR(1),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_LANCAMENTO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_LANCAMENTO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_CONTA` INT UNSIGNED NOT NULL,
@@ -4206,12 +4475,13 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_DETALHE` (
   `ID_CONTABIL_LANCAMENTO_CAB` INT UNSIGNED NOT NULL,
   `HISTORICO` VARCHAR(250),
   `VALOR` DECIMAL(18,6),
-  `TIPO` CHAR(1)
+  `TIPO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_LANCAMENTO_ORCADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_LANCAMENTO_ORCADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_ORCADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_CONTA` INT UNSIGNED NOT NULL,
@@ -4227,12 +4497,13 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_LANCAMENTO_ORCADO` (
   `SETEMBRO` DECIMAL(18,6),
   `OUTUBRO` DECIMAL(18,6),
   `NOVEMBRO` DECIMAL(18,6),
-  `DEZEMBRO` DECIMAL(18,6)
+  `DEZEMBRO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PLANO_CONTA_REF_SPED
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PLANO_CONTA_REF_SPED
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PLANO_CONTA_REF_SPED` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `COD_CTA_REF` VARCHAR(30),
@@ -4240,12 +4511,13 @@ CREATE TABLE IF NOT EXISTS `PLANO_CONTA_REF_SPED` (
   `ORIENTACOES` TEXT,
   `INICIO_VALIDADE` DATE,
   `FIM_VALIDADE` DATE,
-  `TIPO` CHAR(1)
+  `TIPO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_LOTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_LOTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_LOTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
@@ -4253,23 +4525,25 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_LOTE` (
   `DATA_INCLUSAO` DATE,
   `DATA_LIBERACAO` DATE,
   `PROGRAMADO` CHAR(1),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_DRE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_DRE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_DRE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(100),
   `PADRAO` CHAR(1),
   `PERIODO_INICIAL` VARCHAR(7),
-  `PERIODO_FINAL` VARCHAR(7)
+  `PERIODO_FINAL` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_DRE_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_DRE_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_DRE_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_DRE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -4278,22 +4552,24 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_DRE_DETALHE` (
   `FORMA_CALCULO` CHAR(1),
   `SINAL` CHAR(1),
   `NATUREZA` CHAR(1),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_LIVRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_LIVRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_LIVRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DESCRICAO` VARCHAR(50),
   `COMPETENCIA` VARCHAR(7),
-  `FORMA_ESCRITURACAO` CHAR(1)
+  `FORMA_ESCRITURACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_TERMO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_TERMO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_TERMO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_LIVRO` INT UNSIGNED NOT NULL,
@@ -4308,23 +4584,25 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_TERMO` (
   `DATA_ENCERRAMENTO` DATE,
   `ESCRITURACAO_INICIO` DATE,
   `ESCRITURACAO_FIM` DATE,
-  `TEXTO` TEXT
+  `TEXTO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_ENCERRAMENTO_EXE_CAB
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_ENCERRAMENTO_EXE_CAB
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_ENCERRAMENTO_EXE_CAB` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_INICIO` DATE,
   `DATA_FIM` DATE,
   `DATA_INCLUSAO` DATE,
-  `MOTIVO` VARCHAR(100)
+  `MOTIVO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_ENCERRAMENTO_EXE_DET
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_ENCERRAMENTO_EXE_DET
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_ENCERRAMENTO_EXE_DET` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_CONTA` INT UNSIGNED NOT NULL,
@@ -4332,12 +4610,13 @@ CREATE TABLE IF NOT EXISTS `CONTABIL_ENCERRAMENTO_EXE_DET` (
   `SALDO_ANTERIOR` DECIMAL(18,6),
   `VALOR_DEBITO` DECIMAL(18,6),
   `VALOR_CREDITO` DECIMAL(18,6),
-  `SALDO` DECIMAL(18,6)
+  `SALDO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: LANCA_CENTRO_RESULTADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- LANCA_CENTRO_RESULTADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LANCA_CENTRO_RESULTADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
@@ -4345,241 +4624,263 @@ CREATE TABLE IF NOT EXISTS `LANCA_CENTRO_RESULTADO` (
   `HISTORICO` VARCHAR(250),
   `DATA_LANCAMENTO` DATE,
   `DATA_INCLUSAO` DATE,
-  `ORIGEM_DE_RATEIO` CHAR(1)
+  `ORIGEM_DE_RATEIO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CENTRO_RESULTADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CENTRO_RESULTADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CENTRO_RESULTADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PLANO_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
   `CLASSIFICACAO` VARCHAR(30),
   `DESCRICAO` VARCHAR(100),
-  `SOFRE_RATEIRO` CHAR(1)
+  `SOFRE_RATEIRO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: RATEIO_CENTRO_RESULTADO_CAB
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- RATEIO_CENTRO_RESULTADO_CAB
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `RATEIO_CENTRO_RESULTADO_CAB` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: RATEIO_CENTRO_RESULTADO_DET
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- RATEIO_CENTRO_RESULTADO_DET
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `RATEIO_CENTRO_RESULTADO_DET` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO_DESTINO` INT UNSIGNED NOT NULL,
   `ID_RATEIO_CENTRO_RESUL_CAB` INT UNSIGNED NOT NULL,
-  `PORCENTO_RATEIO` DECIMAL(18,6)
+  `PORCENTO_RATEIO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PLANO_CONTA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PLANO_CONTA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PLANO_CONTA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
   `DATA_INCLUSAO` DATE,
   `MASCARA` VARCHAR(50),
-  `NIVEIS` INT UNSIGNED
+  `NIVEIS` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PLANO_CENTRO_RESULTADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PLANO_CENTRO_RESULTADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PLANO_CENTRO_RESULTADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
   `MASCARA` VARCHAR(50),
   `NIVEIS` INT UNSIGNED,
-  `DATA_INCLUSAO` DATE
+  `DATA_INCLUSAO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ENCERRA_CENTRO_RESULTADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ENCERRA_CENTRO_RESULTADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ENCERRA_CENTRO_RESULTADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
   `COMPETENCIA` VARCHAR(7),
   `VALOR_TOTAL` DECIMAL(18,6),
-  `VALOR_SUB_RATEIO` DECIMAL(18,6)
+  `VALOR_SUB_RATEIO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_LANCAMENTO_COMISSAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_LANCAMENTO_COMISSAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_LANCAMENTO_COMISSAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_VENDEDOR` INT NOT NULL,
   `COMPETENCIA` VARCHAR(7),
   `VENCIMENTO` DATE,
   `BASE_CALCULO` DECIMAL(18,6),
-  `VALOR_COMISSAO` DECIMAL(18,6)
+  `VALOR_COMISSAO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_CONTA_RATEIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_CONTA_RATEIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_CONTA_RATEIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
   `ID_CONTABIL_CONTA` INT UNSIGNED NOT NULL,
-  `PORCENTO_RATEIO` DECIMAL(18,6)
+  `PORCENTO_RATEIO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: LOG_IMPORTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- LOG_IMPORTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LOG_IMPORTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_IMPORTACAO` DATE,
   `HORA_IMPORTACAO` VARCHAR(8),
   `ERRO` TEXT,
-  `REGISTRO` TEXT
+  `REGISTRO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: LOG_EXPORTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- LOG_EXPORTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `LOG_EXPORTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_EXPORTACAO` DATE,
   `HORA_EXPORTACAO` VARCHAR(8),
   `ERRO` TEXT,
-  `REGISTRO` TEXT
+  `REGISTRO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: INTEGRACAO_PDV
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- INTEGRACAO_PDV
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `INTEGRACAO_PDV` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `IDENTIFICA` VARCHAR(50),
   `DATA_INTEGRACAO` DATE,
-  `HORA_INTEGRACAO` VARCHAR(8)
+  `HORA_INTEGRACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_436
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_436
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_436` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_437
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_437
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_437` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` VARCHAR(250)
+  `DESCRICAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_4316
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_4316
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_4316` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
   `OBSERVACAO` TEXT,
   `INICIO_VIGENCIA` DATE,
-  `FIM_VIGENCIA` DATE
+  `FIM_VIGENCIA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_4315
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_4315
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_4315` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
   `OBSERVACAO` TEXT,
   `INICIO_VIGENCIA` DATE,
-  `FIM_VIGENCIA` DATE
+  `FIM_VIGENCIA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_4314
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_4314
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_4314` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
   `OBSERVACAO` TEXT,
   `INICIO_VIGENCIA` DATE,
-  `FIM_VIGENCIA` DATE
+  `FIM_VIGENCIA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_4313
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_4313
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_4313` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
   `OBSERVACAO` TEXT,
   `INICIO_VIGENCIA` DATE,
-  `FIM_VIGENCIA` DATE
+  `FIM_VIGENCIA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_439
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_439
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_439` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
   `OBSERVACAO` TEXT,
   `INICIO_VIGENCIA` DATE,
-  `FIM_VIGENCIA` DATE
+  `FIM_VIGENCIA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EFD_TABELA_4310
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EFD_TABELA_4310
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EFD_TABELA_4310` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` INT UNSIGNED,
   `DESCRICAO` TEXT,
   `OBSERVACAO` TEXT,
   `INICIO_VIGENCIA` DATE,
-  `FIM_VIGENCIA` DATE
+  `FIM_VIGENCIA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: EMPRESA_CNAE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- EMPRESA_CNAE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `EMPRESA_CNAE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_EMPRESA` INT NOT NULL,
   `ID_CNAE` INT NOT NULL,
   `PRINCIPAL` CHAR(1),
   `RAMO_ATIVIDADE` VARCHAR(50),
-  `OBJETO_SOCIAL` TEXT
+  `OBJETO_SOCIAL` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: INVENTARIO_CONTAGEM_CAB
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- INVENTARIO_CONTAGEM_CAB
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `INVENTARIO_CONTAGEM_CAB` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_CONTAGEM` DATE,
   `ESTOQUE_ATUALIZADO` CHAR(1),
-  `TIPO` CHAR(1)
+  `TIPO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: INVENTARIO_CONTAGEM_DET
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- INVENTARIO_CONTAGEM_DET
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `INVENTARIO_CONTAGEM_DET` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_INVENTARIO_CONTAGEM_CAB` INT UNSIGNED NOT NULL,
@@ -4590,12 +4891,13 @@ CREATE TABLE IF NOT EXISTS `INVENTARIO_CONTAGEM_DET` (
   `FECHADO_CONTAGEM` CHAR(2),
   `QUANTIDADE_SISTEMA` DECIMAL(18,6),
   `ACURACIDADE` DECIMAL(18,6),
-  `DIVERGENCIA` DECIMAL(18,6)
+  `DIVERGENCIA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ORCAMENTO_EMPRESARIAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ORCAMENTO_EMPRESARIAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ORCAMENTO_EMPRESARIAL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ORCAMENTO_PERIODO` INT UNSIGNED NOT NULL,
@@ -4603,21 +4905,23 @@ CREATE TABLE IF NOT EXISTS `ORCAMENTO_EMPRESARIAL` (
   `DESCRICAO` TEXT,
   `DATA_INICIAL` DATE,
   `NUMERO_PERIODOS` INT UNSIGNED,
-  `DATA_BASE` DATE
+  `DATA_BASE` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ORCAMENTO_PERIODO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ORCAMENTO_PERIODO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ORCAMENTO_PERIODO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `PERIODO` CHAR(2),
-  `NOME` VARCHAR(30)
+  `NOME` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ORCAMENTO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ORCAMENTO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ORCAMENTO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ORCAMENTO_EMPRESARIAL` INT UNSIGNED NOT NULL,
@@ -4626,34 +4930,37 @@ CREATE TABLE IF NOT EXISTS `ORCAMENTO_DETALHE` (
   `VALOR_ORCADO` DECIMAL(18,6),
   `VALOR_REALIZADO` DECIMAL(18,6),
   `TAXA_VARIACAO` DECIMAL(18,6),
-  `VALOR_VARIACAO` DECIMAL(18,6)
+  `VALOR_VARIACAO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_INDICE_ATUALIZACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_INDICE_ATUALIZACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_INDICE_ATUALIZACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_INDICE` DATE,
   `NOME` VARCHAR(10),
   `VALOR` DECIMAL(18,6),
-  `VALOR_ALTERNATIVO` DECIMAL(18,6)
+  `VALOR_ALTERNATIVO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_TAXA_DEPRECIACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_TAXA_DEPRECIACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_TAXA_DEPRECIACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NCM` VARCHAR(8),
   `BEM` VARCHAR(250),
   `VIDA` DECIMAL(18,6),
-  `TAXA` DECIMAL(18,6)
+  `TAXA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_BEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_BEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_BEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
@@ -4690,43 +4997,47 @@ CREATE TABLE IF NOT EXISTS `PATRIM_BEM` (
   `TAXA_MENSAL_DEPRECIACAO` DECIMAL(18,6),
   `TAXA_DEPRECIACAO_ACELERADA` DECIMAL(18,6),
   `TAXA_DEPRECIACAO_INCENTIVADA` DECIMAL(18,6),
-  `FUNCAO` TEXT
+  `FUNCAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_TIPO_AQUISICAO_BEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_TIPO_AQUISICAO_BEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_TIPO_AQUISICAO_BEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `TIPO` CHAR(2),
   `NOME` VARCHAR(50),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SEGURADORA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SEGURADORA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SEGURADORA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
   `CONTATO` VARCHAR(50),
-  `TELEFONE` VARCHAR(14)
+  `TELEFONE` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_DOCUMENTO_BEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_DOCUMENTO_BEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_DOCUMENTO_BEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PATRIM_BEM` INT UNSIGNED NOT NULL,
   `NOME` VARCHAR(50),
   `DESCRICAO` TEXT,
-  `IMAGEM` TEXT
+  `IMAGEM` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_DEPRECIACAO_BEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_DEPRECIACAO_BEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_DEPRECIACAO_BEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PATRIM_BEM` INT UNSIGNED NOT NULL,
@@ -4735,43 +5046,47 @@ CREATE TABLE IF NOT EXISTS `PATRIM_DEPRECIACAO_BEM` (
   `TAXA` DECIMAL(18,6),
   `INDICE` DECIMAL(18,6),
   `VALOR` DECIMAL(18,6),
-  `DEPRECIACAO_ACUMULADA` DECIMAL(18,6)
+  `DEPRECIACAO_ACUMULADA` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_MOVIMENTACAO_BEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_MOVIMENTACAO_BEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_MOVIMENTACAO_BEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PATRIM_BEM` INT UNSIGNED NOT NULL,
   `ID_PATRIM_TIPO_MOVIMENTACAO` INT UNSIGNED NOT NULL,
   `DATA_MOVIMENTACAO` DATE,
-  `RESPONSAVEL` VARCHAR(50)
+  `RESPONSAVEL` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_TIPO_MOVIMENTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_TIPO_MOVIMENTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_TIPO_MOVIMENTACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `TIPO` CHAR(2),
   `NOME` VARCHAR(50),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_ESTADO_CONSERVACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_ESTADO_CONSERVACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_ESTADO_CONSERVACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
   `NOME` VARCHAR(50),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_APOLICE_SEGURO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_APOLICE_SEGURO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_APOLICE_SEGURO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PATRIM_BEM` INT UNSIGNED NOT NULL,
@@ -4782,12 +5097,13 @@ CREATE TABLE IF NOT EXISTS `PATRIM_APOLICE_SEGURO` (
   `VALOR_PREMIO` DECIMAL(18,6),
   `VALOR_SEGURADO` DECIMAL(18,6),
   `OBSERVACAO` TEXT,
-  `IMAGEM` TEXT
+  `IMAGEM` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PATRIM_GRUPO_BEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PATRIM_GRUPO_BEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PATRIM_GRUPO_BEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
@@ -4796,12 +5112,13 @@ CREATE TABLE IF NOT EXISTS `PATRIM_GRUPO_BEM` (
   `CONTA_ATIVO_IMOBILIZADO` VARCHAR(30),
   `CONTA_DEPRECIACAO_ACUMULADA` VARCHAR(30),
   `CONTA_DESPESA_DEPRECIACAO` VARCHAR(30),
-  `CODIGO_HISTORICO` INT UNSIGNED
+  `CODIGO_HISTORICO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_PARAMETRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_PARAMETRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_PARAMETRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FISCAL_ESTADUAL_PORTE` INT UNSIGNED,
@@ -4819,20 +5136,22 @@ CREATE TABLE IF NOT EXISTS `FISCAL_PARAMETRO` (
   `PERFIL_SPED` CHAR(1),
   `APURACAO_CONSOLIDADA` CHAR(1),
   `SUBSTITUICAO_TRIBUTARIA` CHAR(1),
-  `FORMA_CALCULO_ISS` CHAR(2)
+  `FORMA_CALCULO_ISS` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_LIVRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_LIVRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_LIVRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `DESCRICAO` VARCHAR(50)
+  `DESCRICAO` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_TERMO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_TERMO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_TERMO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FISCAL_LIVRO` INT UNSIGNED NOT NULL,
@@ -4847,64 +5166,70 @@ CREATE TABLE IF NOT EXISTS `FISCAL_TERMO` (
   `DATA_ENCERRAMENTO` DATE,
   `ESCRITURACAO_INICIO` DATE,
   `ESCRITURACAO_FIM` DATE,
-  `TEXTO` TEXT
+  `TEXTO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_ESTADUAL_REGIME
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_ESTADUAL_REGIME
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_ESTADUAL_REGIME` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF` CHAR(2),
   `CODIGO` VARCHAR(20),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_ESTADUAL_PORTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_ESTADUAL_PORTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_ESTADUAL_PORTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF` CHAR(2),
   `CODIGO` VARCHAR(20),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_INSCRICOES_SUBSTITUTAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_INSCRICOES_SUBSTITUTAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_INSCRICOES_SUBSTITUTAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FISCAL_PARAMETROS` INT UNSIGNED NOT NULL,
   `UF` CHAR(2),
   `INSCRICAO_ESTADUAL` VARCHAR(30),
-  `PMPF` CHAR(1)
+  `PMPF` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_MUNICIPAL_REGIME
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_MUNICIPAL_REGIME
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_MUNICIPAL_REGIME` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF` CHAR(2),
   `CODIGO` VARCHAR(20),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SIMPLES_NACIONAL_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SIMPLES_NACIONAL_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SIMPLES_NACIONAL_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `VIGENCIA_INICIAL` DATE,
   `VIGENCIA_FINAL` DATE,
   `ANEXO` VARCHAR(10),
-  `TABELA` VARCHAR(10)
+  `TABELA` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: SIMPLES_NACIONAL_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- SIMPLES_NACIONAL_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `SIMPLES_NACIONAL_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_SIMPLES_NACIONAL_CABECALHO` INT UNSIGNED NOT NULL,
@@ -4919,12 +5244,13 @@ CREATE TABLE IF NOT EXISTS `SIMPLES_NACIONAL_DETALHE` (
   `CPP` DECIMAL(18,6),
   `ICMS` DECIMAL(18,6),
   `IPI` DECIMAL(18,6),
-  `ISS` DECIMAL(18,6)
+  `ISS` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_NOTA_FISCAL_ENTRADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_NOTA_FISCAL_ENTRADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_NOTA_FISCAL_ENTRADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -4953,12 +5279,13 @@ CREATE TABLE IF NOT EXISTS `FISCAL_NOTA_FISCAL_ENTRADA` (
   `ALIQUOTA_CREDITO_ICMS` DECIMAL(18,6),
   `ALIQUOTA_CREDITO_PIS` DECIMAL(18,6),
   `ALIQUOTA_CREDITO_COFINS` DECIMAL(18,6),
-  `ALIQUOTA_CREDITO_IPI` DECIMAL(18,6)
+  `ALIQUOTA_CREDITO_IPI` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PARAMETRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PARAMETRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PARAMETRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `COMPETENCIA` VARCHAR(7),
@@ -4977,12 +5304,13 @@ CREATE TABLE IF NOT EXISTS `FOLHA_PARAMETRO` (
   `FERIAS_ADIANTAR_13` CHAR(1),
   `FERIAS_PAGAR_ESTAGIARIOS` CHAR(1),
   `FERIAS_CALC_JUSTA_CAUSA` CHAR(1),
-  `FERIAS_MOVIMENTO_MENSAL` CHAR(1)
+  `FERIAS_MOVIMENTO_MENSAL` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GUIAS_ACUMULADAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GUIAS_ACUMULADAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GUIAS_ACUMULADAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `GPS_TIPO` CHAR(1),
@@ -4996,21 +5324,23 @@ CREATE TABLE IF NOT EXISTS `GUIAS_ACUMULADAS` (
   `IRRF_DATA_PAGAMENTO` DATE,
   `PIS_COMPETENCIA` VARCHAR(7),
   `PIS_VALOR_ACUMULADO` DECIMAL(18,6),
-  `PIS_DATA_PAGAMENTO` DATE
+  `PIS_DATA_PAGAMENTO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_FECHAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_FECHAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_FECHAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `FECHAMENTO_ATUAL` VARCHAR(7),
-  `PROXIMO_FECHAMENTO` VARCHAR(7)
+  `PROXIMO_FECHAMENTO` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FERIAS_PERIODO_AQUISITIVO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FERIAS_PERIODO_AQUISITIVO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FERIAS_PERIODO_AQUISITIVO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -5026,46 +5356,50 @@ CREATE TABLE IF NOT EXISTS `FERIAS_PERIODO_AQUISITIVO` (
   `DIAS_DIREITO` INT UNSIGNED,
   `DIAS_GOZADOS` INT UNSIGNED,
   `DIAS_FALTAS` INT UNSIGNED,
-  `DIAS_RESTANTES` INT UNSIGNED
+  `DIAS_RESTANTES` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_TIPO_AFASTAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_TIPO_AFASTAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_TIPO_AFASTAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `NOME` VARCHAR(100),
   `DESCRICAO` TEXT,
-  `CODIGO_ESOCIAL` CHAR(2)
+  `CODIGO_ESOCIAL` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_AFASTAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_AFASTAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_AFASTAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_TIPO_AFASTAMENTO` INT UNSIGNED NOT NULL,
   `ID_COLABORADOR` INT NOT NULL,
   `DATA_INICIO` DATE,
   `DATA_FIM` DATE,
-  `DIAS_AFASTADO` INT UNSIGNED
+  `DIAS_AFASTADO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PLANO_SAUDE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PLANO_SAUDE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PLANO_SAUDE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `ID_OPERADORA_PLANO_SAUDE` INT UNSIGNED NOT NULL,
   `DATA_INICIO` DATE,
-  `BENEFICIARIO` CHAR(1)
+  `BENEFICIARIO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_EVENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_EVENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_EVENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
@@ -5083,12 +5417,13 @@ CREATE TABLE IF NOT EXISTS `FOLHA_EVENTO` (
   `REPERCUTE_DSR` CHAR(1),
   `REPERCUTE_13` CHAR(1),
   `REPERCUTE_FERIAS` CHAR(1),
-  `REPERCUTE_AVISO` CHAR(1)
+  `REPERCUTE_AVISO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_RESCISAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_RESCISAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_RESCISAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -5106,34 +5441,37 @@ CREATE TABLE IF NOT EXISTS `FOLHA_RESCISAO` (
   `FGTS_SALDO_BANCO` DECIMAL(18,6),
   `FGTS_COMPLEMENTO_SALDO` DECIMAL(18,6),
   `FGTS_CODIGO_AFASTAMENTO` VARCHAR(10),
-  `FGTS_CODIGO_SAQUE` VARCHAR(10)
+  `FGTS_CODIGO_SAQUE` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_LANCAMENTO_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_LANCAMENTO_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_LANCAMENTO_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `COMPETENCIA` VARCHAR(7),
-  `TIPO` CHAR(1)
+  `TIPO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_LANCAMENTO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_LANCAMENTO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_LANCAMENTO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_EVENTO` INT UNSIGNED NOT NULL,
   `ID_FOLHA_LANCAMENTO_CABECALHO` INT UNSIGNED NOT NULL,
   `ORIGEM` DECIMAL(18,6),
   `PROVENTO` DECIMAL(18,6),
-  `DESCONTO` DECIMAL(18,6)
+  `DESCONTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_FERIAS_COLETIVAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_FERIAS_COLETIVAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_FERIAS_COLETIVAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_INICIO` DATE,
@@ -5142,81 +5480,89 @@ CREATE TABLE IF NOT EXISTS `FOLHA_FERIAS_COLETIVAS` (
   `ABONO_PECUNIARIO_INICIO` DATE,
   `ABONO_PECUNIARIO_FIM` DATE,
   `DIAS_ABONO` INT UNSIGNED,
-  `DATA_PAGAMENTO` DATE
+  `DATA_PAGAMENTO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_VALE_TRANSPORTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_VALE_TRANSPORTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_VALE_TRANSPORTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_EMPRESA_TRANSP_ITIN` INT UNSIGNED NOT NULL,
   `ID_COLABORADOR` INT NOT NULL,
-  `QUANTIDADE` INT UNSIGNED
+  `QUANTIDADE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_INSS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_INSS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_INSS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `COMPETENCIA` VARCHAR(7)
+  `COMPETENCIA` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_INSS_RETENCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_INSS_RETENCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_INSS_RETENCAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_INSS` INT UNSIGNED NOT NULL,
   `ID_FOLHA_INSS_SERVICO` INT UNSIGNED NOT NULL,
   `VALOR_MENSAL` DECIMAL(18,6),
-  `VALOR_13` DECIMAL(18,6)
+  `VALOR_13` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_INSS_SERVICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_INSS_SERVICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_INSS_SERVICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
-  `NOME` VARCHAR(100)
+  `NOME` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PPP
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PPP
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PPP` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PPP_CAT
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PPP_CAT
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PPP_CAT` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_PPP` INT UNSIGNED NOT NULL,
   `NUMERO_CAT` INT UNSIGNED,
   `DATA_AFASTAMENTO` DATE,
-  `DATA_REGISTRO` DATE
+  `DATA_REGISTRO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PPP_ATIVIDADE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PPP_ATIVIDADE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PPP_ATIVIDADE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_PPP` INT UNSIGNED NOT NULL,
   `DATA_INICIO` DATE,
   `DATA_FIM` DATE,
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PPP_FATOR_RISCO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PPP_FATOR_RISCO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PPP_FATOR_RISCO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_PPP` INT UNSIGNED NOT NULL,
@@ -5233,12 +5579,13 @@ CREATE TABLE IF NOT EXISTS `FOLHA_PPP_FATOR_RISCO` (
   `ATENDIMENTO_NR06_2` CHAR(1),
   `ATENDIMENTO_NR06_3` CHAR(1),
   `ATENDIMENTO_NR06_4` CHAR(1),
-  `ATENDIMENTO_NR06_5` CHAR(1)
+  `ATENDIMENTO_NR06_5` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_PPP_EXAME_MEDICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_PPP_EXAME_MEDICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_PPP_EXAME_MEDICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FOLHA_PPP` INT UNSIGNED NOT NULL,
@@ -5246,12 +5593,13 @@ CREATE TABLE IF NOT EXISTS `FOLHA_PPP_EXAME_MEDICO` (
   `TIPO` CHAR(1),
   `NATUREZA` VARCHAR(50),
   `EXAME` CHAR(1),
-  `INDICACAO_RESULTADOS` VARCHAR(50)
+  `INDICACAO_RESULTADOS` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FOLHA_HISTORICO_SALARIAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FOLHA_HISTORICO_SALARIAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FOLHA_HISTORICO_SALARIAL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -5260,12 +5608,13 @@ CREATE TABLE IF NOT EXISTS `FOLHA_HISTORICO_SALARIAL` (
   `PERCENTUAL_AUMENTO` DECIMAL(18,6),
   `SALARIO_NOVO` DECIMAL(18,6),
   `VALIDO_A_PARTIR` VARCHAR(7),
-  `MOTIVO` VARCHAR(100)
+  `MOTIVO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO` (
   `ID` INT UNSIGNED NOT NULL,
   `ID_SOLICITACAO_SERVICO` INT UNSIGNED NOT NULL,
@@ -5281,21 +5630,23 @@ CREATE TABLE IF NOT EXISTS `CONTRATO` (
   `QUANTIDADE_PARCELAS` INT UNSIGNED,
   `INTERVALO_ENTRE_PARCELAS` INT,
   `OBSERVACAO` TEXT,
-  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30)
+  `CLASSIFICACAO_CONTABIL_CONTA` VARCHAR(30),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: TIPO_CONTRATO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- TIPO_CONTRATO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `TIPO_CONTRATO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO_SOLICITACAO_SERVICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO_SOLICITACAO_SERVICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO_SOLICITACAO_SERVICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTRATO_TIPO_SERVICO` INT UNSIGNED NOT NULL,
@@ -5307,21 +5658,23 @@ CREATE TABLE IF NOT EXISTS `CONTRATO_SOLICITACAO_SERVICO` (
   `DATA_DESEJADA_INICIO` DATE,
   `URGENTE` CHAR(1),
   `STATUS_SOLICITACAO` CHAR(1),
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO_TIPO_SERVICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO_TIPO_SERVICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO_TIPO_SERVICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO_HISTORICO_REAJUSTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO_HISTORICO_REAJUSTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO_HISTORICO_REAJUSTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTRATO` INT UNSIGNED NOT NULL,
@@ -5329,32 +5682,35 @@ CREATE TABLE IF NOT EXISTS `CONTRATO_HISTORICO_REAJUSTE` (
   `VALOR_ANTERIOR` DECIMAL(18,6),
   `VALOR_ATUAL` DECIMAL(18,6),
   `DATA_REAJUSTE` DATE,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO_PREV_FATURAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO_PREV_FATURAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO_PREV_FATURAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTRATO` INT UNSIGNED NOT NULL,
   `DATA_PREVISTA` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO_HIST_FATURAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO_HIST_FATURAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO_HIST_FATURAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTRATO` INT UNSIGNED NOT NULL,
   `DATA_FATURA` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FERIADOS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FERIADOS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FERIADOS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ANO` CHAR(4),
@@ -5363,12 +5719,13 @@ CREATE TABLE IF NOT EXISTS `FERIADOS` (
   `UF` CHAR(2),
   `MUNICIPIO_IBGE` INT UNSIGNED,
   `TIPO` CHAR(1),
-  `DATA_FERIADO` DATE
+  `DATA_FERIADO` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_PARAMETRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_PARAMETRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_PARAMETRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `MES_ANO` VARCHAR(7),
@@ -5380,12 +5737,13 @@ CREATE TABLE IF NOT EXISTS `PONTO_PARAMETRO` (
   `PERCENTUAL_HE_NOTURNA` DECIMAL(18,6),
   `DURACAO_HORA_NOTURNA` VARCHAR(8),
   `TRATAMENTO_HORA_MAIS` CHAR(1),
-  `TRATAMENTO_HORA_MENOS` CHAR(1)
+  `TRATAMENTO_HORA_MENOS` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_HORARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_HORARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_HORARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `TIPO` CHAR(1),
@@ -5404,12 +5762,13 @@ CREATE TABLE IF NOT EXISTS `PONTO_HORARIO` (
   `ENTRADA05` VARCHAR(8),
   `SAIDA05` VARCHAR(8),
   `HORA_INICIO_JORNADA` VARCHAR(8),
-  `HORA_FIM_JORNADA` VARCHAR(8)
+  `HORA_FIM_JORNADA` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_ESCALA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_ESCALA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_ESCALA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
@@ -5421,34 +5780,37 @@ CREATE TABLE IF NOT EXISTS `PONTO_ESCALA` (
   `CODIGO_HORARIO_QUARTA` CHAR(4),
   `CODIGO_HORARIO_QUINTA` CHAR(4),
   `CODIGO_HORARIO_SEXTA` CHAR(4),
-  `CODIGO_HORARIO_SABADO` CHAR(4)
+  `CODIGO_HORARIO_SABADO` CHAR(4),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_RELOGIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_RELOGIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_RELOGIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `LOCALIZACAO` VARCHAR(50),
   `MARCA` VARCHAR(30),
   `FABRICANTE` VARCHAR(30),
   `NUMERO_SERIE` VARCHAR(50),
-  `UTILIZACAO` CHAR(1)
+  `UTILIZACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_TURMA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_TURMA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_TURMA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PONTO_ESCALA` INT UNSIGNED NOT NULL,
   `CODIGO` CHAR(5),
-  `NOME` VARCHAR(50)
+  `NOME` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_MARCACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_MARCACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_MARCACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PONTO_RELOGIO` INT UNSIGNED,
@@ -5459,35 +5821,38 @@ CREATE TABLE IF NOT EXISTS `PONTO_MARCACAO` (
   `TIPO_MARCACAO` CHAR(1),
   `TIPO_REGISTRO` CHAR(1),
   `PAR_ENTRADA_SAIDA` CHAR(2),
-  `JUSTIFICATIVA` VARCHAR(100)
+  `JUSTIFICATIVA` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_BANCO_HORAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_BANCO_HORAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_BANCO_HORAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `DATA_TRABALHO` DATE,
   `QUANTIDADE` VARCHAR(8),
-  `SITUACAO` CHAR(1)
+  `SITUACAO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_CLASSIFICACAO_JORNADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_CLASSIFICACAO_JORNADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_CLASSIFICACAO_JORNADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `NOME` VARCHAR(50),
   `DESCRICAO` TEXT,
   `PADRAO` CHAR(1),
-  `DESCONTAR_HORAS` CHAR(1)
+  `DESCONTAR_HORAS` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_HORARIO_AUTORIZADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_HORARIO_AUTORIZADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_HORARIO_AUTORIZADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -5504,12 +5869,13 @@ CREATE TABLE IF NOT EXISTS `PONTO_HORARIO_AUTORIZADO` (
   `SAIDA04` VARCHAR(8),
   `ENTRADA05` VARCHAR(8),
   `SAIDA05` VARCHAR(8),
-  `HORA_FECHAMENTO_DIA` VARCHAR(8)
+  `HORA_FECHAMENTO_DIA` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_ABONO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_ABONO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_ABONO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -5518,22 +5884,24 @@ CREATE TABLE IF NOT EXISTS `PONTO_ABONO` (
   `SALDO` INT UNSIGNED,
   `DATA_CADASTRO` DATE,
   `INICIO_UTILIZACAO` DATE,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_ABONO_UTILIZACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_ABONO_UTILIZACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_ABONO_UTILIZACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PONTO_ABONO` INT UNSIGNED NOT NULL,
   `DATA_UTILIZACAO` DATE,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: DAV_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- DAV_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DAV_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -5553,12 +5921,13 @@ CREATE TABLE IF NOT EXISTS `DAV_CABECALHO` (
   `SUBTOTAL` DECIMAL(18,6),
   `VALOR` DECIMAL(18,6),
   `IMPRESSO` CHAR(1),
-  `HASH_REGISTRO` VARCHAR(32)
+  `HASH_REGISTRO` VARCHAR(32),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: DAV_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- DAV_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DAV_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_DAV_CABECALHO` INT UNSIGNED NOT NULL,
@@ -5576,12 +5945,13 @@ CREATE TABLE IF NOT EXISTS `DAV_DETALHE` (
   `UNIDADE_PRODUTO` VARCHAR(10),
   `TOTALIZADOR_PARCIAL` VARCHAR(10),
   `SERVICO_FORMULA` TEXT,
-  `HASH_REGISTRO` VARCHAR(32)
+  `HASH_REGISTRO` VARCHAR(32),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRE_VENDA_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRE_VENDA_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRE_VENDA_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
@@ -5596,12 +5966,13 @@ CREATE TABLE IF NOT EXISTS `PRE_VENDA_CABECALHO` (
   `DESCONTO` DECIMAL(18,6),
   `ACRESCIMO` DECIMAL(18,6),
   `TAXA_ACRESCIMO` DECIMAL(18,6),
-  `TAXA_DESCONTO` DECIMAL(18,6)
+  `TAXA_DESCONTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRE_VENDA_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRE_VENDA_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRE_VENDA_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PRE_VENDA_CABECALHO` INT UNSIGNED NOT NULL,
@@ -5614,74 +5985,81 @@ CREATE TABLE IF NOT EXISTS `PRE_VENDA_DETALHE` (
   `GTIN_PRODUTO` VARCHAR(14),
   `NOME_PRODUTO` VARCHAR(100),
   `UNIDADE_PRODUTO` VARCHAR(10),
-  `ECF_ICMS_ST` VARCHAR(4)
+  `ECF_ICMS_ST` VARCHAR(4),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_FECHAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_FECHAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_FECHAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_INICIO` DATE,
   `DATA_FIM` DATE,
-  `CRITERIO_LANCAMENTO` CHAR(1)
+  `CRITERIO_LANCAMENTO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_INDICE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_INDICE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_INDICE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `INDICE` VARCHAR(50),
   `PERIODICIDADE` CHAR(1) NOT NULL,
   `DIARIO_A_PARTIR_DE` DATE,
-  `MENSAL_MES_ANO` VARCHAR(7)
+  `MENSAL_MES_ANO` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTABIL_INDICE_VALOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTABIL_INDICE_VALOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTABIL_INDICE_VALOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CONTABIL_INDICE` INT UNSIGNED NOT NULL,
   `DATA_INDICE` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: QUADRO_SOCIETARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- QUADRO_SOCIETARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `QUADRO_SOCIETARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_REGISTRO` DATE,
   `CAPITAL_SOCIAL` DECIMAL(18,6),
   `VALOR_QUOTA` DECIMAL(18,6),
-  `QUANTIDADE_COTAS` INT UNSIGNED
+  `QUANTIDADE_COTAS` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CONTRATO_TEMPLATE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CONTRATO_TEMPLATE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CONTRATO_TEMPLATE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_BANCO_HORAS_UTILIZACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_BANCO_HORAS_UTILIZACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_BANCO_HORAS_UTILIZACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PONTO_BANCO_HORAS` INT UNSIGNED NOT NULL,
   `DATA_UTILIZACAO` DATE,
   `QUANTIDADE_UTILIZADA` VARCHAR(8),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PONTO_FECHAMENTO_JORNADA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PONTO_FECHAMENTO_JORNADA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PONTO_FECHAMENTO_JORNADA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PONTO_CLASSIFICACAO_JORNADA` INT UNSIGNED NOT NULL,
@@ -5720,66 +6098,72 @@ CREATE TABLE IF NOT EXISTS `PONTO_FECHAMENTO_JORNADA` (
   `FALTA_ATRASO` VARCHAR(8),
   `COMPENSAR` CHAR(1),
   `BANCO_HORAS` VARCHAR(8),
-  `OBSERVACAO` VARCHAR(250)
+  `OBSERVACAO` VARCHAR(250),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ADM_MODULO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ADM_MODULO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ADM_MODULO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CT_RESULTADO_NT_FINANCEIRA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CT_RESULTADO_NT_FINANCEIRA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CT_RESULTADO_NT_FINANCEIRA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_CENTRO_RESULTADO` INT UNSIGNED NOT NULL,
   `ID_FIN_NATUREZA_FINANCEIRA` INT UNSIGNED NOT NULL,
-  `PERCENTUAL_RATEIO` DECIMAL(18,6)
+  `PERCENTUAL_RATEIO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_ALIQUOTAS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_ALIQUOTAS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_ALIQUOTAS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `TOTALIZADOR_PARCIAL` VARCHAR(10),
   `ECF_ICMS_ST` VARCHAR(4),
-  `PAF_P_ST` CHAR(1)
+  `PAF_P_ST` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: AUDITORIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- AUDITORIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AUDITORIA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_REGISTRO` DATE,
   `HORA_REGISTRO` VARCHAR(8),
   `JANELA_CONTROLLER` VARCHAR(50),
   `ACAO` VARCHAR(50),
-  `CONTEUDO` TEXT
+  `CONTEUDO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PRODUTO_ALTERACAO_ITEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PRODUTO_ALTERACAO_ITEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PRODUTO_ALTERACAO_ITEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PRODUTO` INT NOT NULL,
   `CODIGO` VARCHAR(14),
   `NOME` VARCHAR(100),
   `DATA_INICIAL` DATE,
-  `DATA_FINAL` DATE
+  `DATA_FINAL` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_APURACAO_ICMS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_APURACAO_ICMS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_APURACAO_ICMS` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `COMPETENCIA` VARCHAR(7),
@@ -5796,21 +6180,23 @@ CREATE TABLE IF NOT EXISTS `FISCAL_APURACAO_ICMS` (
   `VALOR_TOTAL_DEDUCAO` DECIMAL(18,6),
   `VALOR_ICMS_RECOLHER` DECIMAL(18,6),
   `VALOR_SALDO_CREDOR_TRANSP` DECIMAL(18,6),
-  `VALOR_DEBITO_ESPECIAL` DECIMAL(18,6)
+  `VALOR_DEBITO_ESPECIAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FISCAL_NOTA_FISCAL_SAIDA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FISCAL_NOTA_FISCAL_SAIDA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FISCAL_NOTA_FISCAL_SAIDA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_NFE_CABECALHO` INT UNSIGNED NOT NULL,
-  `COMPETENCIA` VARCHAR(7)
+  `COMPETENCIA` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_SINTEGRA_60M
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_SINTEGRA_60M
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_SINTEGRA_60M` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(8),
@@ -5827,12 +6213,13 @@ CREATE TABLE IF NOT EXISTS `ECF_SINTEGRA_60M` (
   `VALOR_VENDA_BRUTA` DECIMAL(18,6),
   `VALOR_GRANDE_TOTAL` DECIMAL(18,6),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_SINTEGRA_60A
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_SINTEGRA_60A
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_SINTEGRA_60A` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(8),
@@ -5842,12 +6229,13 @@ CREATE TABLE IF NOT EXISTS `ECF_SINTEGRA_60A` (
   `SITUACAO_TRIBUTARIA` VARCHAR(4),
   `VALOR` DECIMAL(18,6),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(32)
+  `HORA_SINCRONIZACAO` VARCHAR(32),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ADM_PARAMETRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ADM_PARAMETRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ADM_PARAMETRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `FIN_PARCELA_ABERTO` INT UNSIGNED,
@@ -5855,12 +6243,13 @@ CREATE TABLE IF NOT EXISTS `ADM_PARAMETRO` (
   `FIN_PARCELA_QUITADO_PARCIAL` INT UNSIGNED,
   `FIN_TIPO_RECEBIMENTO_EDI` INT UNSIGNED,
   `COMPRA_FIN_DOC_ORIGEM` INT UNSIGNED,
-  `COMPRA_CONTA_CAIXA` INT UNSIGNED
+  `COMPRA_CONTA_CAIXA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ECF_E3
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ECF_E3
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ECF_E3` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `SERIE_ECF` VARCHAR(20),
@@ -5869,35 +6258,38 @@ CREATE TABLE IF NOT EXISTS `ECF_E3` (
   `MARCA_ECF` VARCHAR(20),
   `MODELO_ECF` VARCHAR(20),
   `DATA_ESTOQUE` DATE,
-  `HORA_ESTOQUE` VARCHAR(8)
+  `HORA_ESTOQUE` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PESSOA_ALTERACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PESSOA_ALTERACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PESSOA_ALTERACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PESSOA` INT NOT NULL,
   `DATA_ALTERACAO` DATE,
   `OBJETO_ANTIGO` TEXT,
-  `OBJETO_NOVO` TEXT
+  `OBJETO_NOVO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: DAV_DETALHE_ALTERACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- DAV_DETALHE_ALTERACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DAV_DETALHE_ALTERACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_DAV_DETALHE` INT UNSIGNED NOT NULL,
   `DATA_ALTERACAO` DATE,
   `HORA_ALTERACAO` VARCHAR(8),
   `TIPO_ALTERACAO` CHAR(1),
-  `OBJETO` TEXT
+  `OBJETO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PDV_SANGRIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PDV_SANGRIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PDV_SANGRIA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME_CAIXA` VARCHAR(30),
@@ -5907,12 +6299,13 @@ CREATE TABLE IF NOT EXISTS `PDV_SANGRIA` (
   `DATA_SANGRIA` DATE,
   `VALOR` DECIMAL(18,6),
   `DATA_SINCRONIZACAO` DATE,
-  `HORA_SINCRONIZACAO` VARCHAR(8)
+  `HORA_SINCRONIZACAO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MALOTE_DIGITAL_DOCUMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MALOTE_DIGITAL_DOCUMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MALOTE_DIGITAL_DOCUMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
@@ -5922,31 +6315,34 @@ CREATE TABLE IF NOT EXISTS `MALOTE_DIGITAL_DOCUMENTO` (
   `TAMANHO` INT UNSIGNED,
   `ASSINADO` CHAR(1),
   `DATA_ENVIO` DATE,
-  `ASSUNTO` VARCHAR(100)
+  `ASSUNTO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MALOTE_DIGITAL_DESTINATARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MALOTE_DIGITAL_DESTINATARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MALOTE_DIGITAL_DESTINATARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MALOTE_DIGITAL_DOCUMENTO` INT UNSIGNED NOT NULL,
-  `ID_COLABORADOR` INT NOT NULL
+  `ID_COLABORADOR` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MALOTE_DIGITAL_ACESSO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MALOTE_DIGITAL_ACESSO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MALOTE_DIGITAL_ACESSO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MALOTE_DIGITAL_DESTINATARIO` INT UNSIGNED NOT NULL,
   `DATA_ACESSO` DATE,
-  `HORA_ACESSO` VARCHAR(8)
+  `HORA_ACESSO` VARCHAR(8),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ETIQUETA_LAYOUT
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ETIQUETA_LAYOUT
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ETIQUETA_LAYOUT` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_FORMATO_PAPEL` INT UNSIGNED NOT NULL,
@@ -5959,22 +6355,24 @@ CREATE TABLE IF NOT EXISTS `ETIQUETA_LAYOUT` (
   `MARGEM_ESQUERDA` INT UNSIGNED,
   `MARGEM_DIREITA` INT UNSIGNED,
   `ESPACAMENTO_HORIZONTAL` INT UNSIGNED,
-  `ESPACAMENTO_VERTICAL` INT UNSIGNED
+  `ESPACAMENTO_VERTICAL` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ETIQUETA_FORMATO_PAPEL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ETIQUETA_FORMATO_PAPEL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ETIQUETA_FORMATO_PAPEL` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(50),
   `ALTURA` INT UNSIGNED,
-  `LARGURA` INT UNSIGNED
+  `LARGURA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ETIQUETA_TEMPLATE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ETIQUETA_TEMPLATE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ETIQUETA_TEMPLATE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_ETIQUETA_LAYOUT` INT UNSIGNED NOT NULL,
@@ -5982,12 +6380,13 @@ CREATE TABLE IF NOT EXISTS `ETIQUETA_TEMPLATE` (
   `CAMPO` VARCHAR(50),
   `FORMATO` INT UNSIGNED,
   `QUANTIDADE_REPETICOES` INT UNSIGNED,
-  `FILTRO` VARCHAR(100)
+  `FILTRO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: AGENDA_COMPROMISSO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- AGENDA_COMPROMISSO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AGENDA_COMPROMISSO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_AGENDA_CATEGORIA_COMPROMISSO` INT UNSIGNED NOT NULL,
@@ -5997,129 +6396,142 @@ CREATE TABLE IF NOT EXISTS `AGENDA_COMPROMISSO` (
   `DURACAO` INT UNSIGNED,
   `ONDE` VARCHAR(100),
   `DESCRICAO` VARCHAR(100),
-  `TIPO` CHAR(1)
+  `TIPO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: AGENDA_CATEGORIA_COMPROMISSO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- AGENDA_CATEGORIA_COMPROMISSO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AGENDA_CATEGORIA_COMPROMISSO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
-  `COR` VARCHAR(50)
+  `COR` VARCHAR(50),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: AGENDA_NOTIFICACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- AGENDA_NOTIFICACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AGENDA_NOTIFICACAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_AGENDA_COMPROMISSO` INT UNSIGNED NOT NULL,
   `DATA_NOTIFICACAO` DATE,
   `HORA` VARCHAR(8),
-  `TIPO` INT UNSIGNED
+  `TIPO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: AGENDA_COMPROMISSO_CONVIDADO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- AGENDA_COMPROMISSO_CONVIDADO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `AGENDA_COMPROMISSO_CONVIDADO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_AGENDA_COMPROMISSO` INT UNSIGNED NOT NULL,
-  `ID_COLABORADOR` INT NOT NULL
+  `ID_COLABORADOR` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: REUNIAO_SALA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- REUNIAO_SALA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `REUNIAO_SALA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `PREDIO` VARCHAR(100),
   `ANDAR` VARCHAR(10),
-  `NUMERO` VARCHAR(10)
+  `NUMERO` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: REUNIAO_SALA_EVENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- REUNIAO_SALA_EVENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `REUNIAO_SALA_EVENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_AGENDA_COMPROMISSO` INT UNSIGNED NOT NULL,
   `ID_REUNIAO_SALA` INT UNSIGNED NOT NULL,
-  `DATA_RESERVA` DATE
+  `DATA_RESERVA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: RECADO_REMETENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- RECADO_REMETENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `RECADO_REMETENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_COLABORADOR` INT NOT NULL,
   `DATA_ENVIO` DATE,
   `HORA_ENVIO` VARCHAR(8),
   `ASSUNTO` VARCHAR(100),
-  `TEXTO` TEXT
+  `TEXTO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: RECADO_DESTINATARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- RECADO_DESTINATARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `RECADO_DESTINATARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_RECADO_REMETENTE` INT UNSIGNED NOT NULL,
-  `ID_COLABORADOR` INT NOT NULL
+  `ID_COLABORADOR` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESOCIAL_NATUREZA_JURIDICA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESOCIAL_NATUREZA_JURIDICA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESOCIAL_NATUREZA_JURIDICA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `GRUPO` INT UNSIGNED,
   `CODIGO` VARCHAR(5),
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESOCIAL_CLASSIFICACAO_TRIBUT
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESOCIAL_CLASSIFICACAO_TRIBUT
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESOCIAL_CLASSIFICACAO_TRIBUT` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESOCIAL_RUBRICA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESOCIAL_RUBRICA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESOCIAL_RUBRICA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(4),
   `NOME` VARCHAR(100),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESOCIAL_TIPO_AFASTAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESOCIAL_TIPO_AFASTAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESOCIAL_TIPO_AFASTAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: ESOCIAL_MOTIVO_DESLIGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- ESOCIAL_MOTIVO_DESLIGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ESOCIAL_MOTIVO_DESLIGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_OP_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_OP_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_OP_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `INICIO` DATE,
@@ -6128,12 +6540,13 @@ CREATE TABLE IF NOT EXISTS `PCP_OP_CABECALHO` (
   `CUSTO_TOTAL_PREVISTO` DECIMAL(18,6),
   `CUSTO_TOTAL_REALIZADO` DECIMAL(18,6),
   `PORCENTO_VENDA` DECIMAL(18,6),
-  `PORCENTO_ESTOQUE` DECIMAL(18,6)
+  `PORCENTO_ESTOQUE` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_OP_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_OP_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_OP_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PCP_OP_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6142,12 +6555,13 @@ CREATE TABLE IF NOT EXISTS `PCP_OP_DETALHE` (
   `QUANTIDADE_PRODUZIDA` DECIMAL(18,6),
   `QUANTIDADE_ENTREGUE` DECIMAL(18,6),
   `CUSTO_PREVISTO` DECIMAL(18,6),
-  `CUSTO_REALIZADO` DECIMAL(18,6)
+  `CUSTO_REALIZADO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_SERVICO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_SERVICO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_SERVICO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PCP_OP_DETALHE` INT UNSIGNED NOT NULL,
@@ -6162,48 +6576,53 @@ CREATE TABLE IF NOT EXISTS `PCP_SERVICO` (
   `HORAS_PREVISTO` INT UNSIGNED,
   `MINUTOS_PREVISTO` INT UNSIGNED,
   `SEGUNDOS_PREVISTO` INT UNSIGNED,
-  `CUSTO_PREVISTO` DECIMAL(18,6)
+  `CUSTO_PREVISTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_SERVICO_COLABORADOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_SERVICO_COLABORADOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_SERVICO_COLABORADOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PCP_SERVICO` INT UNSIGNED NOT NULL,
-  `ID_COLABORADOR` INT NOT NULL
+  `ID_COLABORADOR` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_INSTRUCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_INSTRUCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_INSTRUCAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(3),
-  `DESCRICAO` VARCHAR(100)
+  `DESCRICAO` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_INSTRUCAO_OP
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_INSTRUCAO_OP
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_INSTRUCAO_OP` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PCP_INSTRUCAO` INT UNSIGNED NOT NULL,
-  `ID_PCP_OP_CABECALHO` INT UNSIGNED NOT NULL
+  `ID_PCP_OP_CABECALHO` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PCP_SERVICO_EQUIPAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PCP_SERVICO_EQUIPAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PCP_SERVICO_EQUIPAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_PATRIM_BEM` INT UNSIGNED NOT NULL,
-  `ID_PCP_SERVICO` INT UNSIGNED NOT NULL
+  `ID_PCP_SERVICO` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_AGENDAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_AGENDAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_AGENDAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `DATA_OPERACAO` DATE,
@@ -6212,24 +6631,26 @@ CREATE TABLE IF NOT EXISTS `WMS_AGENDAMENTO` (
   `QUANTIDADE_VOLUME` INT UNSIGNED,
   `PESO_TOTAL_VOLUME` DECIMAL(18,6),
   `QUANTIDADE_PESSOA` INT UNSIGNED,
-  `QUANTIDADE_HORA` INT UNSIGNED
+  `QUANTIDADE_HORA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_PARAMETRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_PARAMETRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_PARAMETRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `HORA_POR_VOLUME` INT UNSIGNED,
   `PESSOA_POR_VOLUME` INT UNSIGNED,
   `HORA_POR_PESO` INT UNSIGNED,
   `PESSOA_POR_PESO` INT UNSIGNED,
-  `ITEM_DIFERENTE_CAIXA` CHAR(1)
+  `ITEM_DIFERENTE_CAIXA` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_RECEBIMENTO_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_RECEBIMENTO_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_RECEBIMENTO_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_AGENDAMENTO` INT UNSIGNED NOT NULL,
@@ -6239,12 +6660,13 @@ CREATE TABLE IF NOT EXISTS `WMS_RECEBIMENTO_CABECALHO` (
   `VOLUME_RECEBIDO` INT UNSIGNED,
   `PESO_RECEBIDO` DECIMAL(18,6),
   `INCONSISTENCIA` CHAR(1),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_RECEBIMENTO_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_RECEBIMENTO_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_RECEBIMENTO_DETALHE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_RECEBIMENTO_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6252,85 +6674,93 @@ CREATE TABLE IF NOT EXISTS `WMS_RECEBIMENTO_DETALHE` (
   `QUANTIDADE_VOLUME` INT UNSIGNED,
   `QUANTIDADE_ITEM_POR_VOLUME` INT UNSIGNED,
   `QUANTIDADE_RECEBIDA` INT UNSIGNED,
-  `DESTINO` CHAR(1)
+  `DESTINO` CHAR(1),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_RUA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_RUA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_RUA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(10),
   `NOME` VARCHAR(100),
-  `QUANTIDADE_ESTANTE` INT UNSIGNED
+  `QUANTIDADE_ESTANTE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_ESTANTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_ESTANTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_ESTANTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_RUA` INT UNSIGNED NOT NULL,
   `CODIGO` VARCHAR(10),
-  `QUANTIDADE_CAIXA` INT UNSIGNED
+  `QUANTIDADE_CAIXA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_CAIXA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_CAIXA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_CAIXA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_ESTANTE` INT UNSIGNED NOT NULL,
   `CODIGO` VARCHAR(10),
   `ALTURA` INT UNSIGNED,
   `LARGURA` INT UNSIGNED,
-  `PROFUNDIDADE` INT UNSIGNED
+  `PROFUNDIDADE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_ARMAZENAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_ARMAZENAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_ARMAZENAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_CAIXA` INT UNSIGNED NOT NULL,
   `ID_WMS_RECEBIMENTO_DETALHE` INT UNSIGNED NOT NULL,
-  `QUANTIDADE` INT UNSIGNED
+  `QUANTIDADE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_ORDEM_SEPARACAO_CAB
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_ORDEM_SEPARACAO_CAB
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_ORDEM_SEPARACAO_CAB` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ORIGEM` CHAR(1),
   `DATA_SOLICITACAO` DATE,
-  `DATA_LIMITE` DATE
+  `DATA_LIMITE` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_ORDEM_SEPARACAO_DET
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_ORDEM_SEPARACAO_DET
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_ORDEM_SEPARACAO_DET` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_ORDEM_SEPARACAO_CAB` INT UNSIGNED NOT NULL,
   `ID_PRODUTO` INT NOT NULL,
-  `QUANTIDADE` INT UNSIGNED
+  `QUANTIDADE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: WMS_EXPEDICAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- WMS_EXPEDICAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `WMS_EXPEDICAO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_WMS_ORDEM_SEPARACAO_DET` INT UNSIGNED NOT NULL,
   `ID_WMS_ARMAZENAMENTO` INT UNSIGNED NOT NULL,
   `QUANTIDADE` INT UNSIGNED,
-  `DATA_SAIDA` DATE
+  `DATA_SAIDA` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: IBPT
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- IBPT
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `IBPT` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `NCM` VARCHAR(8),
@@ -6345,12 +6775,13 @@ CREATE TABLE IF NOT EXISTS `IBPT` (
   `VIGENCIA_FIM` DATE,
   `CHAVE` VARCHAR(6),
   `VERSAO` VARCHAR(6),
-  `FONTE` VARCHAR(34)
+  `FONTE` VARCHAR(34),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF` INT UNSIGNED,
@@ -6377,43 +6808,47 @@ CREATE TABLE IF NOT EXISTS `MDFE_CABECALHO` (
   `CODIGO_UNIDADE_MEDIDA` CHAR(2),
   `PESO_BRUTO_CARGA` DECIMAL(18,6),
   `VALOR_CARGA` DECIMAL(18,6),
-  `NUMERO_PROTOCOLO` VARCHAR(15)
+  `NUMERO_PROTOCOLO` VARCHAR(15),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_LACRE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_LACRE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_LACRE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
-  `NUMERO_LACRE` VARCHAR(20)
+  `NUMERO_LACRE` VARCHAR(20),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_INFORMACAO_CTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_INFORMACAO_CTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_INFORMACAO_CTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_MUNICIPIO_DESCARREGA` INT UNSIGNED NOT NULL,
   `CHAVE_CTE` VARCHAR(44),
   `SEGUNDO_CODIGO_BARRA` VARCHAR(36),
-  `INDICADOR_REENTREGA` INT UNSIGNED
+  `INDICADOR_REENTREGA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_INFORMACAO_NFE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_INFORMACAO_NFE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_INFORMACAO_NFE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_MUNICIPIO_DESCARREGA` INT UNSIGNED NOT NULL,
   `CHAVE_NFE` VARCHAR(44),
   `SEGUNDO_CODIGO_BARRA` VARCHAR(36),
-  `INDICADOR_REENTREGA` INT UNSIGNED
+  `INDICADOR_REENTREGA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_EMITENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_EMITENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_EMITENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6430,52 +6865,57 @@ CREATE TABLE IF NOT EXISTS `MDFE_EMITENTE` (
   `CEP` VARCHAR(8),
   `UF` CHAR(2),
   `TELEFONE` VARCHAR(12),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_PERCURSO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_PERCURSO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_PERCURSO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
   `UF_PERCURSO` CHAR(2),
-  `DATA_INICIO_VIAGEM` DATE
+  `DATA_INICIO_VIAGEM` DATE,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_MUNICIPIO_CARREGAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_MUNICIPIO_CARREGAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_MUNICIPIO_CARREGAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
   `NOME_MUNICIPIO` VARCHAR(60),
-  `CODIGO_MUNICIPIO` VARCHAR(7)
+  `CODIGO_MUNICIPIO` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_RODOVIARIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_RODOVIARIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
   `RNTRC` VARCHAR(8),
-  `CODIGO_AGENDAMENTO` VARCHAR(16)
+  `CODIGO_AGENDAMENTO` VARCHAR(16),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_RODOVIARIO_MOTORISTA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_RODOVIARIO_MOTORISTA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO_MOTORISTA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_RODOVIARIO` INT UNSIGNED NOT NULL,
   `NOME` VARCHAR(60),
-  `CPF` VARCHAR(11)
+  `CPF` VARCHAR(11),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_RODOVIARIO_VEICULO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_RODOVIARIO_VEICULO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO_VEICULO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_RODOVIARIO` INT UNSIGNED NOT NULL,
@@ -6493,22 +6933,24 @@ CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO_VEICULO` (
   `PROPRIETARIO_RNTRC` VARCHAR(8),
   `PROPRIETARIO_NOME` VARCHAR(60),
   `PROPRIETARIO_IE` VARCHAR(2),
-  `PROPRIETARIO_TIPO` INT UNSIGNED
+  `PROPRIETARIO_TIPO` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_MUNICIPIO_DESCARREGA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_MUNICIPIO_DESCARREGA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_MUNICIPIO_DESCARREGA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
   `NOME_MUNICIPIO` VARCHAR(60),
-  `CODIGO_MUNICIPIO` VARCHAR(7)
+  `CODIGO_MUNICIPIO` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_INFORMACAO_SEGURO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_INFORMACAO_SEGURO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_INFORMACAO_SEGURO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6517,12 +6959,13 @@ CREATE TABLE IF NOT EXISTS `MDFE_INFORMACAO_SEGURO` (
   `SEGURADORA` VARCHAR(11),
   `CNPJ_SEGURADORA` VARCHAR(14),
   `APOLICE` VARCHAR(20),
-  `AVERBACAO` VARCHAR(40)
+  `AVERBACAO` VARCHAR(40),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_RODOVIARIO_PEDAGIO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_RODOVIARIO_PEDAGIO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO_PEDAGIO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_RODOVIARIO` INT UNSIGNED NOT NULL,
@@ -6530,23 +6973,25 @@ CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO_PEDAGIO` (
   `CNPJ_RESPONSAVEL` VARCHAR(14),
   `CPF_RESPONSAVEL` VARCHAR(11),
   `NUMERO_COMPROVANTE` VARCHAR(20),
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: MDFE_RODOVIARIO_CIOT
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- MDFE_RODOVIARIO_CIOT
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `MDFE_RODOVIARIO_CIOT` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_MDFE_RODOVIARIO` INT UNSIGNED NOT NULL,
   `CIOT` VARCHAR(12),
   `CPF` VARCHAR(11),
-  `CNPJ` VARCHAR(14)
+  `CNPJ` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_VEICULO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_VEICULO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_VEICULO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO_TIPO` INT NOT NULL,
@@ -6558,74 +7003,81 @@ CREATE TABLE IF NOT EXISTS `FROTA_VEICULO` (
   `MARCA` VARCHAR(100),
   `MODELO` VARCHAR(100),
   `MODELO_ANO` CHAR(4),
-  `CODIGO_FIPE` VARCHAR(7)
+  `CODIGO_FIPE` VARCHAR(7),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_VEICULO_TIPO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_VEICULO_TIPO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_VEICULO_TIPO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `NOME` VARCHAR(100)
+  `NOME` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_IPVA_CONTROLE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_IPVA_CONTROLE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_IPVA_CONTROLE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO` INT NOT NULL,
   `PARCELA` CHAR(2),
   `DATA_VENCIMENTO` DATE,
   `DATA_PAGAMENTO` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_DPVAT_CONTROLE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_DPVAT_CONTROLE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_DPVAT_CONTROLE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO` INT NOT NULL,
   `PARCELA` CHAR(2),
   `DATA_VENCIMENTO` DATE,
   `DATA_PAGAMENTO` DATE,
-  `VALOR` DECIMAL(18,6)
+  `VALOR` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_COMBUSTIVEL_TIPO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_COMBUSTIVEL_TIPO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_COMBUSTIVEL_TIPO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `NOME` VARCHAR(100)
+  `NOME` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_MOTORISTA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_MOTORISTA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_MOTORISTA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PESSOA_FISICA` INT NOT NULL,
   `NUMERO_CNH` VARCHAR(11),
-  `CNH_CATEGORIA` CHAR(2)
+  `CNH_CATEGORIA` CHAR(2),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_VEICULO_SINISTRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_VEICULO_SINISTRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_VEICULO_SINISTRO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO` INT NOT NULL,
   `DATA_SINISTRO` DATE,
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_VEICULO_MOVIMENTACAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_VEICULO_MOVIMENTACAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_VEICULO_MOVIMENTACAO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_MOTORISTA` INT NOT NULL,
@@ -6634,101 +7086,110 @@ CREATE TABLE IF NOT EXISTS `FROTA_VEICULO_MOVIMENTACAO` (
   `HORA_SAIDA` VARCHAR(8),
   `DATA_ENTRADA` DATE,
   `HORA_ENTRADA` VARCHAR(8),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_VEICULO_PNEU
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_VEICULO_PNEU
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_VEICULO_PNEU` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `DATA_TROCA` DATE,
   `VALOR_TROCA` DECIMAL(18,6),
   `POSICAO_PNEU` VARCHAR(100),
   `MARCA_PNEU` VARCHAR(100),
-  `ID_FROTA_VEICULO` INT NOT NULL
+  `ID_FROTA_VEICULO` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_VEICULO_MANUTENCAO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_VEICULO_MANUTENCAO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_VEICULO_MANUTENCAO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO` INT NOT NULL,
   `TIPO` CHAR(1),
   `DATA_MANUTENCAO` DATE,
   `VALOR_MANUTENCAO` DECIMAL(18,6),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_MULTA_CONTROLE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_MULTA_CONTROLE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_MULTA_CONTROLE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO` INT NOT NULL,
   `DATA_MULTA` DATE,
   `PONTOS` INT,
   `VALOR` DECIMAL(18,6),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: FROTA_COMBUSTIVEL_CONTROLE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- FROTA_COMBUSTIVEL_CONTROLE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `FROTA_COMBUSTIVEL_CONTROLE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_FROTA_VEICULO` INT NOT NULL,
   `DATA_ABASTECIMENTO` DATE,
   `HORA_ABASTECIMENTO` VARCHAR(8),
-  `VALOR_ABASTECIMENTO` DECIMAL(18,6)
+  `VALOR_ABASTECIMENTO` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GONDOLA_RUA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GONDOLA_RUA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GONDOLA_RUA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `CODIGO` VARCHAR(10),
   `NOME` VARCHAR(100),
-  `QUANTIDADE_ESTANTE` INT UNSIGNED
+  `QUANTIDADE_ESTANTE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GONDOLA_CAIXA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GONDOLA_CAIXA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GONDOLA_CAIXA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_GONDOLA_ESTANTE` INT UNSIGNED NOT NULL,
   `CODIGO` VARCHAR(10),
   `ALTURA` INT UNSIGNED,
   `LARGURA` INT UNSIGNED,
-  `PROFUNDIDADE` INT UNSIGNED
+  `PROFUNDIDADE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GONDOLA_ESTANTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GONDOLA_ESTANTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GONDOLA_ESTANTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_GONDOLA_RUA` INT UNSIGNED NOT NULL,
   `CODIGO` VARCHAR(10),
-  `QUANTIDADE_CAIXA` INT UNSIGNED
+  `QUANTIDADE_CAIXA` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: GONDOLA_ARMAZENAMENTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- GONDOLA_ARMAZENAMENTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `GONDOLA_ARMAZENAMENTO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_GONDOLA_CAIXA` INT UNSIGNED NOT NULL,
   `ID_PRODUTO` INT NOT NULL,
-  `QUANTIDADE` INT UNSIGNED
+  `QUANTIDADE` INT UNSIGNED,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PROJETO_PRINCIPAL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PROJETO_PRINCIPAL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_PRINCIPAL` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `NOME` VARCHAR(100),
@@ -6737,44 +7198,48 @@ CREATE TABLE IF NOT EXISTS `PROJETO_PRINCIPAL` (
   `DATA_FIM` DATE,
   `LINK_QUADRO_TRELLO` VARCHAR(100),
   `VALOR_ORCAMENTO` DECIMAL(18,6),
-  `OBSERVACAO` TEXT
+  `OBSERVACAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PROJETO_CRONOGRAMA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PROJETO_CRONOGRAMA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_CRONOGRAMA` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PROJETO_PRINCIPAL` INT NOT NULL,
   `TAREFA` VARCHAR(100),
   `DATA_TAREFA` DATE,
-  `DESCRICAO` TEXT
+  `DESCRICAO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PROJETO_STAKEHOLDERS
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PROJETO_STAKEHOLDERS
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_STAKEHOLDERS` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PROJETO_DADOS` INT NOT NULL,
-  `ID_COLABORADOR` INT NOT NULL
+  `ID_COLABORADOR` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PROJETO_RISCO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PROJETO_RISCO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_RISCO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PROJETO_PRINCIPAL` INT NOT NULL,
   `NOME` VARCHAR(100),
   `DESCRICAO` TEXT,
   `PROBABILIDADE` INT,
-  `IMPACTO` INT
+  `IMPACTO` INT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: PROJETO_CUSTO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- PROJETO_CUSTO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `PROJETO_CUSTO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_PROJETO_PRINCIPAL` INT NOT NULL,
@@ -6782,12 +7247,13 @@ CREATE TABLE IF NOT EXISTS `PROJETO_CUSTO` (
   `NOME` VARCHAR(100),
   `JUSTIFICATIVA` TEXT,
   `VALOR_MENSAL` DECIMAL(18,6),
-  `VALOR_TOTAL` DECIMAL(18,6)
+  `VALOR_TOTAL` DECIMAL(18,6),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_CABECALHO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `UF_EMITENTE` INT UNSIGNED,
@@ -6823,12 +7289,13 @@ CREATE TABLE IF NOT EXISTS `BPE_CABECALHO` (
   `ALIQUOTA_ICMS` DECIMAL(18,6),
   `VALOR_ICMS` DECIMAL(18,6),
   `PERCENTUAL_REDUCAO_BC_ICMS` DECIMAL(18,6),
-  `INFORMACOES_ADD_FISCO` TEXT
+  `INFORMACOES_ADD_FISCO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_EMITENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_EMITENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_EMITENTE` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BPE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6848,12 +7315,13 @@ CREATE TABLE IF NOT EXISTS `BPE_EMITENTE` (
   `NOME_MUNICIPIO` VARCHAR(60),
   `UF` CHAR(2),
   `CEP` VARCHAR(8),
-  `TELEFONE` VARCHAR(14)
+  `TELEFONE` VARCHAR(14),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_PASSAGEIRO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_PASSAGEIRO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_PASSAGEIRO` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BPE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6864,12 +7332,13 @@ CREATE TABLE IF NOT EXISTS `BPE_PASSAGEIRO` (
   `DOCUMENTO_OUTROS_DESCRICAO` VARCHAR(100),
   `DATA_NASCIMENTO` DATE,
   `TELEFONE` VARCHAR(12),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_COMPRADOR
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_COMPRADOR
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_COMPRADOR` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BPE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6889,12 +7358,13 @@ CREATE TABLE IF NOT EXISTS `BPE_COMPRADOR` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_VIAGEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_VIAGEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_VIAGEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BPE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6908,12 +7378,13 @@ CREATE TABLE IF NOT EXISTS `BPE_VIAGEM` (
   `DATA_HORA_CONEXAO` TIMESTAMP_F,
   `PREFIXO_LINHA` VARCHAR(20),
   `POLTRONA` CHAR(3),
-  `PLATAFORMA` VARCHAR(10)
+  `PLATAFORMA` VARCHAR(10),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_AGENCIA
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_AGENCIA
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_AGENCIA` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BPE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6930,12 +7401,13 @@ CREATE TABLE IF NOT EXISTS `BPE_AGENCIA` (
   `CEP` VARCHAR(8),
   `CODIGO_PAIS` INT,
   `NOME_PAIS` VARCHAR(60),
-  `EMAIL` VARCHAR(60)
+  `EMAIL` VARCHAR(60),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: BPE_PASSAGEM
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- BPE_PASSAGEM
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `BPE_PASSAGEM` (
   `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `ID_BPE_CABECALHO` INT UNSIGNED NOT NULL,
@@ -6944,70 +7416,506 @@ CREATE TABLE IF NOT EXISTS `BPE_PASSAGEM` (
   `CODIGO_LOCALIDADE_DESTINO` VARCHAR(7),
   `DESCRICAO_LOCALIDADE_DESTINO` VARCHAR(60),
   `DATA_HORA_EMBARQUE` TIMESTAMP_F,
-  `DATA_HORA_VALIDADE` TIMESTAMP_F
+  `DATA_HORA_VALIDADE` TIMESTAMP_F,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CRM_SAC_CABECALHO
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CRM_SAC_CABECALHO
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRM_SAC_CABECALHO` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `DATA_ABERTURA` DATE,
   `HORA_ABERTURA` VARCHAR(8),
   `NUMERO_PROTOCOLO` VARCHAR(100),
   `NIVEL_RECLAMACAO` CHAR(1),
-  `ID_CLIENTE` INT NOT NULL
+  `ID_CLIENTE` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CRM_SAC_DETALHE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CRM_SAC_DETALHE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRM_SAC_DETALHE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_CRM_SAC_CABECALHO` INT NOT NULL,
   `DATA_REGISTRO` DATE,
   `HORA_REGISTRO` VARCHAR(8),
-  `HISTORICO` TEXT
+  `HISTORICO` TEXT,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CRM_BUSCAS_CLIENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CRM_BUSCAS_CLIENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRM_BUSCAS_CLIENTE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `DATA_BUSCA` DATE,
   `HORA_BUSCA` VARCHAR(8),
   `DETALHES` TEXT,
-  `ID_CLIENTE` INT NOT NULL
+  `ID_CLIENTE` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CRM_CARTEIRA_CLIENTE
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CRM_CARTEIRA_CLIENTE
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRM_CARTEIRA_CLIENTE` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `ID_CRM_CARTEIRA_CLIENTE_PERFIL` INT NOT NULL,
-  `ID_CLIENTE` INT NOT NULL
+  `ID_CLIENTE` INT NOT NULL,
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- -------------------------------------------------------------
--- Tabela: CRM_CARTEIRA_CLIENTE_PERFIL
--- -------------------------------------------------------------
+-- ----------------------------------------------------------------
+-- CRM_CARTEIRA_CLIENTE_PERFIL
+-- ----------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `CRM_CARTEIRA_CLIENTE_PERFIL` (
   `ID` INT NOT NULL AUTO_INCREMENT,
   `CODIGO` CHAR(2),
-  `NOME` VARCHAR(100)
+  `NOME` VARCHAR(100),
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- =============================================================
--- Indices
--- =============================================================
+-- ================================================================
+-- Índices
+-- ================================================================
+CREATE INDEX `fk_PESSOA_FISICA_PESSOA1_idx` ON `PESSOA_FISICA` (`ID_PESSOA`);
+CREATE INDEX `fk_PESSOA_FISICA_NIVEL_FORMACAO1_idx` ON `PESSOA_FISICA` (`ID_NIVEL_FORMACAO`);
+CREATE INDEX `fk_PESSOA_FISICA_ESTADO_CIVIL1_idx` ON `PESSOA_FISICA` (`ID_ESTADO_CIVIL`);
+CREATE INDEX `fk_PESSOA_JURIDICA_PESSOA1_idx` ON `PESSOA_JURIDICA` (`ID_PESSOA`);
+CREATE INDEX `fk_CLIENTE_PESSOA_idx` ON `CLIENTE` (`ID_PESSOA`);
+CREATE INDEX `fk_CLIENTE_TABELA_PRECO1_idx` ON `CLIENTE` (`ID_TABELA_PRECO`);
+CREATE INDEX `fk_FORNECEDOR_PESSOA1_idx` ON `FORNECEDOR` (`ID_PESSOA`);
+CREATE INDEX `fk_TRANSPORTADORA_PESSOA1_idx` ON `TRANSPORTADORA` (`ID_PESSOA`);
+CREATE INDEX `fk_CONTADOR_PESSOA1_idx` ON `CONTADOR` (`ID_PESSOA`);
+CREATE INDEX `fk_COLABORADOR_PESSOA1_idx` ON `COLABORADOR` (`ID_PESSOA`);
+CREATE INDEX `fk_COLABORADOR_CARGO1_idx` ON `COLABORADOR` (`ID_CARGO`);
+CREATE INDEX `fk_COLABORADOR_SETOR1_idx` ON `COLABORADOR` (`ID_SETOR`);
+CREATE INDEX `fk_COLABORADOR_COLABORADOR_SITUACAO1_idx` ON `COLABORADOR` (`ID_COLABORADOR_SITUACAO`);
+CREATE INDEX `fk_COLABORADOR_TIPO_ADMISSAO1_idx` ON `COLABORADOR` (`ID_TIPO_ADMISSAO`);
+CREATE INDEX `fk_COLABORADOR_COLABORADOR_TIPO1_idx` ON `COLABORADOR` (`ID_COLABORADOR_TIPO`);
+CREATE INDEX `fk_COLABORADOR_SINDICATO1_idx` ON `COLABORADOR` (`ID_SINDICATO`);
+CREATE INDEX `fk_VENDEDOR_COLABORADOR1_idx` ON `VENDEDOR` (`ID_COLABORADOR`);
+CREATE INDEX `fk_VENDEDOR_COMISSAO_PERFIL1_idx` ON `VENDEDOR` (`ID_COMISSAO_PERFIL`);
+CREATE INDEX `fk_PESSOA_ENDERECO_PESSOA1_idx` ON `PESSOA_ENDERECO` (`ID_PESSOA`);
+CREATE INDEX `fk_PESSOA_CONTATO_PESSOA1_idx` ON `PESSOA_CONTATO` (`ID_PESSOA`);
+CREATE INDEX `fk_PESSOA_TELEFONE_PESSOA1_idx` ON `PESSOA_TELEFONE` (`ID_PESSOA`);
+CREATE INDEX `fk_USUARIO_COLABORADOR1_idx` ON `USUARIO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_USUARIO_PAPEL1_idx` ON `USUARIO` (`ID_PAPEL`);
+CREATE INDEX `fk_PAPEL_FUNCAO_PAPEL1_idx` ON `PAPEL_FUNCAO` (`ID_PAPEL`);
+CREATE INDEX `fk_PAPEL_FUNCAO_FUNCAO1_idx` ON `PAPEL_FUNCAO` (`ID_FUNCAO`);
+CREATE INDEX `fk_PRODUTO_PRODUTO_SUBGRUPO1_idx` ON `PRODUTO` (`ID_PRODUTO_SUBGRUPO`);
+CREATE INDEX `fk_PRODUTO_PRODUTO_MARCA1_idx` ON `PRODUTO` (`ID_PRODUTO_MARCA`);
+CREATE INDEX `fk_PRODUTO_PRODUTO_UNIDADE1_idx` ON `PRODUTO` (`ID_PRODUTO_UNIDADE`);
+CREATE INDEX `fk_PRODUTO_TRIBUT_ICMS_CUSTOM_CAB1_idx` ON `PRODUTO` (`ID_TRIBUT_ICMS_CUSTOM_CAB`);
+CREATE INDEX `fk_PRODUTO_TRIBUT_GRUPO_TRIBUTARIO1_idx` ON `PRODUTO` (`ID_TRIBUT_GRUPO_TRIBUTARIO`);
+CREATE INDEX `fk_PRODUTO_SUBGRUPO_PRODUTO_GRUPO1_idx` ON `PRODUTO_SUBGRUPO` (`ID_PRODUTO_GRUPO`);
+CREATE INDEX `fk_BANCO_AGENCIA_BANCO1_idx` ON `BANCO_AGENCIA` (`ID_BANCO`);
+CREATE INDEX `fk_BANCO_CONTA_CAIXA_BANCO_AGENCIA1_idx` ON `BANCO_CONTA_CAIXA` (`ID_BANCO_AGENCIA`);
+CREATE INDEX `fk_MUNICIPIO_UF1_idx` ON `MUNICIPIO` (`ID_UF`);
+CREATE INDEX `fk_EMPRESA_ENDERECO_EMPRESA1_idx` ON `EMPRESA_ENDERECO` (`ID_EMPRESA`);
+CREATE INDEX `fk_EMPRESA_CONTATO_EMPRESA1_idx` ON `EMPRESA_CONTATO` (`ID_EMPRESA`);
+CREATE INDEX `fk_EMPRESA_TELEFONE_EMPRESA1_idx` ON `EMPRESA_TELEFONE` (`ID_EMPRESA`);
+CREATE INDEX `fk_TALONARIO_CHEQUE_BANCO_CONTA_CAIXA1_idx` ON `TALONARIO_CHEQUE` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_TALONARIO_CHEQUE` ON `CHEQUE` (`ID_TALONARIO_CHEQUE`);
+CREATE INDEX `fk_FIN_FECHAMENTO_CAIXA_BANCO_BANCO_CONTA_CAIXA1_idx` ON `FIN_FECHAMENTO_CAIXA_BANCO` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `fk_FIN_EXTRATO_CONTA_BANCO_BANCO_CONTA_CAIXA1_idx` ON `FIN_EXTRATO_CONTA_BANCO` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_DOC_ORIG_LCTO_PAGAR` ON `FIN_LANCAMENTO_PAGAR` (`ID_FIN_DOCUMENTO_ORIGEM`);
+CREATE INDEX `fk_FIN_LANCAMENTO_PAGAR_FIN_NATUREZA_FINANCEIRA1_idx` ON `FIN_LANCAMENTO_PAGAR` (`ID_FIN_NATUREZA_FINANCEIRA`);
+CREATE INDEX `fk_FIN_LANCAMENTO_PAGAR_FORNECEDOR1_idx` ON `FIN_LANCAMENTO_PAGAR` (`ID_FORNECEDOR`);
+CREATE INDEX `fk_FIN_LANCAMENTO_PAGAR_BANCO_CONTA_CAIXA1_idx` ON `FIN_LANCAMENTO_PAGAR` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_STATUS_PARCELA_PAGAR` ON `FIN_PARCELA_PAGAR` (`ID_FIN_STATUS_PARCELA`);
+CREATE INDEX `FK_LANCAMENTO_PARCELA` ON `FIN_PARCELA_PAGAR` (`ID_FIN_LANCAMENTO_PAGAR`);
+CREATE INDEX `fk_FIN_PARCELA_PAGAR_FIN_TIPO_PAGAMENTO1_idx` ON `FIN_PARCELA_PAGAR` (`ID_FIN_TIPO_PAGAMENTO`);
+CREATE INDEX `fk_FIN_PARCELA_PAGAR_FIN_CHEQUE_EMITIDO1_idx` ON `FIN_PARCELA_PAGAR` (`ID_FIN_CHEQUE_EMITIDO`);
+CREATE INDEX `FK_CHEQUE_EMITIDO` ON `FIN_CHEQUE_EMITIDO` (`ID_CHEQUE`);
+CREATE INDEX `FK_DOC_ORI_LANC_RECEBER` ON `FIN_LANCAMENTO_RECEBER` (`ID_FIN_DOCUMENTO_ORIGEM`);
+CREATE INDEX `fk_FIN_LANCAMENTO_RECEBER_FIN_NATUREZA_FINANCEIRA1_idx` ON `FIN_LANCAMENTO_RECEBER` (`ID_FIN_NATUREZA_FINANCEIRA`);
+CREATE INDEX `fk_FIN_LANCAMENTO_RECEBER_CLIENTE1_idx` ON `FIN_LANCAMENTO_RECEBER` (`ID_CLIENTE`);
+CREATE INDEX `fk_FIN_LANCAMENTO_RECEBER_BANCO_CONTA_CAIXA1_idx` ON `FIN_LANCAMENTO_RECEBER` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_LANCAMENTO_PARCELA_RECEBER` ON `FIN_PARCELA_RECEBER` (`ID_FIN_LANCAMENTO_RECEBER`);
+CREATE INDEX `FK_STATUS_PARCELA_RECEBER` ON `FIN_PARCELA_RECEBER` (`ID_FIN_STATUS_PARCELA`);
+CREATE INDEX `fk_FIN_PARCELA_RECEBER_FIN_TIPO_RECEBIMENTO1_idx` ON `FIN_PARCELA_RECEBER` (`ID_FIN_TIPO_RECEBIMENTO`);
+CREATE INDEX `fk_FIN_PARCELA_RECEBER_FIN_CHEQUE_RECEBIDO1_idx` ON `FIN_PARCELA_RECEBER` (`ID_FIN_CHEQUE_RECEBIDO`);
+CREATE INDEX `fk_FIN_CHEQUE_RECEBIDO_PESSOA1_idx` ON `FIN_CHEQUE_RECEBIDO` (`ID_PESSOA`);
+CREATE INDEX `fk_FIN_CONFIGURACAO_BOLETO_BANCO_CONTA_CAIXA1_idx` ON `FIN_CONFIGURACAO_BOLETO` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_CONFIG_OF_GT_ICMS` ON `TRIBUT_ICMS_UF` (`ID_TRIBUT_CONFIGURA_OF_GT`);
+CREATE INDEX `FK_CONFIG_OF_GT_PIS` ON `TRIBUT_PIS` (`ID_TRIBUT_CONFIGURA_OF_GT`);
+CREATE INDEX `FK_CONFIG_OF_GT_COFINS` ON `TRIBUT_COFINS` (`ID_TRIBUT_CONFIGURA_OF_GT`);
+CREATE INDEX `FK_CONFIG_OF_GT_IPI` ON `TRIBUT_IPI` (`ID_TRIBUT_CONFIGURA_OF_GT`);
+CREATE INDEX `FK_TRIBUT_OP_FISCAL_ISS` ON `TRIBUT_ISS` (`ID_TRIBUT_OPERACAO_FISCAL`);
+CREATE INDEX `FK_TIPO_REQ_COMPRA` ON `COMPRA_REQUISICAO` (`ID_COMPRA_TIPO_REQUISICAO`);
+CREATE INDEX `fk_COMPRA_REQUISICAO_COLABORADOR1_idx` ON `COMPRA_REQUISICAO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_REQUISICAO_COMPRA_DETALHE` ON `COMPRA_REQUISICAO_DETALHE` (`ID_COMPRA_REQUISICAO`);
+CREATE INDEX `fk_COMPRA_REQUISICAO_DETALHE_PRODUTO1_idx` ON `COMPRA_REQUISICAO_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `fk_COMPRA_COTACAO_COMPRA_REQUISICAO1_idx` ON `COMPRA_COTACAO` (`ID_COMPRA_REQUISICAO`);
+CREATE INDEX `FK_COTACAO_FORNECEDOR` ON `COMPRA_FORNECEDOR_COTACAO` (`ID_COMPRA_COTACAO`);
+CREATE INDEX `fk_COMPRA_FORNECEDOR_COTACAO_FORNECEDOR1_idx` ON `COMPRA_FORNECEDOR_COTACAO` (`ID_FORNECEDOR`);
+CREATE INDEX `FK_FORNECEDOR_COTACAO_DETALHE` ON `COMPRA_COTACAO_DETALHE` (`ID_COMPRA_FORNECEDOR_COTACAO`);
+CREATE INDEX `fk_COMPRA_COTACAO_DETALHE_PRODUTO1_idx` ON `COMPRA_COTACAO_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_TIPO_PEDIDO_COMPRA` ON `COMPRA_PEDIDO` (`ID_COMPRA_TIPO_PEDIDO`);
+CREATE INDEX `fk_COMPRA_PEDIDO_FORNECEDOR1_idx` ON `COMPRA_PEDIDO` (`ID_FORNECEDOR`);
+CREATE INDEX `fk_COMPRA_PEDIDO_COLABORADOR1_idx` ON `COMPRA_PEDIDO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_PEDIDO_COMPRA_DETALHE` ON `COMPRA_PEDIDO_DETALHE` (`ID_COMPRA_PEDIDO`);
+CREATE INDEX `fk_COMPRA_PEDIDO_DETALHE_PRODUTO1_idx` ON `COMPRA_PEDIDO_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_COND_PGTO_ORC_PED_VENDA` ON `VENDA_ORCAMENTO_CABECALHO` (`ID_VENDA_CONDICOES_PAGAMENTO`);
+CREATE INDEX `fk_VENDA_ORCAMENTO_CABECALHO_VENDEDOR1_idx` ON `VENDA_ORCAMENTO_CABECALHO` (`ID_VENDEDOR`);
+CREATE INDEX `fk_VENDA_ORCAMENTO_CABECALHO_CLIENTE1_idx` ON `VENDA_ORCAMENTO_CABECALHO` (`ID_CLIENTE`);
+CREATE INDEX `fk_VENDA_ORCAMENTO_CABECALHO_TRANSPORTADORA1_idx` ON `VENDA_ORCAMENTO_CABECALHO` (`ID_TRANSPORTADORA`);
+CREATE INDEX `FK_NF_TIPO_MODELO` ON `NOTA_FISCAL_TIPO` (`ID_NOTA_FISCAL_MODELO`);
+CREATE INDEX `FK_VENDA_ORCAMENTO_CAB_DET` ON `VENDA_ORCAMENTO_DETALHE` (`ID_VENDA_ORCAMENTO_CABECALHO`);
+CREATE INDEX `fk_VENDA_ORCAMENTO_DETALHE_PRODUTO1_idx` ON `VENDA_ORCAMENTO_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_ORCAMENTO_VENDA` ON `VENDA_CABECALHO` (`ID_VENDA_ORCAMENTO_CABECALHO`);
+CREATE INDEX `FK_VENDA_CAB_CONDICOES` ON `VENDA_CABECALHO` (`ID_VENDA_CONDICOES_PAGAMENTO`);
+CREATE INDEX `FK_TIPO_NF_VENDA_CAB` ON `VENDA_CABECALHO` (`ID_NOTA_FISCAL_TIPO`);
+CREATE INDEX `fk_VENDA_CABECALHO_CLIENTE1_idx` ON `VENDA_CABECALHO` (`ID_CLIENTE`);
+CREATE INDEX `fk_VENDA_CABECALHO_TRANSPORTADORA1_idx` ON `VENDA_CABECALHO` (`ID_TRANSPORTADORA`);
+CREATE INDEX `fk_VENDA_CABECALHO_VENDEDOR1_idx` ON `VENDA_CABECALHO` (`ID_VENDEDOR`);
+CREATE INDEX `FK_VENDA_CAB_DET` ON `VENDA_DETALHE` (`ID_VENDA_CABECALHO`);
+CREATE INDEX `fk_VENDA_DETALHE_PRODUTO1_idx` ON `VENDA_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_CONDICOES_PARCELAS` ON `VENDA_CONDICOES_PARCELAS` (`ID_VENDA_CONDICOES_PAGAMENTO`);
+CREATE INDEX `FK_VENDA_CABECALHO_FRETE` ON `VENDA_FRETE` (`ID_VENDA_CABECALHO`);
+CREATE INDEX `fk_VENDA_FRETE_TRANSPORTADORA1_idx` ON `VENDA_FRETE` (`ID_TRANSPORTADORA`);
+CREATE INDEX `FK_VENDA_COMISSAO` ON `VENDA_COMISSAO` (`ID_VENDA_CABECALHO`);
+CREATE INDEX `fk_VENDA_COMISSAO_VENDEDOR1_idx` ON `VENDA_COMISSAO` (`ID_VENDEDOR`);
+CREATE INDEX `fk_REQUISICAO_INTERNA_CABECALHO_COLABORADOR1_idx` ON `REQUISICAO_INTERNA_CABECALHO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_REQ_INTERNA_CAB_DET` ON `REQUISICAO_INTERNA_DETALHE` (`ID_REQUISICAO_INTERNA_CABECALHO`);
+CREATE INDEX `fk_REQUISICAO_INTERNA_DETALHE_PRODUTO1_idx` ON `REQUISICAO_INTERNA_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `fk_ESTOQUE_REAJUSTE_CABECALHO_COLABORADOR1_idx` ON `ESTOQUE_REAJUSTE_CABECALHO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_ESTOQUE_REAJUSTE_CAB_DET` ON `ESTOQUE_REAJUSTE_DETALHE` (`ID_ESTOQUE_REAJUSTE_CABECALHO`);
+CREATE INDEX `fk_ESTOQUE_REAJUSTE_DETALHE_PRODUTO1_idx` ON `ESTOQUE_REAJUSTE_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_ESTOQUE_COR_GRADE` ON `ESTOQUE_GRADE` (`ID_ESTOQUE_COR`);
+CREATE INDEX `FK_ESTOQUE_TAMANHO_GRADE` ON `ESTOQUE_GRADE` (`ID_ESTOQUE_TAMANHO`);
+CREATE INDEX `FK_ESTOQUE_SABOR` ON `ESTOQUE_GRADE` (`ID_ESTOQUE_SABOR`);
+CREATE INDEX `FK_ESTOQUE_MARCA` ON `ESTOQUE_GRADE` (`ID_ESTOQUE_MARCA`);
+CREATE INDEX `fk_ESTOQUE_GRADE_PRODUTO1_idx` ON `ESTOQUE_GRADE` (`ID_PRODUTO`);
+CREATE INDEX `FK_OP_FISCAL_CONFIGURA` ON `TRIBUT_CONFIGURA_OF_GT` (`ID_TRIBUT_OPERACAO_FISCAL`);
+CREATE INDEX `FK_GRUPO_TRIB_CONFIGURA` ON `TRIBUT_CONFIGURA_OF_GT` (`ID_TRIBUT_GRUPO_TRIBUTARIO`);
+CREATE INDEX `FK_ICMS_CUSTOM_CAB_DET` ON `TRIBUT_ICMS_CUSTOM_DET` (`ID_TRIBUT_ICMS_CUSTOM_CAB`);
+CREATE INDEX `fk_NFE_CABECALHO_VENDEDOR1_idx` ON `NFE_CABECALHO` (`ID_VENDEDOR`);
+CREATE INDEX `fk_NFE_CABECALHO_FORNECEDOR1_idx` ON `NFE_CABECALHO` (`ID_FORNECEDOR`);
+CREATE INDEX `fk_NFE_CABECALHO_NFCE_MOVIMENTO1_idx` ON `NFE_CABECALHO` (`ID_NFCE_MOVIMENTO`);
+CREATE INDEX `fk_NFE_CABECALHO_VENDA_CABECALHO1_idx` ON `NFE_CABECALHO` (`ID_VENDA_CABECALHO`);
+CREATE INDEX `fk_NFE_CABECALHO_TRIBUT_OPERACAO_FISCAL1_idx` ON `NFE_CABECALHO` (`ID_TRIBUT_OPERACAO_FISCAL`);
+CREATE INDEX `fk_NFE_CABECALHO_CLIENTE1_idx` ON `NFE_CABECALHO` (`ID_CLIENTE`);
+CREATE INDEX `FK_NFE_CAB_DET` ON `NFE_DETALHE` (`ID_NFE_CABECALHO`);
+CREATE INDEX `fk_NFE_DETALHE_PRODUTO1_idx` ON `NFE_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_NFE_REFERENCIADA` ON `NFE_REFERENCIADA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_EMITENTE` ON `NFE_EMITENTE` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_DESTINATARIO` ON `NFE_DESTINATARIO` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_LOCAL_RETIRADA` ON `NFE_LOCAL_RETIRADA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_LOCAL_ENTREGA` ON `NFE_LOCAL_ENTREGA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_DET_ESPECIFICO_VEICULO` ON `NFE_DET_ESPECIFICO_VEICULO` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_ESP_MEDICAMENTO` ON `NFE_DET_ESPECIFICO_MEDICAMENTO` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_ESP_ARMAMENTO` ON `NFE_DET_ESPECIFICO_ARMAMENTO` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_ESP_COMBUSTIVEL` ON `NFE_DET_ESPECIFICO_COMBUSTIVEL` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_TRANSPORTE` ON `NFE_TRANSPORTE` (`ID_NFE_CABECALHO`);
+CREATE INDEX `fk_NFE_TRANSPORTE_TRANSPORTADORA1_idx` ON `NFE_TRANSPORTE` (`ID_TRANSPORTADORA`);
+CREATE INDEX `FK_NFE_CAB_FATURA` ON `NFE_FATURA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `fk_NFE_DUPLICATA_NFE_FATURA1_idx` ON `NFE_DUPLICATA` (`ID_NFE_FATURA`);
+CREATE INDEX `FK_NFE_DET_DEC_IMPORTACAO` ON `NFE_DECLARACAO_IMPORTACAO` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_IMPORTACAO_DETALHE` ON `NFE_IMPORTACAO_DETALHE` (`ID_NFE_DECLARACAO_IMPORTACAO`);
+CREATE INDEX `FK_NFE_CAB_CANA` ON `NFE_CANA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_CANA_FORNECIMENTO` ON `NFE_CANA_FORNECIMENTO_DIARIO` (`ID_NFE_CANA`);
+CREATE INDEX `FK_NFE_CANA_DEDUCOES` ON `NFE_CANA_DEDUCOES_SAFRA` (`ID_NFE_CANA`);
+CREATE INDEX `FK_NFE_CF_REFERENCIADO` ON `NFE_CUPOM_FISCAL_REFERENCIADO` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_RURAL_REFERENCIADO` ON `NFE_PROD_RURAL_REFERENCIADA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_NF_REFERENCIADA` ON `NFE_NF_REFERENCIADA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_DET_ICMS` ON `NFE_DETALHE_IMPOSTO_ICMS` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_IPI` ON `NFE_DETALHE_IMPOSTO_IPI` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_II` ON `NFE_DETALHE_IMPOSTO_II` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_PIS` ON `NFE_DETALHE_IMPOSTO_PIS` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_COFINS` ON `NFE_DETALHE_IMPOSTO_COFINS` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_ISSQN` ON `NFE_DETALHE_IMPOSTO_ISSQN` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_TRANSP_REBOQUE` ON `NFE_TRANSPORTE_REBOQUE` (`ID_NFE_TRANSPORTE`);
+CREATE INDEX `FK_TRANSP_VOLUME` ON `NFE_TRANSPORTE_VOLUME` (`ID_NFE_TRANSPORTE`);
+CREATE INDEX `FK_NFE_TRANSP_VOL_LACRE` ON `NFE_TRANSPORTE_VOLUME_LACRE` (`ID_NFE_TRANSPORTE_VOLUME`);
+CREATE INDEX `NFE_CAB_PROC_REF` ON `NFE_PROCESSO_REFERENCIADO` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_CTE_REFERENCIADO` ON `NFE_CTE_REFERENCIADO` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_ACESSO_XML` ON `NFE_ACESSO_XML` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_NFE_EXPORTACAO` ON `NFE_EXPORTACAO` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_FORMA_PAGAMENTO` ON `NFE_INFORMACAO_PAGAMENTO` (`ID_NFE_CABECALHO`);
+CREATE INDEX `fk_NFE_ITEM_RASTREADO_NFE_DETALHE1_idx` ON `NFE_ITEM_RASTREADO` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_PIS` ON `NFE_DETALHE_IMPOSTO_PIS_ST` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_ICMS` ON `NFE_DETALHE_IMPOSTO_ICMS_UFDEST` (`ID_NFE_DETALHE`);
+CREATE INDEX `FK_NFE_DET_COFINS` ON `NFE_DETALHE_IMPOSTO_COFINS_ST` (`ID_NFE_DETALHE`);
+CREATE INDEX `fk_NFE_RESPONSAVEL_TECNICO_NFE_CABECALHO1_idx` ON `NFE_RESPONSAVEL_TECNICO` (`ID_NFE_CABECALHO`);
+CREATE INDEX `FK_TABELA_PRECO` ON `TABELA_PRECO_PRODUTO` (`ID_TABELA_PRECO`);
+CREATE INDEX `fk_TABELA_PRECO_PRODUTO_PRODUTO1_idx` ON `TABELA_PRECO_PRODUTO` (`ID_PRODUTO`);
+CREATE INDEX `FK_GED_TIPO_DOCUMENTO` ON `GED_DOCUMENTO_DETALHE` (`ID_GED_TIPO_DOCUMENTO`);
+CREATE INDEX `FK_GED_DOCUMENTO_CAB_DET` ON `GED_DOCUMENTO_DETALHE` (`ID_GED_DOCUMENTO_CABECALHO`);
+CREATE INDEX `FK_GED_DOC_VERSAO_DOC` ON `GED_VERSAO_DOCUMENTO` (`ID_GED_DOCUMENTO_DETALHE`);
+CREATE INDEX `fk_GED_VERSAO_DOCUMENTO_COLABORADOR1_idx` ON `GED_VERSAO_DOCUMENTO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_OS_STATUS_ABERTURA` ON `OS_ABERTURA` (`ID_OS_STATUS`);
+CREATE INDEX `fk_OS_ABERTURA_CLIENTE1_idx` ON `OS_ABERTURA` (`ID_CLIENTE`);
+CREATE INDEX `fk_OS_ABERTURA_COLABORADOR1_idx` ON `OS_ABERTURA` (`ID_COLABORADOR`);
+CREATE INDEX `FK_OS_ABERT_EQUIP` ON `OS_ABERTURA_EQUIPAMENTO` (`ID_OS_ABERTURA`);
+CREATE INDEX `FK_OS_EQUIP_ABERT` ON `OS_ABERTURA_EQUIPAMENTO` (`ID_OS_EQUIPAMENTO`);
+CREATE INDEX `FK_OS_ABERT_PROD_SERV` ON `OS_PRODUTO_SERVICO` (`ID_OS_ABERTURA`);
+CREATE INDEX `fk_OS_PRODUTO_SERVICO_PRODUTO1_idx` ON `OS_PRODUTO_SERVICO` (`ID_PRODUTO`);
+CREATE INDEX `OS_EVOLUCAO_FKIndex1` ON `OS_EVOLUCAO` (`ID_OS_ABERTURA`);
+CREATE INDEX `FK_COMISSAO_PERFIL_OBJETIVO` ON `COMISSAO_OBJETIVO` (`ID_COMISSAO_PERFIL`);
+CREATE INDEX `fk_COMISSAO_OBJETIVO_PRODUTO1_idx` ON `COMISSAO_OBJETIVO` (`ID_PRODUTO`);
+CREATE INDEX `fk_VENDEDOR_ROTA_VENDEDOR1_idx` ON `VENDEDOR_ROTA` (`ID_VENDEDOR`);
+CREATE INDEX `fk_VENDEDOR_ROTA_CLIENTE1_idx` ON `VENDEDOR_ROTA` (`ID_CLIENTE`);
+CREATE INDEX `fk_VENDEDOR_META_VENDEDOR1_idx` ON `VENDEDOR_META` (`ID_VENDEDOR`);
+CREATE INDEX `fk_VENDEDOR_META_CLIENTE1_idx` ON `VENDEDOR_META` (`ID_CLIENTE`);
+CREATE INDEX `FK_NFCE_MOV_SANGRIA` ON `NFCE_SANGRIA` (`ID_NFCE_MOVIMENTO`);
+CREATE INDEX `FK_NFCE_OPERADOR_MOV` ON `NFCE_MOVIMENTO` (`ID_NFCE_OPERADOR`);
+CREATE INDEX `FK_NFCE_CAIXA_MOV` ON `NFCE_MOVIMENTO` (`ID_NFCE_CAIXA`);
+CREATE INDEX `fk_NFCE_OPERADOR_COLABORADOR1_idx` ON `NFCE_OPERADOR` (`ID_COLABORADOR`);
+CREATE INDEX `FK_NFCE_MOV_FECHA` ON `NFCE_FECHAMENTO` (`ID_NFCE_MOVIMENTO`);
+CREATE INDEX `fk_NFCE_FECHAMENTO_NFCE_TIPO_PAGAMENTO1_idx` ON `NFCE_FECHAMENTO` (`ID_NFCE_TIPO_PAGAMENTO`);
+CREATE INDEX `FK_NFCE_MOV_SUPRIMENTO` ON `NFCE_SUPRIMENTO` (`ID_NFCE_MOVIMENTO`);
+CREATE INDEX `fk_NFSE_CABECALHO_OS_ABERTURA1_idx` ON `NFSE_CABECALHO` (`ID_OS_ABERTURA`);
+CREATE INDEX `fk_NFSE_CABECALHO_CLIENTE1_idx` ON `NFSE_CABECALHO` (`ID_CLIENTE`);
+CREATE INDEX `FK_NFSE_CAB_DET` ON `NFSE_DETALHE` (`ID_NFSE_CABECALHO`);
+CREATE INDEX `FK_LISTA_SER_DET` ON `NFSE_DETALHE` (`ID_NFSE_LISTA_SERVICO`);
+CREATE INDEX `FK_NFSE_INTERMEDIARIO` ON `NFSE_INTERMEDIARIO` (`ID_NFSE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_EMITENTE` ON `CTE_EMITENTE` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_COLETA` ON `CTE_LOCAL_COLETA` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_TOMADOR` ON `CTE_TOMADOR` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_PASSAGEM` ON `CTE_PASSAGEM` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_REMETENTE` ON `CTE_REMETENTE` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_EXPEDIDOR` ON `CTE_EXPEDIDOR` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_RECEBEDOR` ON `CTE_RECEBEDOR` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_DESTINATARIO` ON `CTE_DESTINATARIO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_ENTREGA` ON `CTE_LOCAL_ENTREGA` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_COMPONENTE` ON `CTE_COMPONENTE` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_CARGA` ON `CTE_CARGA` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_INFORMACAO_NF` ON `CTE_INFORMACAO_NF_OUTROS` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_INF_NF_TRANSP` ON `CTE_INFORMACAO_NF_TRANSPORTE` (`ID_CTE_INFORMACAO_NF`);
+CREATE INDEX `FK_CTE_INF_NF_TRANS_LACRE` ON `CTE_INF_NF_TRANSPORTE_LACRE` (`ID_CTE_INFORMACAO_NF_TRANSPORTE`);
+CREATE INDEX `FK_CTE_INF_NF_CARGA` ON `CTE_INFORMACAO_NF_CARGA` (`ID_CTE_INFORMACAO_NF`);
+CREATE INDEX `FK_CTE_INF_CARGA_LACRE` ON `CTE_INF_NF_CARGA_LACRE` (`ID_CTE_INFORMACAO_NF_CARGA`);
+CREATE INDEX `FK_CTE_CAB_DOC_ANTERIOR` ON `CTE_DOCUMENTO_ANTERIOR` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_DOC_ANTERIOR_ID` ON `CTE_DOCUMENTO_ANTERIOR_ID` (`ID_CTE_DOCUMENTO_ANTERIOR`);
+CREATE INDEX `FK_CTE_CAB_SEGURO` ON `CTE_SEGURO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_PERIGO` ON `CTE_PERIGOSO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_VEICULO_NOVO` ON `CTE_VEICULO_NOVO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_FATURA` ON `CTE_FATURA` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_DUPLICATA` ON `CTE_DUPLICATA` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_RODOVIARIO` ON `CTE_RODOVIARIO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_ROD_OCC` ON `CTE_RODOVIARIO_OCC` (`ID_CTE_RODOVIARIO`);
+CREATE INDEX `FK_CTE_ROD_PEDAGIO` ON `CTE_RODOVIARIO_PEDAGIO` (`ID_CTE_RODOVIARIO`);
+CREATE INDEX `FK_CTE_ROD_VEICULO` ON `CTE_RODOVIARIO_VEICULO` (`ID_CTE_RODOVIARIO`);
+CREATE INDEX `FK_CTE_ROD_LACRE` ON `CTE_RODOVIARIO_LACRE` (`ID_CTE_RODOVIARIO`);
+CREATE INDEX `FK_CTE_ROD_MOTORISTA` ON `CTE_RODOVIARIO_MOTORISTA` (`ID_CTE_RODOVIARIO`);
+CREATE INDEX `FK_CTE_CAB_AEREO` ON `CTE_AEREO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_AQUAVIARIO` ON `CTE_AQUAVIARIO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_AQUA_BALSA` ON `CTE_AQUAVIARIO_BALSA` (`ID_CTE_AQUAVIARIO`);
+CREATE INDEX `FK_CTE_CAB_FERROVIARIO` ON `CTE_FERROVIARIO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_FERRO_VIA` ON `CTE_FERROVIARIO_FERROVIA` (`ID_CTE_FERROVIARIO`);
+CREATE INDEX `FK_CTE_FERRO_VAGAO` ON `CTE_FERROVIARIO_VAGAO` (`ID_CTE_FERROVIARIO`);
+CREATE INDEX `FK_CTE_CAB_DUTO` ON `CTE_DUTOVIARIO` (`ID_CTE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_MULTI` ON `CTE_MULTIMODAL` (`ID_CTE_CABECALHO`);
+CREATE INDEX `fk_OPERADORA_CARTAO_BANCO_CONTA_CAIXA1_idx` ON `OPERADORA_CARTAO` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_TIPO_REL_COLABORADOR` ON `COLABORADOR_RELACIONAMENTO` (`ID_TIPO_RELACIONAMENTO`);
+CREATE INDEX `fk_COLABORADOR_RELACIONAMENTO_COLABORADOR1_idx` ON `COLABORADOR_RELACIONAMENTO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_FORNECEDOR_PRODUTO_PRODUTO1_idx` ON `FORNECEDOR_PRODUTO` (`ID_PRODUTO`);
+CREATE INDEX `fk_FORNECEDOR_PRODUTO_FORNECEDOR1_idx` ON `FORNECEDOR_PRODUTO` (`ID_FORNECEDOR`);
+CREATE INDEX `fk_PRODUTO_PROMOCAO_PRODUTO1_idx` ON `PRODUTO_PROMOCAO` (`ID_PRODUTO`);
+CREATE INDEX `fk_PRODUTO_FICHA_TECNICA_PRODUTO1_idx` ON `PRODUTO_FICHA_TECNICA` (`ID_PRODUTO`);
+CREATE INDEX `fk_PRODUTO_CODIGO_ADICIONAL_PRODUTO1_idx` ON `PRODUTO_CODIGO_ADICIONAL` (`ID_PRODUTO`);
+CREATE INDEX `FK_IRRF_DETALHE` ON `IRRF_DETALHE` (`ID_IRRF`);
+CREATE INDEX `FK_INSS_DETALHE` ON `INSS_DETALHE` (`ID_INSS`);
+CREATE INDEX `FK_INSS_SALARIO_FAMILIA` ON `SALARIO_FAMILIA` (`ID_INSS`);
+CREATE INDEX `FK_SIND_PATRO_CONTR` ON `CONTRIB_SIND_PATRONAL_CAB` (`ID_SINDICATO`);
+CREATE INDEX `FK_CONTR_SIND_PATRONAL` ON `CONTRIB_SIND_PATRONAL_DET` (`ID_CONTRIB_SIND_PATRONAL_CAB`);
+CREATE INDEX `FK_EMP_TRANS_ITINER` ON `EMPRESA_TRANSPORTE_ITINERARIO` (`ID_EMPRESA_TRANSPORTE`);
+CREATE INDEX `FK_TIPO_REC_DACON` ON `COD_APURACAO_RECEITA_DACON` (`ID_TIPO_RECEITA_DACON`);
+CREATE INDEX `FK_COD_APURA_DACON` ON `COD_APURACAO_RECEITA_DACON` (`ID_CODIGO_APURACAO_EFD`);
+CREATE INDEX `fk_ORCAMENTO_FLUXO_CAIXA_PERIODO_BANCO_CONTA_CAIXA1_idx` ON `ORCAMENTO_FLUXO_CAIXA_PERIODO` (`ID_BANCO_CONTA_CAIXA`);
+CREATE INDEX `FK_FLUXO_CX_PERIODO` ON `ORCAMENTO_FLUXO_CAIXA` (`ID_ORC_FLUXO_CAIXA_PERIODO`);
+CREATE INDEX `FK_FLUXO_CAIXA_DETALHE` ON `ORCAMENTO_FLUXO_CAIXA_DETALHE` (`ID_ORCAMENTO_FLUXO_CAIXA`);
+CREATE INDEX `fk_ORCAMENTO_FLUXO_CAIXA_DETALHE_FIN_NATUREZA_FINANCEIRA1_idx` ON `ORCAMENTO_FLUXO_CAIXA_DETALHE` (`ID_FIN_NATUREZA_FINANCEIRA`);
+CREATE INDEX `FK_CONTA_SPED_CONTA` ON `CONTABIL_CONTA` (`ID_PLANO_CONTA_REF_SPED`);
+CREATE INDEX `FK_CONTABIL_CONTA_CONTA` ON `CONTABIL_CONTA` (`ID_CONTABIL_CONTA`);
+CREATE INDEX `FK_PLANO_CONTA_CONTA` ON `CONTABIL_CONTA` (`ID_PLANO_CONTA`);
+CREATE INDEX `FK_LOTE_LANC_CAB` ON `CONTABIL_LANCAMENTO_CABECALHO` (`ID_CONTABIL_LOTE`);
+CREATE INDEX `FK_CONTABIL_LANCAMENTO` ON `CONTABIL_LANCAMENTO_DETALHE` (`ID_CONTABIL_LANCAMENTO_CAB`);
+CREATE INDEX `FK_HIST_LANCAMENTO` ON `CONTABIL_LANCAMENTO_DETALHE` (`ID_CONTABIL_HISTORICO`);
+CREATE INDEX `FK_CONTA_LANCAMENTO` ON `CONTABIL_LANCAMENTO_DETALHE` (`ID_CONTABIL_CONTA`);
+CREATE INDEX `FK_CONTA_LANC_ORCADO` ON `CONTABIL_LANCAMENTO_ORCADO` (`ID_CONTABIL_CONTA`);
+CREATE INDEX `FK_DRE_CAB_DET` ON `CONTABIL_DRE_DETALHE` (`ID_CONTABIL_DRE_CABECALHO`);
+CREATE INDEX `FK_CONTABIL_LIVRO_TERMO` ON `CONTABIL_TERMO` (`ID_CONTABIL_LIVRO`);
+CREATE INDEX `FK_ENC_EXE_CAB_DET` ON `CONTABIL_ENCERRAMENTO_EXE_DET` (`ID_CONTABIL_ENCERRAMENTO_EXE`);
+CREATE INDEX `FK_CONTABIL_CONTA_ENC_DET` ON `CONTABIL_ENCERRAMENTO_EXE_DET` (`ID_CONTABIL_CONTA`);
+CREATE INDEX `FK_CENTRO_LANCA` ON `LANCA_CENTRO_RESULTADO` (`ID_CENTRO_RESULTADO`);
+CREATE INDEX `FK_PLANO_CENTRO` ON `CENTRO_RESULTADO` (`ID_PLANO_CENTRO_RESULTADO`);
+CREATE INDEX `FK_CENTRO_RATEIO_CAB` ON `RATEIO_CENTRO_RESULTADO_CAB` (`ID_CENTRO_RESULTADO`);
+CREATE INDEX `FK_RATEIO_CAB_DET` ON `RATEIO_CENTRO_RESULTADO_DET` (`ID_RATEIO_CENTRO_RESUL_CAB`);
+CREATE INDEX `FK_CENTRO_RATEIO` ON `RATEIO_CENTRO_RESULTADO_DET` (`ID_CENTRO_RESULTADO_DESTINO`);
+CREATE INDEX `FK_CENTRO_ENCERRA` ON `ENCERRA_CENTRO_RESULTADO` (`ID_CENTRO_RESULTADO`);
+CREATE INDEX `fk_FOLHA_LANCAMENTO_COMISSAO_VENDEDOR1_idx` ON `FOLHA_LANCAMENTO_COMISSAO` (`ID_VENDEDOR`);
+CREATE INDEX `FK_CONTABIL_CONTA_RATEIO` ON `CONTABIL_CONTA_RATEIO` (`ID_CONTABIL_CONTA`);
+CREATE INDEX `FK_CENTRO_RESULTADO_RATEIO` ON `CONTABIL_CONTA_RATEIO` (`ID_CENTRO_RESULTADO`);
+CREATE INDEX `fk_EMPRESA_CNAE_EMPRESA1_idx` ON `EMPRESA_CNAE` (`ID_EMPRESA`);
+CREATE INDEX `fk_EMPRESA_CNAE_CNAE1_idx` ON `EMPRESA_CNAE` (`ID_CNAE`);
+CREATE INDEX `FK_CONTAGEM_CAB_DET` ON `INVENTARIO_CONTAGEM_DET` (`ID_INVENTARIO_CONTAGEM_CAB`);
+CREATE INDEX `fk_INVENTARIO_CONTAGEM_DET_PRODUTO1_idx` ON `INVENTARIO_CONTAGEM_DET` (`ID_PRODUTO`);
+CREATE INDEX `FK_ORCAMENTO_PERIODO_ORC` ON `ORCAMENTO_EMPRESARIAL` (`ID_ORCAMENTO_PERIODO`);
+CREATE INDEX `FK_ORC_EMPRESARIAL_CAB_DET` ON `ORCAMENTO_DETALHE` (`ID_ORCAMENTO_EMPRESARIAL`);
+CREATE INDEX `fk_ORCAMENTO_DETALHE_FIN_NATUREZA_FINANCEIRA1_idx` ON `ORCAMENTO_DETALHE` (`ID_FIN_NATUREZA_FINANCEIRA`);
+CREATE INDEX `FK_PATRIM_GRUPO_BEM` ON `PATRIM_BEM` (`ID_PATRIM_GRUPO_BEM`);
+CREATE INDEX `FK_TIPO_AQUISICAO_BEM` ON `PATRIM_BEM` (`ID_PATRIM_TIPO_AQUISICAO_BEM`);
+CREATE INDEX `FK_ESTADO_CONSERVACAO_BEM` ON `PATRIM_BEM` (`ID_PATRIM_ESTADO_CONSERVACAO`);
+CREATE INDEX `FK_CENTRO_RES_BEM` ON `PATRIM_BEM` (`ID_CENTRO_RESULTADO`);
+CREATE INDEX `fk_PATRIM_BEM_FORNECEDOR1_idx` ON `PATRIM_BEM` (`ID_FORNECEDOR`);
+CREATE INDEX `fk_PATRIM_BEM_COLABORADOR1_idx` ON `PATRIM_BEM` (`ID_COLABORADOR`);
+CREATE INDEX `fk_PATRIM_BEM_SETOR1_idx` ON `PATRIM_BEM` (`ID_SETOR`);
+CREATE INDEX `FK_PATRIM_DOCUMENTO_BEM` ON `PATRIM_DOCUMENTO_BEM` (`ID_PATRIM_BEM`);
+CREATE INDEX `FK_PATRIM_BEM_DEPRECIACAO` ON `PATRIM_DEPRECIACAO_BEM` (`ID_PATRIM_BEM`);
+CREATE INDEX `FK_TIPO_MOV_BEM_MOV_BEM` ON `PATRIM_MOVIMENTACAO_BEM` (`ID_PATRIM_TIPO_MOVIMENTACAO`);
+CREATE INDEX `FK_PATRIM_BEM_MOVIMENTACAO` ON `PATRIM_MOVIMENTACAO_BEM` (`ID_PATRIM_BEM`);
+CREATE INDEX `FK_SEGURADA_APOLICE` ON `PATRIM_APOLICE_SEGURO` (`ID_SEGURADORA`);
+CREATE INDEX `FK_PATRIM_APOLICE_BEM` ON `PATRIM_APOLICE_SEGURO` (`ID_PATRIM_BEM`);
+CREATE INDEX `FK_REGIME_MUN_PAR` ON `FISCAL_PARAMETRO` (`ID_FISCAL_MUNICIPAL_REGIME`);
+CREATE INDEX `FK_REGIME_EST_PAR` ON `FISCAL_PARAMETRO` (`ID_FISCAL_ESTADUAL_REGIME`);
+CREATE INDEX `FK_PORTE_EST_PAR` ON `FISCAL_PARAMETRO` (`ID_FISCAL_ESTADUAL_PORTE`);
+CREATE INDEX `FK_FISCAL_LIVRO_TERMO` ON `FISCAL_TERMO` (`ID_FISCAL_LIVRO`);
+CREATE INDEX `FK_PAR_INSC_SUBSTITUTA` ON `FISCAL_INSCRICOES_SUBSTITUTAS` (`ID_FISCAL_PARAMETROS`);
+CREATE INDEX `FK_SIMPLES_NACIONAL_CAB_DET` ON `SIMPLES_NACIONAL_DETALHE` (`ID_SIMPLES_NACIONAL_CABECALHO`);
+CREATE INDEX `fk_FISCAL_NOTA_FISCAL_ENTRADA_NFE_CABECALHO1_idx` ON `FISCAL_NOTA_FISCAL_ENTRADA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `fk_FERIAS_PERIODO_AQUISITIVO_COLABORADOR1_idx` ON `FERIAS_PERIODO_AQUISITIVO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_FOLHA_TIPO_AFASTAMENTO` ON `FOLHA_AFASTAMENTO` (`ID_FOLHA_TIPO_AFASTAMENTO`);
+CREATE INDEX `fk_FOLHA_AFASTAMENTO_COLABORADOR1_idx` ON `FOLHA_AFASTAMENTO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_FOLHA_PLANO_SAUDE_COLABORADOR1_idx` ON `FOLHA_PLANO_SAUDE` (`ID_COLABORADOR`);
+CREATE INDEX `fk_FOLHA_PLANO_SAUDE_OPERADORA_PLANO_SAUDE1_idx` ON `FOLHA_PLANO_SAUDE` (`ID_OPERADORA_PLANO_SAUDE`);
+CREATE INDEX `fk_FOLHA_RESCISAO_COLABORADOR1_idx` ON `FOLHA_RESCISAO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_FOLHA_LANCAMENTO_CABECALHO_COLABORADOR1_idx` ON `FOLHA_LANCAMENTO_CABECALHO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_FOLHA_LANCAMENTO_CAB_DET` ON `FOLHA_LANCAMENTO_DETALHE` (`ID_FOLHA_LANCAMENTO_CABECALHO`);
+CREATE INDEX `FK_FOLHA_EVENTO_LANCAMENTO` ON `FOLHA_LANCAMENTO_DETALHE` (`ID_FOLHA_EVENTO`);
+CREATE INDEX `FK_EMP_TRA_ITIN_VAL_TRA` ON `FOLHA_VALE_TRANSPORTE` (`ID_EMPRESA_TRANSP_ITIN`);
+CREATE INDEX `fk_FOLHA_VALE_TRANSPORTE_COLABORADOR1_idx` ON `FOLHA_VALE_TRANSPORTE` (`ID_COLABORADOR`);
+CREATE INDEX `FK_FOLHA_INSS_SERV_RETENCAO` ON `FOLHA_INSS_RETENCAO` (`ID_FOLHA_INSS_SERVICO`);
+CREATE INDEX `FK_FOLHA_INSS_RETENCAO` ON `FOLHA_INSS_RETENCAO` (`ID_FOLHA_INSS`);
+CREATE INDEX `fk_FOLHA_PPP_COLABORADOR1_idx` ON `FOLHA_PPP` (`ID_COLABORADOR`);
+CREATE INDEX `FK_FOLHA_PPP_CAT` ON `FOLHA_PPP_CAT` (`ID_FOLHA_PPP`);
+CREATE INDEX `FK_FOLHA_PPP_ATIVIDADE` ON `FOLHA_PPP_ATIVIDADE` (`ID_FOLHA_PPP`);
+CREATE INDEX `FK_FOLHA_PPP_FATOR_RISCO` ON `FOLHA_PPP_FATOR_RISCO` (`ID_FOLHA_PPP`);
+CREATE INDEX `FK_FOLHA_PPP_EXAME_MEDIDO` ON `FOLHA_PPP_EXAME_MEDICO` (`ID_FOLHA_PPP`);
+CREATE INDEX `fk_FOLHA_HISTORICO_SALARIAL_COLABORADOR1_idx` ON `FOLHA_HISTORICO_SALARIAL` (`ID_COLABORADOR`);
+CREATE INDEX `FK_TIPO_CONTRATO_CONTRATO` ON `CONTRATO` (`ID_TIPO_CONTRATO`);
+CREATE INDEX `FK_SOL_SERVICO_CONTRATO` ON `CONTRATO` (`ID_SOLICITACAO_SERVICO`);
+CREATE INDEX `FK_CONTRATO_TIPO_SERVICO_SOL` ON `CONTRATO_SOLICITACAO_SERVICO` (`ID_CONTRATO_TIPO_SERVICO`);
+CREATE INDEX `fk_CONTRATO_SOLICITACAO_SERVICO_SETOR1_idx` ON `CONTRATO_SOLICITACAO_SERVICO` (`ID_SETOR`);
+CREATE INDEX `fk_CONTRATO_SOLICITACAO_SERVICO_COLABORADOR1_idx` ON `CONTRATO_SOLICITACAO_SERVICO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_CONTRATO_SOLICITACAO_SERVICO_CLIENTE1_idx` ON `CONTRATO_SOLICITACAO_SERVICO` (`ID_CLIENTE`);
+CREATE INDEX `fk_CONTRATO_SOLICITACAO_SERVICO_FORNECEDOR1_idx` ON `CONTRATO_SOLICITACAO_SERVICO` (`ID_FORNECEDOR`);
+CREATE INDEX `FK_CONTRATO_HISTORICO_REAJUSTE` ON `CONTRATO_HISTORICO_REAJUSTE` (`ID_CONTRATO`);
+CREATE INDEX `FK_CONTRATO_PREV_FATURAMENTO` ON `CONTRATO_PREV_FATURAMENTO` (`ID_CONTRATO`);
+CREATE INDEX `FK_CONTRATO_HIST_FATURAMENTO` ON `CONTRATO_HIST_FATURAMENTO` (`ID_CONTRATO`);
+CREATE INDEX `FK_PONTO_ESCALA_TURMA` ON `PONTO_TURMA` (`ID_PONTO_ESCALA`);
+CREATE INDEX `FK_PONTO_RELOGIO_MARCACAO` ON `PONTO_MARCACAO` (`ID_PONTO_RELOGIO`);
+CREATE INDEX `fk_PONTO_MARCACAO_COLABORADOR1_idx` ON `PONTO_MARCACAO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_PONTO_BANCO_HORAS_COLABORADOR1_idx` ON `PONTO_BANCO_HORAS` (`ID_COLABORADOR`);
+CREATE INDEX `fk_PONTO_HORARIO_AUTORIZADO_COLABORADOR1_idx` ON `PONTO_HORARIO_AUTORIZADO` (`ID_COLABORADOR`);
+CREATE INDEX `fk_PONTO_ABONO_COLABORADOR1_idx` ON `PONTO_ABONO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_PONTO_ABONO_UTILIZACAO` ON `PONTO_ABONO_UTILIZACAO` (`ID_PONTO_ABONO`);
+CREATE INDEX `fk_DAV_CABECALHO_PESSOA1_idx` ON `DAV_CABECALHO` (`ID_PESSOA`);
+CREATE INDEX `FK_DAV_CAB_DET` ON `DAV_DETALHE` (`ID_DAV_CABECALHO`);
+CREATE INDEX `fk_DAV_DETALHE_PRODUTO1_idx` ON `DAV_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `fk_PRE_VENDA_CABECALHO_PESSOA1_idx` ON `PRE_VENDA_CABECALHO` (`ID_PESSOA`);
+CREATE INDEX `FK_PRE_VENDA_CAB_DET` ON `PRE_VENDA_DETALHE` (`ID_PRE_VENDA_CABECALHO`);
+CREATE INDEX `fk_PRE_VENDA_DETALHE_PRODUTO1_idx` ON `PRE_VENDA_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_CONTABIL_INDICE_VALOR` ON `CONTABIL_INDICE_VALOR` (`ID_CONTABIL_INDICE`);
+CREATE INDEX `FK_BANCO_HORA_UTILIZACAO` ON `PONTO_BANCO_HORAS_UTILIZACAO` (`ID_PONTO_BANCO_HORAS`);
+CREATE INDEX `FK_PONTO_CLASSIFICACAO_JORNADA` ON `PONTO_FECHAMENTO_JORNADA` (`ID_PONTO_CLASSIFICACAO_JORNADA`);
+CREATE INDEX `fk_PONTO_FECHAMENTO_JORNADA_COLABORADOR1_idx` ON `PONTO_FECHAMENTO_JORNADA` (`ID_COLABORADOR`);
+CREATE INDEX `FK_CR_NF` ON `CT_RESULTADO_NT_FINANCEIRA` (`ID_CENTRO_RESULTADO`);
+CREATE INDEX `fk_CT_RESULTADO_NT_FINANCEIRA_FIN_NATUREZA_FINANCEIRA1_idx` ON `CT_RESULTADO_NT_FINANCEIRA` (`ID_FIN_NATUREZA_FINANCEIRA`);
+CREATE INDEX `fk_PRODUTO_ALTERACAO_ITEM_PRODUTO1_idx` ON `PRODUTO_ALTERACAO_ITEM` (`ID_PRODUTO`);
+CREATE INDEX `fk_FISCAL_NOTA_FISCAL_SAIDA_NFE_CABECALHO1_idx` ON `FISCAL_NOTA_FISCAL_SAIDA` (`ID_NFE_CABECALHO`);
+CREATE INDEX `fk_PESSOA_ALTERACAO_PESSOA1_idx` ON `PESSOA_ALTERACAO` (`ID_PESSOA`);
+CREATE INDEX `DAV_DETALHE_ALTERACAO_FKIndex1` ON `DAV_DETALHE_ALTERACAO` (`ID_DAV_DETALHE`);
+CREATE INDEX `fk_MALOTE_DIGITAL_DOCUMENTO_COLABORADOR1_idx` ON `MALOTE_DIGITAL_DOCUMENTO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_MALOTE_DIGITAL_DEST` ON `MALOTE_DIGITAL_DESTINATARIO` (`ID_MALOTE_DIGITAL_DOCUMENTO`);
+CREATE INDEX `fk_MALOTE_DIGITAL_DESTINATARIO_COLABORADOR1_idx` ON `MALOTE_DIGITAL_DESTINATARIO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_MALOTE_DIG_DEST_ACESSO` ON `MALOTE_DIGITAL_ACESSO` (`ID_MALOTE_DIGITAL_DESTINATARIO`);
+CREATE INDEX `FK_PAPEL_ETIQUETA` ON `ETIQUETA_LAYOUT` (`ID_FORMATO_PAPEL`);
+CREATE INDEX `FK_ETIQUETA_TEMPLATE` ON `ETIQUETA_TEMPLATE` (`ID_ETIQUETA_LAYOUT`);
+CREATE INDEX `FK_CATEGORIA_COMPROMISSO` ON `AGENDA_COMPROMISSO` (`ID_AGENDA_CATEGORIA_COMPROMISSO`);
+CREATE INDEX `fk_AGENDA_COMPROMISSO_COLABORADOR1_idx` ON `AGENDA_COMPROMISSO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_COMPROMISSO_NOTIFICACAO` ON `AGENDA_NOTIFICACAO` (`ID_AGENDA_COMPROMISSO`);
+CREATE INDEX `FK_COMPROMISSO_CONVIDADO` ON `AGENDA_COMPROMISSO_CONVIDADO` (`ID_AGENDA_COMPROMISSO`);
+CREATE INDEX `fk_AGENDA_COMPROMISSO_CONVIDADO_COLABORADOR1_idx` ON `AGENDA_COMPROMISSO_CONVIDADO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_SALA_EVENTO` ON `REUNIAO_SALA_EVENTO` (`ID_REUNIAO_SALA`);
+CREATE INDEX `FK_COMPROMISSO_SALA` ON `REUNIAO_SALA_EVENTO` (`ID_AGENDA_COMPROMISSO`);
+CREATE INDEX `fk_RECADO_REMETENTE_COLABORADOR1_idx` ON `RECADO_REMETENTE` (`ID_COLABORADOR`);
+CREATE INDEX `FK_RECADO_REM_DEST` ON `RECADO_DESTINATARIO` (`ID_RECADO_REMETENTE`);
+CREATE INDEX `fk_RECADO_DESTINATARIO_COLABORADOR1_idx` ON `RECADO_DESTINATARIO` (`ID_COLABORADOR`);
+CREATE INDEX `FK_PCP_OP_CAB_DET` ON `PCP_OP_DETALHE` (`ID_PCP_OP_CABECALHO`);
+CREATE INDEX `fk_PCP_OP_DETALHE_PRODUTO1_idx` ON `PCP_OP_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_PCP_SERVICO_REALIZADO` ON `PCP_SERVICO` (`ID_PCP_OP_DETALHE`);
+CREATE INDEX `FK_PCP_SERVICO_COLABORADOR` ON `PCP_SERVICO_COLABORADOR` (`ID_PCP_SERVICO`);
+CREATE INDEX `fk_PCP_SERVICO_COLABORADOR_COLABORADOR1_idx` ON `PCP_SERVICO_COLABORADOR` (`ID_COLABORADOR`);
+CREATE INDEX `FK_PCP_OP_INSTRUCAO` ON `PCP_INSTRUCAO_OP` (`ID_PCP_OP_CABECALHO`);
+CREATE INDEX `FK_PCP_INSTRUCAO_OP` ON `PCP_INSTRUCAO_OP` (`ID_PCP_INSTRUCAO`);
+CREATE INDEX `FK_PCP_SERV_EQUIP` ON `PCP_SERVICO_EQUIPAMENTO` (`ID_PCP_SERVICO`);
+CREATE INDEX `FK_PCP_EQUIP_SERV` ON `PCP_SERVICO_EQUIPAMENTO` (`ID_PATRIM_BEM`);
+CREATE INDEX `FK_WMS_AGENDA_RECEBE` ON `WMS_RECEBIMENTO_CABECALHO` (`ID_WMS_AGENDAMENTO`);
+CREATE INDEX `FK_WMS_REC_CAB_DET` ON `WMS_RECEBIMENTO_DETALHE` (`ID_WMS_RECEBIMENTO_CABECALHO`);
+CREATE INDEX `fk_WMS_RECEBIMENTO_DETALHE_PRODUTO1_idx` ON `WMS_RECEBIMENTO_DETALHE` (`ID_PRODUTO`);
+CREATE INDEX `FK_WMS_RUA_ESTANTE` ON `WMS_ESTANTE` (`ID_WMS_RUA`);
+CREATE INDEX `FK_WMS_ESTANTE_CAIXA` ON `WMS_CAIXA` (`ID_WMS_ESTANTE`);
+CREATE INDEX `FK_CAIXA_ARMAZENA` ON `WMS_ARMAZENAMENTO` (`ID_WMS_CAIXA`);
+CREATE INDEX `FK_RECE_ARMAZENA` ON `WMS_ARMAZENAMENTO` (`ID_WMS_RECEBIMENTO_DETALHE`);
+CREATE INDEX `FK_WMS_OS_CAB_DET` ON `WMS_ORDEM_SEPARACAO_DET` (`ID_WMS_ORDEM_SEPARACAO_CAB`);
+CREATE INDEX `fk_WMS_ORDEM_SEPARACAO_DET_PRODUTO1_idx` ON `WMS_ORDEM_SEPARACAO_DET` (`ID_PRODUTO`);
+CREATE INDEX `FK_WMS_ARMAZ_EXPED` ON `WMS_EXPEDICAO` (`ID_WMS_ARMAZENAMENTO`);
+CREATE INDEX `FK_WMS_OS_DET_EXPED` ON `WMS_EXPEDICAO` (`ID_WMS_ORDEM_SEPARACAO_DET`);
+CREATE INDEX `FK_MDFE_LACRE` ON `MDFE_LACRE` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_INFORMACAO_CTE` ON `MDFE_INFORMACAO_CTE` (`ID_MDFE_MUNICIPIO_DESCARREGA`);
+CREATE INDEX `FK_MDFE_INFORMACAO_NFE` ON `MDFE_INFORMACAO_NFE` (`ID_MDFE_MUNICIPIO_DESCARREGA`);
+CREATE INDEX `FK_MDFE_CAB_EMIT` ON `MDFE_EMITENTE` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_PERCURSO` ON `MDFE_PERCURSO` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_MUNICIPIO_CARREGAMENTO` ON `MDFE_MUNICIPIO_CARREGAMENTO` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_CAB_RODO` ON `MDFE_RODOVIARIO` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_RODOVIARIO_MOTORISTA` ON `MDFE_RODOVIARIO_MOTORISTA` (`ID_MDFE_RODOVIARIO`);
+CREATE INDEX `FK_MDFE_RODOVIARIO_VEICULO` ON `MDFE_RODOVIARIO_VEICULO` (`ID_MDFE_RODOVIARIO`);
+CREATE INDEX `FK_MDFE_MUNICIPIO_DESCARREGAMENTO` ON `MDFE_MUNICIPIO_DESCARREGA` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_INFORMACAO_SEGURO` ON `MDFE_INFORMACAO_SEGURO` (`ID_MDFE_CABECALHO`);
+CREATE INDEX `FK_MDFE_RODOVIARIO_PEDAGIO` ON `MDFE_RODOVIARIO_PEDAGIO` (`ID_MDFE_RODOVIARIO`);
+CREATE INDEX `FK_MDFE_ROD_CIOT` ON `MDFE_RODOVIARIO_CIOT` (`ID_MDFE_RODOVIARIO`);
+CREATE INDEX `fk_FROTA_VEICULO_FROTA_VEICULO_TIPO1_idx` ON `FROTA_VEICULO` (`ID_FROTA_VEICULO_TIPO`);
+CREATE INDEX `fk_FROTA_VEICULO_FROTA_COMBUSTIVEL_TIPO1_idx` ON `FROTA_VEICULO` (`ID_FROTA_COMBUSTIVEL_TIPO`);
+CREATE INDEX `fk_FROTA_IPVA_CONTROLE_FROTA_VEICULO1_idx` ON `FROTA_IPVA_CONTROLE` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_IPVA_CONTROLE_FROTA_VEICULO1_idx` ON `FROTA_DPVAT_CONTROLE` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_MOTORISTA_PESSOA_FISICA1_idx` ON `FROTA_MOTORISTA` (`ID_PESSOA_FISICA`);
+CREATE INDEX `fk_FROTA_SINISTRO_FROTA_VEICULO1_idx` ON `FROTA_VEICULO_SINISTRO` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_VEICULO_MOVIMENTACAO_FROTA_MOTORISTA1_idx` ON `FROTA_VEICULO_MOVIMENTACAO` (`ID_FROTA_MOTORISTA`);
+CREATE INDEX `fk_FROTA_VEICULO_MOVIMENTACAO_FROTA_VEICULO1_idx` ON `FROTA_VEICULO_MOVIMENTACAO` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_VEICULO_PNEU_FROTA_VEICULO1_idx` ON `FROTA_VEICULO_PNEU` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_VEICULO_MANUTENCAO_FROTA_VEICULO1_idx` ON `FROTA_VEICULO_MANUTENCAO` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_MULTA_CONTROLE_FROTA_VEICULO1_idx` ON `FROTA_MULTA_CONTROLE` (`ID_FROTA_VEICULO`);
+CREATE INDEX `fk_FROTA_COMBUSTIVEL_CONTROLE_FROTA_VEICULO1_idx` ON `FROTA_COMBUSTIVEL_CONTROLE` (`ID_FROTA_VEICULO`);
+CREATE INDEX `FK_WMS_ESTANTE_CAIXA` ON `GONDOLA_CAIXA` (`ID_GONDOLA_ESTANTE`);
+CREATE INDEX `FK_WMS_RUA_ESTANTE` ON `GONDOLA_ESTANTE` (`ID_GONDOLA_RUA`);
+CREATE INDEX `FK_CAIXA_ARMAZENA` ON `GONDOLA_ARMAZENAMENTO` (`ID_GONDOLA_CAIXA`);
+CREATE INDEX `fk_GONDOLA_ARMAZENAMENTO_PRODUTO1_idx` ON `GONDOLA_ARMAZENAMENTO` (`ID_PRODUTO`);
+CREATE INDEX `fk_PROJETO_CRONOGRAMA_PROJETO_DADOS1_idx` ON `PROJETO_CRONOGRAMA` (`ID_PROJETO_PRINCIPAL`);
+CREATE INDEX `fk_PROJETO_STAKEHOLDERS_PROJETO_DADOS1_idx` ON `PROJETO_STAKEHOLDERS` (`ID_PROJETO_DADOS`);
+CREATE INDEX `fk_PROJETO_STAKEHOLDERS_COLABORADOR1_idx` ON `PROJETO_STAKEHOLDERS` (`ID_COLABORADOR`);
+CREATE INDEX `fk_PROJETO_RISCO_PROJETO_PRINCIPAL1_idx` ON `PROJETO_RISCO` (`ID_PROJETO_PRINCIPAL`);
+CREATE INDEX `fk_PROJETO_CUSTO_PROJETO_PRINCIPAL1_idx` ON `PROJETO_CUSTO` (`ID_PROJETO_PRINCIPAL`);
+CREATE INDEX `fk_PROJETO_CUSTO_FIN_NATUREZA_FINANCEIRA1_idx` ON `PROJETO_CUSTO` (`ID_FIN_NATUREZA_FINANCEIRA`);
+CREATE INDEX `FK_CTE_CAB_EMITENTE` ON `BPE_EMITENTE` (`ID_BPE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_TOMADOR` ON `BPE_PASSAGEIRO` (`ID_BPE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_REMETENTE` ON `BPE_COMPRADOR` (`ID_BPE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_EXPEDIDOR` ON `BPE_VIAGEM` (`ID_BPE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_DESTINATARIO` ON `BPE_AGENCIA` (`ID_BPE_CABECALHO`);
+CREATE INDEX `FK_CTE_CAB_CARGA` ON `BPE_PASSAGEM` (`ID_BPE_CABECALHO`);
+CREATE INDEX `fk_CRM_SAC_CABECALHO_CLIENTE1_idx` ON `CRM_SAC_CABECALHO` (`ID_CLIENTE`);
+CREATE INDEX `fk_CRM_SAC_DETALHE_CRM_SAC_CABECALHO1_idx` ON `CRM_SAC_DETALHE` (`ID_CRM_SAC_CABECALHO`);
+CREATE INDEX `fk_CRM_BUSCAS_CLIENTE_CLIENTE1_idx` ON `CRM_BUSCAS_CLIENTE` (`ID_CLIENTE`);
+CREATE INDEX `fk_CRM_CARTEIRA_CLIENTE_CRM_CARTEIRA_CLIENTE_PERFIL1_idx` ON `CRM_CARTEIRA_CLIENTE` (`ID_CRM_CARTEIRA_CLIENTE_PERFIL`);
+CREATE INDEX `fk_CRM_CARTEIRA_CLIENTE_CLIENTE1_idx` ON `CRM_CARTEIRA_CLIENTE` (`ID_CLIENTE`);
 
-
--- =============================================================
--- Chaves Estrangeiras (FK)
--- =============================================================
-
+-- ================================================================
+-- Chaves Estrangeiras
+-- ================================================================
 ALTER TABLE `PESSOA_FISICA` ADD CONSTRAINT `fk_PESSOA_FISICA_PESSOA1` FOREIGN KEY (`ID_PESSOA`) REFERENCES `PESSOA` (`ID`);
 ALTER TABLE `PESSOA_FISICA` ADD CONSTRAINT `fk_PESSOA_FISICA_NIVEL_FORMACAO1` FOREIGN KEY (`ID_NIVEL_FORMACAO`) REFERENCES `NIVEL_FORMACAO` (`ID`);
 ALTER TABLE `PESSOA_FISICA` ADD CONSTRAINT `fk_PESSOA_FISICA_ESTADO_CIVIL1` FOREIGN KEY (`ID_ESTADO_CIVIL`) REFERENCES `ESTADO_CIVIL` (`ID`);
@@ -7445,6 +8353,6 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
--- =============================================================
--- Fim do script MySQL -- Fenix ERP
--- =============================================================
+-- ================================================================
+-- Fim do script MySQL — Fênix ERP
+-- ================================================================
