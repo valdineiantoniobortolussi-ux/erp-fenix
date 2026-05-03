@@ -1,0 +1,13 @@
+Regras de Envio
+
+Pasta  	           Envia?	                    Observação
+controller/	   Sim — todos os arquivos	   Rotas/Endpoints
+model/	           Sim — todos os arquivos	   Modelos ORM
+model/transient/   Sim — filter.py	           Filtros de consulta
+service/	   Sim — todos os arquivos	   Lógica de negócio
+util/	           Sim — todos os arquivos	   Utilitários         __pycache__/       NÃO	                   Cache Python, ignorado        __init__.py        NÃO	                   Inicialização Flask, ignorado
+app.py	           Sim	                           Ponto de entrada
+blueprints.py	   Sim	                           Registro de rotas
+config.py	   Sim	                            Configurações
+error_handler.py   Sim	                           Tratamento de erros
+requirements.txt   Sim	                              Depe+ndências
